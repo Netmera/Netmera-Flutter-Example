@@ -1,0 +1,48 @@
+PODS:
+  - Flutter (1.0.0)
+  - fluttertoast (0.0.2):
+    - Flutter
+    - Toast
+  - Netmera (3.14.10-WithoutDependency):
+    - Netmera/Core (= 3.14.10-WithoutDependency)
+    - Netmera/NetmeraWithAdId (= 3.14.10-WithoutDependency)
+  - Netmera/AdIdSupport (3.14.10-WithoutDependency)
+  - Netmera/Application (3.14.10-WithoutDependency):
+    - Netmera/Core
+  - Netmera/Core (3.14.10-WithoutDependency)
+  - Netmera/NetmeraWithAdId (3.14.10-WithoutDependency):
+    - Netmera/AdIdSupport
+    - Netmera/Application
+  - netmera_flutter_sdk (2.0.3):
+    - Flutter
+    - Netmera (= 3.14.10-WithoutDependency)
+  - Toast (4.0.0)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
+  - netmera_flutter_sdk (from `.symlinks/plugins/netmera_flutter_sdk/ios`)
+
+SPEC REPOS:
+  trunk:
+    - Netmera
+    - Toast
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  fluttertoast:
+    :path: ".symlinks/plugins/fluttertoast/ios"
+  netmera_flutter_sdk:
+    :path: ".symlinks/plugins/netmera_flutter_sdk/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  fluttertoast: 16fbe6039d06a763f3533670197d01fc73459037
+  Netmera: bc77f9c5508471dac9e99ee7d33a25fd285bf9dd
+  netmera_flutter_sdk: 5682e9d86574f4e3555c3e02496fef7ee1c0e1fb
+  Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
+
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+
+COCOAPODS: 1.11.3
