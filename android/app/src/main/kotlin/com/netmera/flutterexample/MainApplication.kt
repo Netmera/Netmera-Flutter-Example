@@ -15,6 +15,7 @@ class MainApplication : FlutterApplication() {
 
         //Netmera Configuration
         val fNetmeraConfiguration = FNetmeraConfiguration.Builder()
+            .huaweiSenderId(BuildConfig.HMS_SENDER_ID) // Your HMS sender ID
             .firebaseSenderId(BuildConfig.GCM_SENDER_ID) // Your GCM sender ID
             .apiKey(BuildConfig.NETMERA_API_KEY) // Your Netmera api key
             .logging(true) // This is for enabling Netmera logs.
