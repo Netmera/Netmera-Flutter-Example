@@ -33,6 +33,12 @@ def getGCMSenderId() {
     return properties.getProperty("gcmsenderid")
 }
 
+def getHMSSenderId() {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    return properties.getProperty("hmssenderid")
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
@@ -64,6 +70,7 @@ android {
 
         buildConfigField "String", "NETMERA_API_KEY", "\"" + getNetmeraApiKey() + "\""
         buildConfigField "String", "GCM_SENDER_ID", "\"" + getGCMSenderId() + "\""
+        buildConfigField "String", "HMS_SENDER_ID", "\"" + getHMSSenderId() + "\""
 
         multiDexEnabled true
     }
