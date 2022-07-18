@@ -42,8 +42,9 @@ func registerPlugins(registry: FlutterPluginRegistry) {
             let netmeraApiKey = dict["netmera-api-key"] as? String
         
             FNetmera.logging(true) // Enable Netmera logging
-            FNetmera.initNetmera(netmeraApiKey) //Your Netmera api key.
+            FNetmera.initNetmera(netmeraApiKey) // Your Netmera api key.
             FNetmera.setPushDelegate(self)
+            Netmera.setAppGroupName("group.com.netmera.flutter") // Your app group name
         }
         
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
