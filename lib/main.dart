@@ -76,7 +76,7 @@ class _MyAppState extends State<MyApp> {
 
     if (Platform.isIOS) {
       Netmera.requestPushNotificationAuthorization();
-      Netmera.setAppGroupName("AppGroupName");
+      Netmera.setAppGroupName("group.com.netmera.flutter");// Set your app group name
     }
 
     String msg;

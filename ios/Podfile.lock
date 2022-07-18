@@ -13,6 +13,10 @@ PODS:
   - Netmera/NetmeraWithAdId (3.14.10-WithoutDependency):
     - Netmera/AdIdSupport
     - Netmera/Application
+  - Netmera/NotificationContentExtension (3.14.10-WithoutDependency):
+    - Netmera/Core
+  - Netmera/NotificationServiceExtension (3.14.10-WithoutDependency):
+    - Netmera/Core
   - netmera_flutter_sdk (2.0.3):
     - Flutter
     - Netmera (= 3.14.10-WithoutDependency)
@@ -21,6 +25,9 @@ PODS:
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
+  - Netmera (= 3.14.10-WithoutDependency)
+  - Netmera/NotificationContentExtension (= 3.14.10-WithoutDependency)
+  - Netmera/NotificationServiceExtension (= 3.14.10-WithoutDependency)
   - netmera_flutter_sdk (from `.symlinks/plugins/netmera_flutter_sdk/ios`)
 
 SPEC REPOS:
@@ -43,6 +50,6 @@ SPEC CHECKSUMS:
   netmera_flutter_sdk: 5682e9d86574f4e3555c3e02496fef7ee1c0e1fb
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
 
-PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+PODFILE CHECKSUM: 9b7135c6c5e1c88dcdeb2819379fa534ab974a81
 
 COCOAPODS: 1.11.3
