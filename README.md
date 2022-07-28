@@ -279,6 +279,8 @@ void _onPushReceive(Map<dynamic, dynamic> bundle) async {
 ```
 Please take a look at `Setup-Android part 8`
 
+4) In order to use iOS10 Media Push, follow the instructions in [Netmera Product Hub.](https://developer.netmera.com/en/IOS/Push-Notifications#using-ios10-media-push)
+
 
 ### Calling Dart methods
 
