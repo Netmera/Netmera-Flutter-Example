@@ -7,17 +7,55 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0DD1706628808F7400B85E5C /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD1706528808F7400B85E5C /* NotificationService.swift */; };
+		0DD1706A28808F7400B85E5C /* NetmeraFlutterNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0DD1706328808F7400B85E5C /* NetmeraFlutterNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0DD17077288092C200B85E5C /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DD17076288092C200B85E5C /* UserNotifications.framework */; };
+		0DD17079288092C200B85E5C /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DD17078288092C200B85E5C /* UserNotificationsUI.framework */; };
+		0DD1707C288092C300B85E5C /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD1707B288092C300B85E5C /* NotificationViewController.swift */; };
+		0DD1707F288092C300B85E5C /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DD1707D288092C300B85E5C /* MainInterface.storyboard */; };
+		0DD17083288092C300B85E5C /* NetmeraFlutterNotificationContentExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0DD17075288092C200B85E5C /* NetmeraFlutterNotificationContentExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0DED2CA5281EE64900E10CD0 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0DED2CA4281EE53A00E10CD0 /* keys.plist */; };
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
 		71D8CB6CD217A5C181E1F7A3 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABB100076CC5807178D9711 /* Pods_Runner.framework */; };
+		71E12B65F4BA81732A77689D /* Pods_NetmeraFlutterNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B5F84654536FDD2FA2BF33 /* Pods_NetmeraFlutterNotificationServiceExtension.framework */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
+		CE4C436106B53CF1DC82F82C /* Pods_NetmeraFlutterNotificationContentExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D8725FC03F6EC3B4561286 /* Pods_NetmeraFlutterNotificationContentExtension.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		0DD1706828808F7400B85E5C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 97C146E61CF9000F007C117D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0DD1706228808F7400B85E5C;
+			remoteInfo = NetmeraFlutterNotificationServiceExtension;
+		};
+		0DD17081288092C300B85E5C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 97C146E61CF9000F007C117D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0DD17074288092C200B85E5C;
+			remoteInfo = NetmeraFlutterNotificationContentExtension;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
+		0DD1706B28808F7400B85E5C /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				0DD1706A28808F7400B85E5C /* NetmeraFlutterNotificationServiceExtension.appex in Embed App Extensions */,
+				0DD17083288092C300B85E5C /* NetmeraFlutterNotificationContentExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9705A1C41CF9048500538489 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -31,11 +69,27 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		053651FA04BA649F90333C02 /* Pods-NetmeraFlutterNotificationContentExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetmeraFlutterNotificationContentExtension.release.xcconfig"; path = "Target Support Files/Pods-NetmeraFlutterNotificationContentExtension/Pods-NetmeraFlutterNotificationContentExtension.release.xcconfig"; sourceTree = "<group>"; };
+		0DD1706328808F7400B85E5C /* NetmeraFlutterNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NetmeraFlutterNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DD1706528808F7400B85E5C /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		0DD1706728808F7400B85E5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0DD170702880907400B85E5C /* NetmeraFlutterNotificationServiceExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NetmeraFlutterNotificationServiceExtension-Bridging-Header.h"; sourceTree = "<group>"; };
+		0DD17075288092C200B85E5C /* NetmeraFlutterNotificationContentExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NetmeraFlutterNotificationContentExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DD17076288092C200B85E5C /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		0DD17078288092C200B85E5C /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
+		0DD1707B288092C300B85E5C /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		0DD1707E288092C300B85E5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		0DD17080288092C300B85E5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0DD170882880938800B85E5C /* NetmeraFlutterNotificationContentExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NetmeraFlutterNotificationContentExtension-Bridging-Header.h"; sourceTree = "<group>"; };
+		0DD17089288094F500B85E5C /* NetmeraFlutterNotificationContentExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NetmeraFlutterNotificationContentExtension.entitlements; sourceTree = "<group>"; };
 		0DED2CA4281EE53A00E10CD0 /* keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
+		103506EEB401D346F0FEA740 /* Pods-NetmeraFlutterNotificationContentExtension.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetmeraFlutterNotificationContentExtension.profile.xcconfig"; path = "Target Support Files/Pods-NetmeraFlutterNotificationContentExtension/Pods-NetmeraFlutterNotificationContentExtension.profile.xcconfig"; sourceTree = "<group>"; };
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
+		1A9C9E53A5AA71FFCEB5409C /* Pods-NetmeraFlutterNotificationContentExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetmeraFlutterNotificationContentExtension.debug.xcconfig"; path = "Target Support Files/Pods-NetmeraFlutterNotificationContentExtension/Pods-NetmeraFlutterNotificationContentExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
 		44581E3AF7EBE8F7050B4D5D /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
+		68D8725FC03F6EC3B4561286 /* Pods_NetmeraFlutterNotificationContentExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NetmeraFlutterNotificationContentExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ABB100076CC5807178D9711 /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F94748806BE3DBB216E8361 /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -48,11 +102,33 @@
 		97C146FD1CF9000F007C117D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C06611645372901B1FC568E2 /* Pods-NetmeraFlutterNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetmeraFlutterNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-NetmeraFlutterNotificationServiceExtension/Pods-NetmeraFlutterNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		C48E1A3459E4470742759C81 /* Pods-NetmeraFlutterNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetmeraFlutterNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-NetmeraFlutterNotificationServiceExtension/Pods-NetmeraFlutterNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		C95543BE27EF36DC00359764 /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
 		D07E7654B4609CCA7AA0386C /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
+		DE0508173C3D2C452EA39C0D /* Pods-NetmeraFlutterNotificationServiceExtension.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetmeraFlutterNotificationServiceExtension.profile.xcconfig"; path = "Target Support Files/Pods-NetmeraFlutterNotificationServiceExtension/Pods-NetmeraFlutterNotificationServiceExtension.profile.xcconfig"; sourceTree = "<group>"; };
+		E3B5F84654536FDD2FA2BF33 /* Pods_NetmeraFlutterNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NetmeraFlutterNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0DD1706028808F7400B85E5C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71E12B65F4BA81732A77689D /* Pods_NetmeraFlutterNotificationServiceExtension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0DD17072288092C200B85E5C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0DD17079288092C200B85E5C /* UserNotificationsUI.framework in Frameworks */,
+				0DD17077288092C200B85E5C /* UserNotifications.framework in Frameworks */,
+				CE4C436106B53CF1DC82F82C /* Pods_NetmeraFlutterNotificationContentExtension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		97C146EB1CF9000F007C117D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -64,12 +140,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0DD1706428808F7400B85E5C /* NetmeraFlutterNotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				0DD1706528808F7400B85E5C /* NotificationService.swift */,
+				0DD1706728808F7400B85E5C /* Info.plist */,
+				0DD170702880907400B85E5C /* NetmeraFlutterNotificationServiceExtension-Bridging-Header.h */,
+			);
+			path = NetmeraFlutterNotificationServiceExtension;
+			sourceTree = "<group>";
+		};
+		0DD1707A288092C300B85E5C /* NetmeraFlutterNotificationContentExtension */ = {
+			isa = PBXGroup;
+			children = (
+				0DD17089288094F500B85E5C /* NetmeraFlutterNotificationContentExtension.entitlements */,
+				0DD1707B288092C300B85E5C /* NotificationViewController.swift */,
+				0DD1707D288092C300B85E5C /* MainInterface.storyboard */,
+				0DD17080288092C300B85E5C /* Info.plist */,
+				0DD170882880938800B85E5C /* NetmeraFlutterNotificationContentExtension-Bridging-Header.h */,
+			);
+			path = NetmeraFlutterNotificationContentExtension;
+			sourceTree = "<group>";
+		};
 		19DCB992CA8DB2F79A4DB4E6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				D07E7654B4609CCA7AA0386C /* Pods-Runner.debug.xcconfig */,
 				6F94748806BE3DBB216E8361 /* Pods-Runner.release.xcconfig */,
 				44581E3AF7EBE8F7050B4D5D /* Pods-Runner.profile.xcconfig */,
+				C06611645372901B1FC568E2 /* Pods-NetmeraFlutterNotificationServiceExtension.debug.xcconfig */,
+				C48E1A3459E4470742759C81 /* Pods-NetmeraFlutterNotificationServiceExtension.release.xcconfig */,
+				DE0508173C3D2C452EA39C0D /* Pods-NetmeraFlutterNotificationServiceExtension.profile.xcconfig */,
+				1A9C9E53A5AA71FFCEB5409C /* Pods-NetmeraFlutterNotificationContentExtension.debug.xcconfig */,
+				053651FA04BA649F90333C02 /* Pods-NetmeraFlutterNotificationContentExtension.release.xcconfig */,
+				103506EEB401D346F0FEA740 /* Pods-NetmeraFlutterNotificationContentExtension.profile.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -78,6 +182,10 @@
 			isa = PBXGroup;
 			children = (
 				6ABB100076CC5807178D9711 /* Pods_Runner.framework */,
+				E3B5F84654536FDD2FA2BF33 /* Pods_NetmeraFlutterNotificationServiceExtension.framework */,
+				0DD17076288092C200B85E5C /* UserNotifications.framework */,
+				0DD17078288092C200B85E5C /* UserNotificationsUI.framework */,
+				68D8725FC03F6EC3B4561286 /* Pods_NetmeraFlutterNotificationContentExtension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -98,6 +206,8 @@
 			children = (
 				9740EEB11CF90186004384FC /* Flutter */,
 				97C146F01CF9000F007C117D /* Runner */,
+				0DD1706428808F7400B85E5C /* NetmeraFlutterNotificationServiceExtension */,
+				0DD1707A288092C300B85E5C /* NetmeraFlutterNotificationContentExtension */,
 				97C146EF1CF9000F007C117D /* Products */,
 				19DCB992CA8DB2F79A4DB4E6 /* Pods */,
 				7180AC2EAFA1F3514743BDB3 /* Frameworks */,
@@ -108,6 +218,8 @@
 			isa = PBXGroup;
 			children = (
 				97C146EE1CF9000F007C117D /* Runner.app */,
+				0DD1706328808F7400B85E5C /* NetmeraFlutterNotificationServiceExtension.appex */,
+				0DD17075288092C200B85E5C /* NetmeraFlutterNotificationContentExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -132,6 +244,42 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0DD1706228808F7400B85E5C /* NetmeraFlutterNotificationServiceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0DD1706F28808F7400B85E5C /* Build configuration list for PBXNativeTarget "NetmeraFlutterNotificationServiceExtension" */;
+			buildPhases = (
+				9E3749E9932C79C9A94C5BCC /* [CP] Check Pods Manifest.lock */,
+				0DD1705F28808F7400B85E5C /* Sources */,
+				0DD1706028808F7400B85E5C /* Frameworks */,
+				0DD1706128808F7400B85E5C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NetmeraFlutterNotificationServiceExtension;
+			productName = NetmeraFlutterNotificationServiceExtension;
+			productReference = 0DD1706328808F7400B85E5C /* NetmeraFlutterNotificationServiceExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		0DD17074288092C200B85E5C /* NetmeraFlutterNotificationContentExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0DD17087288092C300B85E5C /* Build configuration list for PBXNativeTarget "NetmeraFlutterNotificationContentExtension" */;
+			buildPhases = (
+				2DEAAD90F3F56A10830379F4 /* [CP] Check Pods Manifest.lock */,
+				0DD17071288092C200B85E5C /* Sources */,
+				0DD17072288092C200B85E5C /* Frameworks */,
+				0DD17073288092C200B85E5C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NetmeraFlutterNotificationContentExtension;
+			productName = NetmeraFlutterNotificationContentExtension;
+			productReference = 0DD17075288092C200B85E5C /* NetmeraFlutterNotificationContentExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		97C146ED1CF9000F007C117D /* Runner */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 97C147051CF9000F007C117D /* Build configuration list for PBXNativeTarget "Runner" */;
@@ -144,10 +292,13 @@
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
 				61AE1B59914524AE4864BB52 /* [CP] Embed Pods Frameworks */,
+				0DD1706B28808F7400B85E5C /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0DD1706928808F7400B85E5C /* PBXTargetDependency */,
+				0DD17082288092C300B85E5C /* PBXTargetDependency */,
 			);
 			name = Runner;
 			productName = Runner;
@@ -160,9 +311,16 @@
 		97C146E61CF9000F007C117D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1340;
 				LastUpgradeCheck = 1300;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
+					0DD1706228808F7400B85E5C = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
+					0DD17074288092C200B85E5C = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
 					97C146ED1CF9000F007C117D = {
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 1100;
@@ -183,11 +341,28 @@
 			projectRoot = "";
 			targets = (
 				97C146ED1CF9000F007C117D /* Runner */,
+				0DD1706228808F7400B85E5C /* NetmeraFlutterNotificationServiceExtension */,
+				0DD17074288092C200B85E5C /* NetmeraFlutterNotificationContentExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0DD1706128808F7400B85E5C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0DD17073288092C200B85E5C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0DD1707F288092C300B85E5C /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		97C146EC1CF9000F007C117D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -203,6 +378,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2DEAAD90F3F56A10830379F4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NetmeraFlutterNotificationContentExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3AF26DE5F79B5A48D60BF792 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -270,9 +467,47 @@
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build";
 		};
+		9E3749E9932C79C9A94C5BCC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NetmeraFlutterNotificationServiceExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0DD1705F28808F7400B85E5C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0DD1706628808F7400B85E5C /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0DD17071288092C200B85E5C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0DD1707C288092C300B85E5C /* NotificationViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		97C146EA1CF9000F007C117D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -284,7 +519,28 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		0DD1706928808F7400B85E5C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0DD1706228808F7400B85E5C /* NetmeraFlutterNotificationServiceExtension */;
+			targetProxy = 0DD1706828808F7400B85E5C /* PBXContainerItemProxy */;
+		};
+		0DD17082288092C300B85E5C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0DD17074288092C200B85E5C /* NetmeraFlutterNotificationContentExtension */;
+			targetProxy = 0DD17081288092C300B85E5C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
+		0DD1707D288092C300B85E5C /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0DD1707E288092C300B85E5C /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 		97C146FA1CF9000F007C117D /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -304,6 +560,231 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0DD1706C28808F7400B85E5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C06611645372901B1FC568E2 /* Pods-NetmeraFlutterNotificationServiceExtension.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 95N24W2PH8;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NetmeraFlutterNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NetmeraFlutterNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.netmera.flutterexample.NetmeraFlutterNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "NetmeraFlutterNotificationServiceExtension/NetmeraFlutterNotificationServiceExtension-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0DD1706D28808F7400B85E5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C48E1A3459E4470742759C81 /* Pods-NetmeraFlutterNotificationServiceExtension.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 95N24W2PH8;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NetmeraFlutterNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NetmeraFlutterNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.netmera.flutterexample.NetmeraFlutterNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "NetmeraFlutterNotificationServiceExtension/NetmeraFlutterNotificationServiceExtension-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		0DD1706E28808F7400B85E5C /* Profile */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DE0508173C3D2C452EA39C0D /* Pods-NetmeraFlutterNotificationServiceExtension.profile.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 95N24W2PH8;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NetmeraFlutterNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NetmeraFlutterNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.netmera.flutterexample.NetmeraFlutterNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "NetmeraFlutterNotificationServiceExtension/NetmeraFlutterNotificationServiceExtension-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Profile;
+		};
+		0DD17084288092C300B85E5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1A9C9E53A5AA71FFCEB5409C /* Pods-NetmeraFlutterNotificationContentExtension.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = NetmeraFlutterNotificationContentExtension/NetmeraFlutterNotificationContentExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 95N24W2PH8;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NetmeraFlutterNotificationContentExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NetmeraFlutterNotificationContentExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.netmera.flutterexample.NetmeraFlutterNotificationContentExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "NetmeraFlutterNotificationContentExtension/NetmeraFlutterNotificationContentExtension-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0DD17085288092C300B85E5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 053651FA04BA649F90333C02 /* Pods-NetmeraFlutterNotificationContentExtension.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = NetmeraFlutterNotificationContentExtension/NetmeraFlutterNotificationContentExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 95N24W2PH8;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NetmeraFlutterNotificationContentExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NetmeraFlutterNotificationContentExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.netmera.flutterexample.NetmeraFlutterNotificationContentExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "NetmeraFlutterNotificationContentExtension/NetmeraFlutterNotificationContentExtension-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		0DD17086288092C300B85E5C /* Profile */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 103506EEB401D346F0FEA740 /* Pods-NetmeraFlutterNotificationContentExtension.profile.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = "$(inherited)";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = NetmeraFlutterNotificationContentExtension/NetmeraFlutterNotificationContentExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 95N24W2PH8;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NetmeraFlutterNotificationContentExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NetmeraFlutterNotificationContentExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.netmera.flutterexample.NetmeraFlutterNotificationContentExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "NetmeraFlutterNotificationContentExtension/NetmeraFlutterNotificationContentExtension-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Profile;
+		};
 		249021D3217E4FDB00AE95B9 /* Profile */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -358,6 +839,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
@@ -488,6 +970,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9740EEB21CF90195004384FC /* Debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
@@ -512,6 +995,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
@@ -534,6 +1018,26 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0DD1706F28808F7400B85E5C /* Build configuration list for PBXNativeTarget "NetmeraFlutterNotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0DD1706C28808F7400B85E5C /* Debug */,
+				0DD1706D28808F7400B85E5C /* Release */,
+				0DD1706E28808F7400B85E5C /* Profile */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0DD17087288092C300B85E5C /* Build configuration list for PBXNativeTarget "NetmeraFlutterNotificationContentExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0DD17084288092C300B85E5C /* Debug */,
+				0DD17085288092C300B85E5C /* Release */,
+				0DD17086288092C300B85E5C /* Profile */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		97C146E91CF9000F007C117D /* Build configuration list for PBXProject "Runner" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

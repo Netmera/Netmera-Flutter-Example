@@ -27,11 +27,25 @@ require File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'podhelpe
 
 flutter_ios_podfile_setup
 
-target 'Runner' do
-  use_frameworks!
-  use_modular_headers!
+use_frameworks!
+use_modular_headers!
 
+# Add these pods to receive Media Push
+pod "Netmera", "3.14.10-WithoutDependency"
+pod "Netmera/NotificationServiceExtension", "3.14.10-WithoutDependency"
+pod "Netmera/NotificationContentExtension", "3.14.10-WithoutDependency"
+
+platform :ios, '12.0'
+
+target 'Runner' do
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+end
+
+# Add these targets to receive Media Push
+target 'NetmeraFlutterNotificationServiceExtension' do
+end
+
+target 'NetmeraFlutterNotificationContentExtension' do
 end
 
 post_install do |installer|
