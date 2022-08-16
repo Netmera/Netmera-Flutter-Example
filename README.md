@@ -34,13 +34,13 @@ buildscript {
     repositories {
         google()
         jcenter()
-        maven {url 'http://developer.huawei.com/repo/'}
+        maven {url 'https://developer.huawei.com/repo/'}
     }
 
     dependencies {
         classpath 'com.android.tools.build:gradle:4.1.3'
         classpath 'com.google.gms:google-services:4.3.5'
-        classpath 'com.huawei.agconnect:agcp:1.4.2.300'
+        classpath 'com.huawei.agconnect:agcp:1.5.2.300'
     }
 }
 
@@ -49,7 +49,7 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://maven.google.com'}
-        maven {url 'http://developer.huawei.com/repo/'}
+        maven {url 'https://developer.huawei.com/repo/'}
     }
 }
 ```
@@ -65,10 +65,11 @@ allprojects {
  }
 ```
 
-5) Add the following into the bottom of app's buid.gradle file
+5) Add the following into the top of app's build.gradle file
 
 ```
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.huawei.agconnect'
 ```
 
 6) Create an application class as shown below.
@@ -92,23 +93,7 @@ apply plugin: 'com.google.gms.google-services'
     }
 ```
 
-
-7) Register Application class into manifest file.
-
-```
- <application
-        android:name=".NMApp"
-        android:label="netmera_flutter_sdk_example"
-        android:icon="@mipmap/ic_launcher">
-        
-        ...
-        ..
-        .
-```
-
-
-
-8) Inside dart class add the following
+7) Inside dart class add the following
 
 ```
 void main() {
@@ -153,7 +138,7 @@ void initBroadcastReceiver() {
 }
 ```
 
-9) If you have custom Firebase Messaging integration, please see usage below.
+8) If you have custom Firebase Messaging integration, please see usage below.
 
 ```
 FirebaseMessaging messaging = FirebaseMessaging.instance;
@@ -168,7 +153,7 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
      }
 });   
 ```
-10) If you have custom Huawei Messaging integration, please see usage below.
+9) If you have custom Huawei Messaging integration, please see usage below.
 
 ```
 Push.getTokenStream.listen((String token) {
@@ -235,6 +220,7 @@ func registerPlugins(registry: FlutterPluginRegistry) {
     FNetmera.logging(true) // Enable Netmera logging
     FNetmera.initNetmera("<YOUR-NETMERA-KEY>") //Initializing Netmera packages.
     FNetmera.setPushDelegate(self) //
+    Netmera.setAppGroupName("group.com.netmera.flutter") // Your app group name
 
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
@@ -624,8 +610,4 @@ updateUser() {
     Netmera.getCurrentExternalId()
 ```
 
-
-For detailed information please explore example folder in the Netmera sdk library.
-
-
-
+Please explore example project for detailed information.
