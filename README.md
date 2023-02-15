@@ -610,4 +610,11 @@ updateUser() {
     Netmera.getCurrentExternalId()
 ```
 
+##### Netmera Popup Presentation
+To enable popup presentation, you need to call the `enablePopupPresentation()` method on the page where you want to display the popup.
+Note: To show popup on the app start or everywhere in the app, please add this to `initState()` method on your `main.dart` file.
+```
+ Netmera.enablePopupPresentation();
+```
+
 Please explore example project for detailed information.
