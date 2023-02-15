@@ -1,18 +1,16 @@
 ///
 /// Copyright (c) 2022 Inomera Research.
 ///
-
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:netmera_flutter_example/page_event.dart';
 import 'package:netmera_flutter_example/page_push_inbox.dart';
 import 'package:netmera_flutter_example/page_settings.dart';
 import 'package:netmera_flutter_example/page_user.dart';
 import 'package:netmera_flutter_sdk/Netmera.dart';
 import 'package:netmera_flutter_sdk/NetmeraPushBroadcastReceiver.dart';
-
-import 'package:fluttertoast/fluttertoast.dart';
 
 import 'page_category.dart';
 
@@ -48,13 +46,12 @@ void _onCarouselObjectSelected(Map<dynamic, dynamic> bundle) async {
 void initBroadcastReceiver() {
   NetmeraPushBroadcastReceiver receiver = NetmeraPushBroadcastReceiver();
   receiver.initialize(
-    onPushRegister: _onPushRegister,
-    onPushReceive: _onPushReceive,
-    onPushDismiss: _onPushDismiss,
-    onPushOpen: _onPushOpen,
-    onPushButtonClicked: _onPushButtonClicked,
-    onCarouselObjectSelected: _onCarouselObjectSelected
-  );
+      onPushRegister: _onPushRegister,
+      onPushReceive: _onPushReceive,
+      onPushDismiss: _onPushDismiss,
+      onPushOpen: _onPushOpen,
+      onPushButtonClicked: _onPushButtonClicked,
+      onCarouselObjectSelected: _onCarouselObjectSelected);
 }
 
 class MyApp extends StatefulWidget {
@@ -65,7 +62,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   void initState() {
     super.initState();
@@ -74,9 +70,13 @@ class _MyAppState extends State<MyApp> {
       print("Netmera: isPushEnabled = " + enabled.toString());
     });
 
+    // Add this to enable popup presentation on app start.
+    Netmera.enablePopupPresentation();
+
     if (Platform.isIOS) {
       Netmera.requestPushNotificationAuthorization();
-      Netmera.setAppGroupName("group.com.netmera.flutter");// Set your app group name
+      Netmera.setAppGroupName(
+          "group.com.netmera.flutter"); // Set your app group name
     }
 
     String msg;
