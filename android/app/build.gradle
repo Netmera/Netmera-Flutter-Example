@@ -46,7 +46,7 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.huawei.agconnect'
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -64,7 +64,7 @@ android {
     defaultConfig {
         applicationId "com.netmera.flutterexample"
         minSdkVersion 19
-        targetSdkVersion 32
+        targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
 

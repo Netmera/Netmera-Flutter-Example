@@ -28,6 +28,10 @@ class _SettingsPageState extends State<SettingsPage> {
     Netmera.requestPermissionsForLocation();
   }
 
+  requestPushNotificationAuthorization() {
+    Netmera.requestPushNotificationAuthorization();
+  }
+
   setNetmeraMaxActiveRegions() {
     Netmera.setNetmeraMaxActiveRegions(10);
   }
@@ -38,6 +42,14 @@ class _SettingsPageState extends State<SettingsPage> {
 
   isPushEnabled() {
     Netmera.isPushEnabled().then((enabled) {
+      setState(() {
+        _isPushEnabled = enabled.toString();
+      });
+    });
+  }
+
+  areNotificationsEnabled() {
+    Netmera.areNotificationsEnabled().then((enabled) {
       setState(() {
         _isPushEnabled = enabled.toString();
       });
@@ -70,13 +82,26 @@ class _SettingsPageState extends State<SettingsPage> {
           child: const Text('Is Push Enabled'),
           onPressed: isPushEnabled,
         ),
-        ElevatedButton(
-          child: const Text('Enable Push'),
-          onPressed: enablePush,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ElevatedButton(
+              child: const Text('Enable Push'),
+              onPressed: enablePush,
+            ),
+            ElevatedButton(
+              child: const Text('Disable Push'),
+              onPressed: disablePush,
+            ),
+          ],
         ),
         ElevatedButton(
-          child: const Text('Disable Push'),
-          onPressed: disablePush,
+          child: const Text('Are Notifications Enabled'),
+          onPressed: areNotificationsEnabled,
+        ),
+        ElevatedButton(
+          child: const Text('Request Push Notification Authorization'),
+          onPressed: requestPushNotificationAuthorization,
         ),
         ElevatedButton(
           child: const Text('Disable Popup Presentation'),
