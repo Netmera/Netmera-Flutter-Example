@@ -33,22 +33,22 @@ For both native sides(Android & iOS) you don't have to include extra Netmera SDK
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
         maven {url 'https://developer.huawei.com/repo/'}
     }
 
     dependencies {
         classpath 'com.android.tools.build:gradle:4.1.3'
-        classpath 'com.google.gms:google-services:4.3.5'
-        classpath 'com.huawei.agconnect:agcp:1.5.2.300'
+        classpath 'com.google.gms:google-services:4.3.10'
+        classpath 'com.huawei.agconnect:agcp:1.6.3.300'
     }
 }
 
 allprojects {
     repositories {
         google()
-        jcenter()
-        maven { url 'https://maven.google.com'}
+        mavenCentral()
+        maven {url 'https://maven.google.com'}
         maven {url 'https://developer.huawei.com/repo/'}
     }
 }
@@ -64,6 +64,7 @@ allprojects {
      
  }
 ```
+
 
 5) Add the following into the top of app's build.gradle file
 
@@ -93,7 +94,126 @@ apply plugin: 'com.huawei.agconnect'
     }
 ```
 
-7) Inside dart class add the following
+### Setup - iOS Part
+
+1) Navigate to ios folder in your terminal and run the following command.
+
+```
+$ pod install
+```
+
+2) Download `GoogleService-Info.plist` file from Firebase and place it into ios/ folder.
+
+3) Enable push notifications for your project
+
+    1) If you have not generated a valid push notification certificate yet,
+       generate one and then export by following the steps explained in [Configuring Push Notifications section of App Distribution Guide](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_certificate-based_connection_to_apns#2947597)
+    2) Export the generated push certificate in .p12 format and upload to Netmera Dashboard.
+    3) Enable Push Notifications capability for your application as explained in [Enable Push Notifications](https://developer.netmera.com/en/IOS/Quick-Start#enable-push-notifications) guide.
+    4) Enable Remote notifications background mode for your application as explained in [Configuring Background Modes](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app#2980038) guide.
+
+
+
+4) If you are using Swift, enter the following in your `Runner-Bridging-Header.h`.
+
+```
+#import "FNetmera.h"
+#import "FNetmeraService.h"
+#import "NetmeraFlutterSdkPlugin.h"
+```
+
+5) If you want to use Android alike message sending from iOS to dart please consider to shape your AppDelegate class as following.
+
+```
+import UIKit
+import Flutter
+
+//This function is needed for sending messages to the dart side. (Setting the callback function)
+func registerPlugins(registry: FlutterPluginRegistry) {
+    GeneratedPluginRegistrant.register(with: registry)
+};
+
+@UIApplicationMain
+@objc class AppDelegate: FlutterAppDelegate,UNUserNotificationCenterDelegate,NetmeraPushDelegate {
+
+    override func application(_ application: UIApplication,
+                didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    GeneratedPluginRegistrant.register(with: self)
+
+        if #available(iOS 10.0, *) {
+        UNUserNotificationCenter.current().delegate = self
+    } else {
+        // Fallback on earlier versions
+    };
+
+        //For triggering onPushReceive when app is killed and push clicked by user
+        let notification = launchOptions?[.remoteNotification]
+        if notification != nil {
+            self.application(application, didReceiveRemoteNotification: notification as! [AnyHashable : Any])
+        }
+
+    //This function is needed for sending messages to the dart side.
+    NetmeraFlutterSdkPlugin.setPluginRegistrantCallback(registerPlugins)
+
+    FNetmera.logging(true) // Enable Netmera logging
+    FNetmera.initNetmera("<YOUR-NETMERA-KEY>") //Initializing Netmera packages.
+    FNetmera.setPushDelegate(self)
+    Netmera.setAppGroupName("group.com.netmera.flutter") // Your app group name
+
+    return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+  }
+
+
+    override func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        FNetmeraService.handleWork(ON_PUSH_REGISTER, dict: ["pushToken": deviceToken])
+    }
+
+    override func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+        FNetmeraService.handleWork(ON_PUSH_RECEIVE, dict:["userInfo" : userInfo])
+    }
+
+
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler:
+        @escaping () -> Void) {
+
+        if response.actionIdentifier == UNNotificationDismissActionIdentifier {
+            FNetmeraService.handleWork(ON_PUSH_DISMISS,dict:["userInfo" : response.notification.request.content.userInfo])
+        }
+        else if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
+            FNetmeraService.handleWork(ON_PUSH_OPEN, dict:["userInfo" : response.notification.request.content.userInfo])
+        }
+        completionHandler()
+    }
+
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([UNNotificationPresentationOptions.alert])
+    }
+}
+
+```
+For example if you trigger `FNetmeraService.handleWork(ON_PUSH_RECEIVE, dict:["userInfo" : userInfo])` from AppDelegate, in the dart part the following method will be triggered.
+```
+void _onPushReceive(Map<dynamic, dynamic> bundle) async {
+  print("onPushReceive: $bundle");
+}
+```
+
+6) In order to use iOS10 Media Push, follow the instructions in [Netmera Product Hub.](https://developer.netmera.com/en/IOS/Push-Notifications#using-ios10-media-push) Differently, you should add the pods to the top of the `Podfile` as below.
+
+```
+// For receiving Media Push, you must add Netmera pods to top of your Podfile.
+pod "Netmera", "3.14.10-WithoutDependency"
+pod "Netmera/NotificationServiceExtension", "3.14.10-WithoutDependency"
+pod "Netmera/NotificationContentExtension", "3.14.10-WithoutDependency"
+```
+
+### Setup - Dart Part
+
+1) Inside dart class add the following
 
 ```
 void main() {
@@ -138,7 +258,7 @@ void initBroadcastReceiver() {
 }
 ```
 
-8) If you have custom Firebase Messaging integration, please see usage below.
+2) If you have custom Firebase Messaging integration, please see usage below.
 
 ```
 FirebaseMessaging messaging = FirebaseMessaging.instance;
@@ -152,8 +272,27 @@ FirebaseMessaging.onMessage.listen((RemoteMessage message) {
          Netmera.onNetmeraFirebasePushMessageReceived(message.from, message.data);
      }
 });   
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+
+  if (Netmera.isNetmeraRemoteMessage(message.data)) {
+      Netmera.onNetmeraFirebasePushMessageReceived(message.from, message.data);
+  }
+}
+
 ```
-9) If you have custom Huawei Messaging integration, please see usage below.
+
+- If you build your project with `flutter run --release`, please add `@pragma('vm:entry-point')` annotation to your `_firebaseMessagingBackgroundHandler` method as in the following code block.
+
+```
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage remoteMessage) async {
+// handle message
+}
+```
+
+3) If you have custom Huawei Messaging integration, please see usage below.
 
 ```
 Push.getTokenStream.listen((String token) {
@@ -167,105 +306,6 @@ Push.onMessageReceivedStream.listen((RemoteMessage remoteMessage) {
   }
 });
 ```
-
-### Setup - iOS Part
-
-1) Navigate to ios folder in your terminal and run the following command.
-
-```
-$ pod install
-```
-
-2) If you are using Swift, enter the following in your `Runner-Bridging-Header.h`.
-
-```
-#import "FNetmera.h"
-#import "FNetmeraService.h"
-#import "NetmeraFlutterSdkPlugin.h"
-```
-
-3) If you want to use Android alike message sending from iOS to dart please consider to shape your AppDelegate class as following.
-
-```
-import UIKit
-import Flutter
-
-//This function is needed for sending messages to the dart side. (Setting the callback function)
-func registerPlugins(registry: FlutterPluginRegistry) {
-    GeneratedPluginRegistrant.register(with: registry)
-};
-
-@UIApplicationMain
-@objc class AppDelegate: FlutterAppDelegate,UNUserNotificationCenterDelegate,NetmeraPushDelegate {
-
-    override func application(_ application: UIApplication,
-                didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    GeneratedPluginRegistrant.register(with: self)
-
-        if #available(iOS 10.0, *) {
-        UNUserNotificationCenter.current().delegate = self
-    } else {
-        // Fallback on earlier versions
-    };
-
-        //For triggering onPushReceive when app is killed and push clicked by user
-        let notification = launchOptions?[.remoteNotification]
-        if notification != nil {
-            self.application(application, didReceiveRemoteNotification: notification as! [AnyHashable : Any])
-        }
-
-    //This function is needed for sending messages to the dart side.
-    NetmeraFlutterSdkPlugin.setPluginRegistrantCallback(registerPlugins)
-
-    FNetmera.logging(true) // Enable Netmera logging
-    FNetmera.initNetmera("<YOUR-NETMERA-KEY>") //Initializing Netmera packages.
-    FNetmera.setPushDelegate(self) //
-    Netmera.setAppGroupName("group.com.netmera.flutter") // Your app group name
-
-    return super.application(application, didFinishLaunchingWithOptions: launchOptions)
-  }
-
-
-    override func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        FNetmeraService.handleWork(ON_PUSH_REGISTER, dict: ["pushToken": deviceToken])
-    }
-
-    override func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
-        FNetmeraService.handleWork(ON_PUSH_RECEIVE, dict:["userInfo" : userInfo])
-    }
-
-
-    @available(iOS 10.0, *)
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                didReceive response: UNNotificationResponse,
-                                withCompletionHandler completionHandler:
-        @escaping () -> Void) {
-
-        if response.actionIdentifier == UNNotificationDismissActionIdentifier {
-            FNetmeraService.handleWork(ON_PUSH_DISMISS,dict:["userInfo" : response.notification.request.content.userInfo])
-        }
-        else if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
-            FNetmeraService.handleWork(ON_PUSH_OPEN, dict:["userInfo" : response.notification.request.content.userInfo])
-        }
-        completionHandler()
-    }
-
-    @available(iOS 10.0, *)
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([UNNotificationPresentationOptions.alert])
-    }
-}
-
-```
-For example if you trigger `FNetmeraService.handleWork(ON_PUSH_RECEIVE, dict:["userInfo" : userInfo])` from AppDelegate, in the dart part the following method will be triggered.
-```
-void _onPushReceive(Map<dynamic, dynamic> bundle) async {
-  print("onPushReceive: $bundle");
-}
-```
-Please take a look at `Setup-Android part 8`
-
-4) In order to use iOS10 Media Push, follow the instructions in [Netmera Product Hub.](https://developer.netmera.com/en/IOS/Push-Notifications#using-ios10-media-push)
 
 
 ### Calling Dart methods
@@ -287,6 +327,8 @@ updateUser() {
 
 ##### Sending Event Examples
 
+You can send your events as follows. For more examples, please see the [example project](https://github.com/Netmera/Netmera-Flutter-Example/blob/master/lib/page_event.dart).
+
 ```
   void sendLoginEvent() {
     NetmeraEventLogin loginEvent = new NetmeraEventLogin();
@@ -304,92 +346,35 @@ updateUser() {
     cartViewEvent.setSubTotal(15.99);
     Netmera.sendEvent(cartViewEvent);
   }
-
-  void sendPurchaseEvent() {
-    NetmeraLineItem netmeraLineItem = NetmeraLineItem();
-    netmeraLineItem.setBrandId("TestBrandID");
-    netmeraLineItem.setBrandName("TestBrandName");
-    netmeraLineItem.setCampaignId("TestCampaignID");
-    netmeraLineItem.setCategoryIds(["TestCategoryID1", "TestCategoryID2"]);
-    netmeraLineItem.setCategoryNames(
-        ["TestCategoryName1", "TestCategoryName2", "TestCategoryName3"]);
-    netmeraLineItem.setKeywords(["keyword1", "keyword2", "keyword3"]);
-    netmeraLineItem.setCount(12);
-    netmeraLineItem.setId("TestItemID");
-    netmeraLineItem.setPrice(130);
-
-    // CustomPurchaseEvent extends PurchaseEvent
-    CustomPurchaseEvent purchaseEvent = CustomPurchaseEvent();
-    // Set default attributes
-    purchaseEvent.setCoupon("Test_Coupon");
-    purchaseEvent.setDiscount(10);
-    purchaseEvent.setItemCount(2);
-    purchaseEvent.setPaymentMethod("Credit Card");
-    purchaseEvent.setSubTotal(260.89);
-    purchaseEvent.setShippingCost(0.0);
-    purchaseEvent.setLineItems([netmeraLineItem, netmeraLineItem]);
-
-    // Set custom attributes
-    purchaseEvent.setInstallment("test installment");
-    Netmera.sendEvent(purchaseEvent);
-  }
-  
-  void sendTestEvent() {
-    //Custom event
-    TestEvent testEvent = TestEvent();
-    testEvent.setNo(3); //Custom attribute
-    Netmera.sendEvent(testEvent);
-  }
 ```
+
+##### Push Notification Permissions
+
+If you don't request notification permission at runtime, you can request it by calling the `requestPushNotificationAuthorization()` method.
+Note: Notification runtime permissions are required on Android 13 (API 33) or higher.
+Therefore, before calling the method, make sure your project targets an API of 33 and above.
+
+```
+ Netmera.requestPushNotificationAuthorization();
+```
+
+You can call the `areNotificationsEnabled()` method if you need to know the status of permissions.
+
+``` 
+ Netmera.areNotificationsEnabled().then((enabled) {
+      // Use the enabled status of permission as boolean
+ });
+```
+
 ##### Netmera Inbox Examples
 
+You can fetch the Netmera inbox as following. For more detailed usage, please see the [example project](https://github.com/Netmera/Netmera-Flutter-Example/blob/master/lib/page_push_inbox.dart).
+
 ```
- String _currentStatus = Netmera.PUSH_OBJECT_STATUS_ALL.toString();
-  String _count = "0";
-  List<NetmeraPushInbox> _pushInboxList = List.empty(growable: true);
-
-  List<DropdownMenuItem<String>> getInboxList() {
-    List<DropdownMenuItem<String>> items = List.empty(growable: true);
-    items.add(DropdownMenuItem(value: Netmera.PUSH_OBJECT_STATUS_ALL.toString(), child: const Text("ALL")));
-    items.add(DropdownMenuItem(value: Netmera.PUSH_OBJECT_STATUS_READ.toString(), child: const Text("READ")));
-    items.add(DropdownMenuItem(value: Netmera.PUSH_OBJECT_STATUS_UNREAD.toString(), child: const Text("UNREAD")));
-    items.add(DropdownMenuItem(value: Netmera.PUSH_OBJECT_STATUS_DELETED.toString(), child: const Text("DELETED")));
-    return items;
-  }
-
-  onInboxStatusChanged(String status) {
-    setState(() {
-      _currentStatus = status;
-    });
-  }
-
-  String getStatusText(int status) {
-    switch (status) {
-      case Netmera.PUSH_OBJECT_STATUS_ALL:
-        return "ALL";
-      case Netmera.PUSH_OBJECT_STATUS_READ:
-        return "READ";
-      case Netmera.PUSH_OBJECT_STATUS_UNREAD:
-        return "UNREAD";
-      case Netmera.PUSH_OBJECT_STATUS_DELETED:
-        return "DELETED";
-    }
-    return "";
-  }
-
-  fillInboxList(list) {
-    setState(() {
-      _pushInboxList = list;
-    });
-  }
-
-  // Click Functions
-  emptyAction() {}
-
   getInboxFilter() {
     NetmeraInboxFilter inboxFilter = NetmeraInboxFilter();
     inboxFilter.setPageSize(2);
-    inboxFilter.setStatus(int.parse(_currentStatus));
+    inboxFilter.setStatus(Netmera.PUSH_OBJECT_STATUS_UNREAD);
     inboxFilter.setIncludeExpiredObjects(true);
     inboxFilter.setCategories(null);
     return inboxFilter;
@@ -397,98 +382,7 @@ updateUser() {
 
   fetchInbox() async {
     Netmera.fetchInbox(getInboxFilter()).then((list) {
-      fillInboxList(list);
-    }).catchError((error) {
-      debugPrint(error);
-    });
-  }
-
-  fetchNextPage() async {
-    Netmera.fetchNextPage().then((list) {
-      fillInboxList(list);
-    }).catchError((error) {
-      debugPrint(error);
-    });
-  }
-
-  countForStatus() async {
-    Netmera.countForStatus(int.parse(_currentStatus)).then((val) {
-      setState(() {
-        if (val != -1) {
-          _count = val.toString();
-        }
-      });
-    });
-  }
-
-  handlePushObject() async {
-    if (_pushInboxList.isNotEmpty) {
-      Netmera.handlePushObject(_pushInboxList[0].getPushId()!);
-    }
-  }
-
-  handleInteractiveAction() async {
-    if (_pushInboxList.isNotEmpty) {
-      for (var element in _pushInboxList) {
-        if (element.getInteractiveActions() != null && element.getInteractiveActions()!.isNotEmpty) {
-          Netmera.handleInteractiveAction(element.getInteractiveActions()![0]);
-          return;
-        }
-      }
-    }
-  }
-
-  inboxUpdateStatus() {
-    List<String> selectedPushList = List.empty(growable: true);
-    if (_pushInboxList.length > 1) {
-      selectedPushList.add(_pushInboxList[0].getPushId()!);
-      selectedPushList.add(_pushInboxList[1].getPushId()!);
-    }
-    int status = Netmera.PUSH_OBJECT_STATUS_UNREAD;
-    Netmera.inboxUpdateStatus(selectedPushList, status).then((netmeraError) {
-      if (netmeraError != null) {
-        debugPrint(netmeraError);
-      }
-    }).catchError((error) {
-      debugPrint(error);
-    });
-  }
-
-  updateAll() async {
-    if (_pushInboxList.isNotEmpty) {
-      var updateStatus = int.parse(_currentStatus);
-      if (updateStatus == Netmera.PUSH_OBJECT_STATUS_ALL) {
-        debugPrint("Please select different status than all!!");
-        return;
-      }
-
-      Netmera.updateAll(updateStatus).then((netmeraError) {
-        fetchInbox();
-      }).catchError((error) {
-        debugPrint(error);
-      });
-    }
-  }
-
-  inboxCountForStatus() async {
-    NMInboxStatusCountFilter filter = NMInboxStatusCountFilter();
-    filter.setStatus(int.parse(_currentStatus));
-    filter.setIncludeExpired(true);
-    Netmera.getInboxCountForStatus(filter).then((map) {
-      String countStatusText = "ALL: " +
-          map[Netmera.PUSH_OBJECT_STATUS_ALL.toString()].toString() +
-          ", " +
-          "READ: " +
-          map[Netmera.PUSH_OBJECT_STATUS_READ.toString()].toString() +
-          ", " +
-          "UNREAD: " +
-          map[Netmera.PUSH_OBJECT_STATUS_UNREAD.toString()].toString() +
-          ", " +
-          "DELETED: " +
-          map[Netmera.PUSH_OBJECT_STATUS_DELETED.toString()].toString();
-      setState(() {
-        _count = countStatusText;
-      });
+      debugPrint(list);
     }).catchError((error) {
       debugPrint(error);
     });
@@ -497,107 +391,20 @@ updateUser() {
 
 ##### Netmera Inbox Category Examples
 
+You can fetch the Netmera category as following. For more detailed usage, please see the [example project](https://github.com/Netmera/Netmera-Flutter-Example/blob/master/lib/page_category.dart).
+
 ```
- String _currentStatus = Netmera.PUSH_OBJECT_STATUS_ALL.toString();
-  List<dynamic> _categoryList = List.empty(growable: true);
-
-  List<DropdownMenuItem<String>> getCategoryStatusList() {
-    List<DropdownMenuItem<String>> items = List.empty(growable: true);
-    items.add(DropdownMenuItem(value: Netmera.PUSH_OBJECT_STATUS_ALL.toString(), child: const Text("ALL")));
-    items.add(DropdownMenuItem(value: Netmera.PUSH_OBJECT_STATUS_READ.toString(), child: const Text("READ")));
-    items.add(DropdownMenuItem(value: Netmera.PUSH_OBJECT_STATUS_UNREAD.toString(), child: const Text("UNREAD")));
-    items.add(DropdownMenuItem(value: Netmera.PUSH_OBJECT_STATUS_DELETED.toString(), child: const Text("DELETED")));
-    return items;
-  }
-
-  onCategoryStatusChanged(String status) {
-    setState(() {
-      _currentStatus = status;
-    });
-  }
-
-  String getStatusText(int status) {
-    switch (status) {
-      case Netmera.PUSH_OBJECT_STATUS_ALL:
-        return "ALL";
-      case Netmera.PUSH_OBJECT_STATUS_READ:
-        return "READ";
-      case Netmera.PUSH_OBJECT_STATUS_UNREAD:
-        return "UNREAD";
-      case Netmera.PUSH_OBJECT_STATUS_DELETED:
-        return "DELETED";
-    }
-    return "";
-  }
-
-  // Click Functions
-  emptyAction() {}
-
   getCategoryFilter() {
     NetmeraCategoryFilter categoryFilter = NetmeraCategoryFilter();
     categoryFilter.setPageSize(2);
-    categoryFilter.setStatus(int.parse(_currentStatus));
+    categoryFilter.setStatus(Netmera.PUSH_OBJECT_STATUS_UNREAD);
     categoryFilter.setIncludeExpiredObjects(true);
     return categoryFilter;
   }
 
   fetchCategory() async {
     Netmera.fetchCategory(getCategoryFilter()).then((list) {
-      fillCategoryList(list);
-    }).catchError((error) {
-      debugPrint(error);
-    });
-  }
-
-  fetchNextCategoryPage() async {
-    Netmera.fetchNextCategory().then((list) {
-      fillCategoryList(list);
-    }).catchError((error) {
-      debugPrint(error);
-    });
-  }
-
-  fillCategoryList(list) {
-    setState(() {
-      _categoryList = list;
-    });
-  }
-
-  handleLastMessage() async {
-    if (_categoryList.isNotEmpty) {
-      Netmera.handleLastMessage(_categoryList[0]);
-    }
-  }
-
-  updateStatusCategories() async {
-    if (_categoryList.isNotEmpty) {
-      List<String> selectedCategories = List.empty(growable: true);
-      if (_categoryList.length == 1) {
-        selectedCategories.add(_categoryList[0].getCategoryName()!);
-      } else if (_categoryList.length > 1) {
-        selectedCategories.add(_categoryList[0].getCategoryName()!);
-        selectedCategories.add(_categoryList[1].getCategoryName()!);
-      }
-
-      Netmera.updateStatusByCategories(Netmera.PUSH_OBJECT_STATUS_READ, selectedCategories).then((netmeraError) {
-        fetchCategory();
-      }).catchError((error) {
-        debugPrint(error);
-      });
-    }
-  }
-
-  getUserCategoryPreferenceList() async {
-    Netmera.getUserCategoryPreferenceList().then((list) {
-      fillCategoryList(list);
-    }).catchError((error) {
-      debugPrint(error);
-    });
-  }
-
-  setUserCategoryPreference(NetmeraCategoryPreference item) async {
-    Netmera.setUserCategoryPreference(item.getCategoryId()!, !item.getOptInStatus()!).then((value) {
-      debugPrint("Successfully set user category preference list");
+      debugPrint(list);
     }).catchError((error) {
       debugPrint(error);
     });
