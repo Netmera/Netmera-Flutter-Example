@@ -5,11 +5,6 @@
 import UIKit
 import Flutter
 
-//This function is needed for sending messages to the dart side. (Setting the callback function)
-func registerPlugins(registry: FlutterPluginRegistry) {
-    GeneratedPluginRegistrant.register(with: registry)
-};
-
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate,NetmeraPushDelegate {
     override func application(
@@ -29,9 +24,6 @@ func registerPlugins(registry: FlutterPluginRegistry) {
         if notification != nil {
             self.application(application, didReceiveRemoteNotification: notification as! [AnyHashable : Any])
         }
-        
-        //This function is needed for sending messages to the dart side.
-        NetmeraFlutterSdkPlugin.setPluginRegistrantCallback(registerPlugins)
         
         var keys: NSDictionary?
         
@@ -55,7 +47,11 @@ func registerPlugins(registry: FlutterPluginRegistry) {
     }
     
     override func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
-        FNetmeraService.handleWork(ON_PUSH_RECEIVE, dict:["userInfo" : userInfo])
+        if UIApplication.shared.applicationState == .active {
+            FNetmeraService.handleWork(ON_PUSH_RECEIVE, dict:["userInfo" : userInfo])
+        } else {
+            FNetmeraService.handleWork(ON_PUSH_RECEIVE_BACKGROUND, dict:["userInfo" : userInfo])
+        }
     }
     
     

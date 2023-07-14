@@ -14,44 +14,52 @@ import 'package:netmera_flutter_sdk/NetmeraPushBroadcastReceiver.dart';
 
 import 'page_category.dart';
 
+// This method must be a top-level function
+@pragma('vm:entry-point')
+void _onPushReceiveBackgroundHandler(Map<dynamic, dynamic> bundle) async {
+  print("onPushReceiveBackground: $bundle");
+}
+
 void main() {
-  initBroadcastReceiver();
+  WidgetsFlutterBinding.ensureInitialized();
+  // This method must be called before the runApp and the provided handler must be a top-level function.
+  NetmeraPushBroadcastReceiver.onPushReceiveBackground(_onPushReceiveBackgroundHandler);
   runApp(const MyApp());
 }
 
-void _onPushRegister(Map<dynamic, dynamic> bundle) async {
-  print("onPushRegister: $bundle");
-}
-
-void _onPushReceive(Map<dynamic, dynamic> bundle) async {
-  print("onPushReceive: $bundle");
-}
-
-void _onPushDismiss(Map<dynamic, dynamic> bundle) async {
-  print("onPushDismiss: $bundle");
-}
-
-void _onPushOpen(Map<dynamic, dynamic> bundle) async {
-  print("onPushOpen: $bundle");
-}
-
-void _onPushButtonClicked(Map<dynamic, dynamic> bundle) async {
-  print("onPushButtonClicked: $bundle");
-}
-
-void _onCarouselObjectSelected(Map<dynamic, dynamic> bundle) async {
-  print("onCarouselObjectSelected: $bundle");
-}
-
 void initBroadcastReceiver() {
-  NetmeraPushBroadcastReceiver receiver = NetmeraPushBroadcastReceiver();
-  receiver.initialize(
-      onPushRegister: _onPushRegister,
-      onPushReceive: _onPushReceive,
-      onPushDismiss: _onPushDismiss,
-      onPushOpen: _onPushOpen,
-      onPushButtonClicked: _onPushButtonClicked,
-      onCarouselObjectSelected: _onCarouselObjectSelected);
+  void _onPushRegister(Map<dynamic, dynamic> bundle) async {
+    print("onPushRegister: $bundle");
+  }
+
+  void _onPushReceive(Map<dynamic, dynamic> bundle) async {
+    print("onPushReceive: $bundle");
+  }
+
+  void _onPushDismiss(Map<dynamic, dynamic> bundle) async {
+    print("onPushDismiss: $bundle");
+  }
+
+  void _onPushOpen(Map<dynamic, dynamic> bundle) async {
+    print("onPushOpen: $bundle");
+  }
+
+  void _onPushButtonClicked(Map<dynamic, dynamic> bundle) async {
+    print("onPushButtonClicked: $bundle");
+  }
+
+  void _onCarouselObjectSelected(Map<dynamic, dynamic> bundle) async {
+    print("onCarouselObjectSelected: $bundle");
+  }
+
+  NetmeraPushBroadcastReceiver().initialize(
+    onPushRegister: _onPushRegister,
+    onPushReceive: _onPushReceive,
+    onPushDismiss: _onPushDismiss,
+    onPushOpen: _onPushOpen,
+    onPushButtonClicked: _onPushButtonClicked,
+    onCarouselObjectSelected: _onCarouselObjectSelected,
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -65,6 +73,8 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+
+    initBroadcastReceiver();
 
     Netmera.isPushEnabled().then((enabled) {
       print("Netmera: isPushEnabled = " + enabled.toString());
