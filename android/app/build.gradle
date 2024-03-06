@@ -1,3 +1,10 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "com.google.gms.google-services"
+    id "com.huawei.agconnect"
+}
+
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
@@ -10,6 +17,7 @@ def flutterRoot = localProperties.getProperty('flutter.sdk')
 if (flutterRoot == null) {
     throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
 }
+apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) {
@@ -39,14 +47,8 @@ def getHMSSenderId() {
     return properties.getProperty("hmssenderid")
 }
 
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
-apply plugin: 'com.google.gms.google-services'
-apply plugin: 'com.huawei.agconnect'
-
 android {
-    compileSdkVersion 33
+    namespace "com.netmera.flutterexample"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -63,8 +65,9 @@ android {
 
     defaultConfig {
         applicationId "com.netmera.flutterexample"
-        minSdkVersion 19
-        targetSdkVersion 33
+        compileSdkVersion flutter.compileSdkVersion
+        minSdkVersion flutter.minSdkVersion
+        targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
 
@@ -96,6 +99,9 @@ android {
             signingConfig signingConfigs.release
         }
     }
+
+    buildFeatures.buildConfig true
+//    android.buildFeatures.buildConfig true
 }
 
 flutter {

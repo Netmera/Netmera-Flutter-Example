@@ -31,9 +31,9 @@ use_frameworks!
 use_modular_headers!
 
 # Add these pods to receive Media Push
-pod "Netmera", "3.14.10-WithoutDependency"
-pod "Netmera/NotificationServiceExtension", "3.14.10-WithoutDependency"
-pod "Netmera/NotificationContentExtension", "3.14.10-WithoutDependency"
+pod "Netmera", "3.22.0"
+pod "Netmera/NotificationServiceExtension", "3.22.0"
+pod "Netmera/NotificationContentExtension", "3.22.0"
 
 platform :ios, '12.0'
 
