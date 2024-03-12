@@ -33,73 +33,87 @@ class _UserPageState extends State<UserPage> {
 
   List<DropdownMenuItem<String>> getGenderList() {
     List<DropdownMenuItem<String>> items = List.empty(growable: true);
-    items.add(DropdownMenuItem(value: NetmeraUser.GENDER_NOT_SPECIFIED.toString(), child: const Text("NOT SPECIFIED")));
-    items.add(DropdownMenuItem(value: NetmeraUser.GENDER_MALE.toString(), child: const Text("MALE")));
-    items.add(DropdownMenuItem(value: NetmeraUser.GENDER_FEMALE.toString(), child: const Text("FEMALE")));
+    items.add(DropdownMenuItem(
+        value: NetmeraUser.GENDER_NOT_SPECIFIED.toString(),
+        child: const Text("NOT SPECIFIED")));
+    items.add(DropdownMenuItem(
+        value: NetmeraUser.GENDER_MALE.toString(), child: const Text("MALE")));
+    items.add(DropdownMenuItem(
+        value: NetmeraUser.GENDER_FEMALE.toString(),
+        child: const Text("FEMALE")));
     return items;
   }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 50.0, right: 50.0),
-            child: TextField(
-              controller: userController,
-              decoration: const InputDecoration(labelText: 'User (Optional)'),
-            ),
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("User"),
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 50.0, right: 50.0),
+                child: TextField(
+                  controller: userController,
+                  decoration:
+                      const InputDecoration(labelText: 'User (Optional)'),
+                ),
+              ),
+              Padding(
+                  padding: const EdgeInsets.only(left: 50.0, right: 50.0),
+                  child: TextField(
+                    controller: nameController,
+                    decoration:
+                        const InputDecoration(labelText: 'Name (Optional)'),
+                  )),
+              Padding(
+                  padding: const EdgeInsets.only(left: 50.0, right: 50.0),
+                  child: TextField(
+                    controller: surnameController,
+                    decoration:
+                        const InputDecoration(labelText: 'Surname (Optional)'),
+                  )),
+              Padding(
+                  padding: const EdgeInsets.only(left: 50.0, right: 50.0),
+                  child: TextField(
+                    controller: emailController,
+                    decoration:
+                        const InputDecoration(labelText: 'Email (Optional)'),
+                  )),
+              Padding(
+                  padding: const EdgeInsets.only(left: 50.0, right: 50.0),
+                  child: TextField(
+                    controller: msisdnController,
+                    decoration:
+                        const InputDecoration(labelText: 'Msisdn (Optional)'),
+                  )),
+              Padding(
+                  padding: const EdgeInsets.only(left: 50.0, right: 50.0),
+                  child: Row(children: [
+                    const Text('Gender (Optional)'),
+                    Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: DropdownButton(
+                            value: _selectedGender,
+                            items: getGenderList(),
+                            onChanged: (val) {
+                              setState(() {
+                                _selectedGender = val as String;
+                              });
+                            }))
+                  ])),
+              Container(
+                margin: const EdgeInsets.only(top: 30),
+                child: ElevatedButton(
+                  onPressed: updateUser,
+                  child: const Text('Update User'),
+                ),
+              )
+            ],
           ),
-          Padding(
-              padding: const EdgeInsets.only(left: 50.0, right: 50.0),
-              child: TextField(
-                controller: nameController,
-                decoration: const InputDecoration(labelText: 'Name (Optional)'),
-              )),
-          Padding(
-              padding: const EdgeInsets.only(left: 50.0, right: 50.0),
-              child: TextField(
-                controller: surnameController,
-                decoration: const InputDecoration(labelText: 'Surname (Optional)'),
-              )),
-          Padding(
-              padding: const EdgeInsets.only(left: 50.0, right: 50.0),
-              child: TextField(
-                controller: emailController,
-                decoration: const InputDecoration(labelText: 'Email (Optional)'),
-              )),
-          Padding(
-              padding: const EdgeInsets.only(left: 50.0, right: 50.0),
-              child: TextField(
-                controller: msisdnController,
-                decoration: const InputDecoration(labelText: 'Msisdn (Optional)'),
-              )),
-          Padding(
-              padding: const EdgeInsets.only(left: 50.0, right: 50.0),
-              child: Row(children: [
-                const Text('Gender (Optional)'),
-                Padding(
-                    padding: const EdgeInsets.only(left: 10.0),
-                    child: DropdownButton(
-                        value: _selectedGender,
-                        items: getGenderList(),
-                        onChanged: (val) {
-                          setState(() {
-                            _selectedGender = val as String;
-                          });
-                        }))
-              ])),
-          Container(
-            margin: const EdgeInsets.only(top: 30),
-            child: ElevatedButton(
-              child: const Text('Update User'),
-              onPressed: updateUser,
-            ),
-          )
-        ],
-      ),
-    );
+        ));
   }
 }

@@ -17,7 +17,7 @@ class EventPage extends StatefulWidget {
   const EventPage({Key? key}) : super(key: key);
 
   @override
-  _EventPageState createState() => _EventPageState();
+  State<EventPage> createState() => _EventPageState();
 }
 
 class _EventPageState extends State<EventPage> {
@@ -79,30 +79,37 @@ class _EventPageState extends State<EventPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        ElevatedButton(
-          child: const Text('Login Event'),
-          onPressed: sendLoginEvent,
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("Events"),
         ),
-        ElevatedButton(
-          child: const Text('Register Event'),
-          onPressed: sendRegisterEvent,
-        ),
-        ElevatedButton(
-          child: const Text('View Cart Event'),
-          onPressed: sendViewCartEvent,
-        ),
-        ElevatedButton(
-          child: const Text('Purchase Event'),
-          onPressed: sendPurchaseEvent,
-        ),
-        ElevatedButton(
-          child: const Text('Custom Test Event'),
-          onPressed: sendTestEvent,
-        ),
-      ],
-    );
+        body: Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                ElevatedButton(
+                  onPressed: sendLoginEvent,
+                  child: const Text('Login Event'),
+                ),
+                ElevatedButton(
+                  onPressed: sendRegisterEvent,
+                  child: const Text('Register Event'),
+                ),
+                ElevatedButton(
+                  onPressed: sendViewCartEvent,
+                  child: const Text('View Cart Event'),
+                ),
+                ElevatedButton(
+                  onPressed: sendPurchaseEvent,
+                  child: const Text('Purchase Event'),
+                ),
+                ElevatedButton(
+                  onPressed: sendTestEvent,
+                  child: const Text('Custom Test Event'),
+                ),
+              ],
+            )));
   }
 }

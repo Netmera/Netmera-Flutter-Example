@@ -2,15 +2,17 @@
 /// Copyright (c) 2022 Inomera Research.
 ///
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:netmera_flutter_example/page_coupon.dart';
 import 'package:netmera_flutter_example/page_event.dart';
 import 'package:netmera_flutter_example/page_push_inbox.dart';
-import 'package:netmera_flutter_example/page_settings.dart';
 import 'package:netmera_flutter_example/page_user.dart';
 import 'package:netmera_flutter_sdk/Netmera.dart';
 import 'package:netmera_flutter_sdk/NetmeraPushBroadcastReceiver.dart';
+import 'package:flutter_config/flutter_config.dart';
 
 import 'page_category.dart';
 
@@ -20,16 +22,20 @@ void _onPushReceiveBackgroundHandler(Map<dynamic, dynamic> bundle) async {
   print("onPushReceiveBackground: $bundle");
 }
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // This method must be called before the runApp and the provided handler must be a top-level function.
-  NetmeraPushBroadcastReceiver.onPushReceiveBackground(_onPushReceiveBackgroundHandler);
+  await FlutterConfig.loadEnvVariables();
+
+  NetmeraPushBroadcastReceiver.onPushReceiveBackground(
+      _onPushReceiveBackgroundHandler);
   runApp(const MyApp());
 }
 
 void initBroadcastReceiver() {
   void _onPushRegister(Map<dynamic, dynamic> bundle) async {
     print("onPushRegister: $bundle");
+    _MyAppState._pushTokenString = bundle['pushToken'];
   }
 
   void _onPushReceive(Map<dynamic, dynamic> bundle) async {
@@ -62,23 +68,38 @@ void initBroadcastReceiver() {
   );
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: HomePage(),
+    );
+  }
 }
 
-class _MyAppState extends State<MyApp> {
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<HomePage> {
+  String _apiKey = "";
+  String _baseUrl = "";
+  bool _isPushEnabled = true;
+  bool _isPopUpPresentationEnabled = true;
+  static String _pushTokenString = "";
+  String testVar = FlutterConfig.get('NETMERA_TEST_API_KEY');
+
   @override
   void initState() {
     super.initState();
 
     initBroadcastReceiver();
-
-    Netmera.isPushEnabled().then((enabled) {
-      print("Netmera: isPushEnabled = " + enabled.toString());
-    });
 
     // Add this to enable popup presentation on app start.
     Netmera.enablePopupPresentation();
@@ -88,6 +109,14 @@ class _MyAppState extends State<MyApp> {
       Netmera.setAppGroupName(
           "group.com.netmera.flutter"); // Set your app group name
     }
+
+    Netmera.isPushEnabled().then((value) {
+      if (value != null) {
+        setState(() {
+          _isPushEnabled = value;
+        });
+      }
+    });
 
     String msg;
     Future.delayed(const Duration(milliseconds: 1000), () {
@@ -107,36 +136,375 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  onCancelPress() {
+    Navigator.pop(context);
+  }
+
+  onSetPress() {
+    if (_baseUrl != '' && _apiKey != '') {
+      if (Platform.isAndroid) {
+        Netmera.setBaseUrl(_baseUrl);
+      } else {
+        Netmera.setBaseUrl(_baseUrl);
+      }
+      Netmera.setApiKey(_apiKey);
+      // SharedPreferencesModule.setApiKey(apiKey);
+      // SharedPreferencesModule.setBaseUrl(baseUrl);
+    }
+  }
+
+  onSetLongPress() {
+    if (_baseUrl == 'b' && _apiKey == 'b') {
+      setState(() {
+        // _baseUrl = Config.NETMERA_PREPROD_BASE_URL ?? '';
+        // _apiKey = Config.NETMERA_PREPROD_API_KEY ?? '';
+      });
+    } else if (_baseUrl == 'c' && _apiKey == 'c') {
+      setState(() {
+        // _baseUrl = Consfig.NETMERA_TEST_BASE_URL ?? '';
+        // _apiKey = Config.NETMERA_TEST_API_KEY ?? '';
+      });
+    } else if (_baseUrl == 'd' && _apiKey == 'd') {
+      setState(() {
+        // _baseUrl = Config.NETMERA_PROD_BASE_URL ?? '';
+        // _apiKey = Config.NETMERA_PROD_API_KEY ?? '';
+      });
+    }
+  }
+
+  setProperties() {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              content: SizedBox(
+                  height: 140,
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        TextField(
+                          decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: "BaseUrl"),
+                          onChanged: (text) {
+                            setState(() {
+                              _baseUrl = text;
+                            });
+                          },
+                        ),
+                        TextField(
+                          decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: "API Key"),
+                          onChanged: (text) {
+                            setState(() {
+                              _apiKey = text;
+                            });
+                          },
+                        ),
+                      ])),
+              actions: [
+                TextButton(
+                  onPressed: onCancelPress,
+                  child: const Text(
+                    'Cancel',
+                    style: TextStyle(
+                      color: Colors.blue, // Set your desired text color here
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: onSetPress,
+                  onLongPress: onSetLongPress,
+                  child: const Text(
+                    'SET',
+                    style: TextStyle(
+                      color:
+                          Colors.deepPurple, // Set your desired text color here
+                    ),
+                  ),
+                ),
+              ],
+            ));
+  }
+
+  enableData() {
+    Netmera.startDataTransfer();
+  }
+
+  disableData() {
+    Netmera.stopDataTransfer();
+  }
+
+  enableLocationAndGeofence() {
+    Netmera.requestPermissionsForLocation();
+  }
+
+  requestPushNotificationAuthorization() {
+    Netmera.requestPushNotificationAuthorization();
+  }
+
+  navigateToCoupons() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const CouponPage()));
+  }
+
+  currentExternalId() {
+    Netmera.getCurrentExternalId().then((externalId) {
+      Fluttertoast.showToast(
+          msg: 'Current External Id: $testVar',
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    });
+  }
+
+  navigateToEvents() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const EventPage()));
+  }
+
+  navigateToUser() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const UserPage()));
+  }
+
+  navigateToPushInbox() {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const PushInboxPage()));
+  }
+
+  navigateToCategory() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const CategoryPage()));
+  }
+
+  isPushEnabled() {
+    Netmera.isPushEnabled().then((enabled) {
+      Fluttertoast.showToast(
+          msg: 'Is Push Enabled: $enabled',
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    });
+  }
+
+  enableOrDisablePush() {
+    if (_isPushEnabled) {
+      Netmera.disablePush();
+      setState(() {
+        _isPushEnabled = false;
+      });
+    } else {
+      Netmera.enablePush();
+      setState(() {
+        _isPushEnabled = true;
+      });
+    }
+  }
+
+  disableOrEnablePopUpPresentation() {
+    if (_isPopUpPresentationEnabled) {
+      Netmera.disablePopupPresentation();
+      setState(() {
+        _isPopUpPresentationEnabled = false;
+      });
+    } else {
+      Netmera.enablePopupPresentation();
+      setState(() {
+        _isPopUpPresentationEnabled = true;
+      });
+    }
+  }
+
+  setNetmeraMaxActiveRegion() {
+    Netmera.setNetmeraMaxActiveRegions(10);
+  }
+
+  toastPushTest() {
+    Fluttertoast.showToast(
+        msg: 'Pushtoken :: $_pushTokenString',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0);
+  }
+
+  turnOffSendingEventAndUserUpdate() {
+    Netmera.turnOffSendingEventAndUserUpdate(false);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: DefaultTabController(
-        length: 5,
-        child: Scaffold(
-          appBar: AppBar(
-            bottom: const TabBar(
-              tabs: [
-                Tab(icon: Text("Event")),
-                Tab(icon: Text("User")),
-                Tab(icon: Text("Push\nInbox")),
-                Tab(icon: Text("Settings")),
-                Tab(icon: Text("Category")),
-              ],
-            ),
-            title: const Text('Netmera Flutter Example'),
-          ),
-          body: const TabBarView(
+      home: Scaffold(
+          body: SafeArea(
+              child: Padding(
+        padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+        child: Column(children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              EventPage(),
-              UserPage(),
-              PushInboxPage(),
-              SettingsPage(),
-              CategoryPage()
+              const Text(
+                'Flutter Example',
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.grey),
+              ),
+              TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: const TextStyle(fontSize: 13),
+                ),
+                onPressed: setProperties,
+                child: const Text('SET PROPERTIES'),
+              ),
             ],
           ),
-        ),
-      ),
+          Expanded(
+              child: SingleChildScrollView(
+                  child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ElevatedButton(
+                      onPressed: enableData,
+                      child: const Text('ENABLE DATA'),
+                    ),
+                    ElevatedButton(
+                      onPressed: disableData,
+                      child: const Text('DISABLE DATA'),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 8),
+                child: ElevatedButton(
+                  onPressed: enableLocationAndGeofence,
+                  child: const Text('ENABLE LOCATION & GEOFENCE'),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 8),
+                child: ElevatedButton(
+                  onPressed: requestPushNotificationAuthorization,
+                  child: const Text('REQUEST PUSH NOTIFICATION AUTHORIZATION'),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 8),
+                child: ElevatedButton(
+                  onPressed: navigateToCoupons,
+                  child: const Text('COUPONS'),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 8),
+                child: ElevatedButton(
+                  onPressed: currentExternalId,
+                  child: const Text('CURRENT EXTERNAL ID'),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 8),
+                child: ElevatedButton(
+                  onPressed: navigateToEvents,
+                  child: const Text('EVENTS'),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 8),
+                child: ElevatedButton(
+                  onPressed: navigateToUser,
+                  child: const Text('USER'),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 8),
+                child: ElevatedButton(
+                  onPressed: navigateToPushInbox,
+                  child: const Text('PUSH INBOX'),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 8),
+                child: ElevatedButton(
+                  onPressed: navigateToCategory,
+                  child: const Text('CATEGORY'),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 8),
+                child: ElevatedButton(
+                  onPressed: isPushEnabled,
+                  child: const Text('IS PUSH ENABLED'),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 8),
+                child: ElevatedButton(
+                    onPressed: enableOrDisablePush,
+                    child:
+                        Text(_isPushEnabled ? 'DISABLE PUSH' : 'ENABLE PUSH')),
+              ),
+              Container(
+                  margin: const EdgeInsets.only(top: 8),
+                  child: ElevatedButton(
+                    onPressed: disableOrEnablePopUpPresentation,
+                    child: Text(_isPopUpPresentationEnabled
+                        ? 'DISABLE PRESENTATION STATE'
+                        : 'ENABLE PRESENTATION STATE'),
+                  )),
+              Container(
+                margin: const EdgeInsets.only(top: 8),
+                child: ElevatedButton(
+                  onPressed: setNetmeraMaxActiveRegion,
+                  child: const Text('SET NETMERA MAX ACTIVE REGION'),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 8),
+                child: ElevatedButton(
+                  onPressed: toastPushTest,
+                  child: const Text('TOAST PUSH TOKEN'),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 8),
+                child: ElevatedButton(
+                  onPressed: turnOffSendingEventAndUserUpdate,
+                  child: const Text('TURN OFF SENDING EVENT AND USER UPDATE'),
+                ),
+              ),
+              Container(
+                  margin: const EdgeInsets.only(top: 8, bottom: 16),
+                  child: Column(children: [
+                    const Text('DEVICE TOKEN',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w700)),
+                    Container(
+                      margin: const EdgeInsets.only(top: 4),
+                      child: Text(_pushTokenString),
+                    ),
+                  ])),
+            ],
+          )))
+        ]),
+      ))),
     );
   }
 }
