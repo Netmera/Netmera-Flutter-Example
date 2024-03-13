@@ -146,7 +146,7 @@ class _MyAppState extends State<HomePage> {
   onSetPress() {
     if (_baseUrl != '' && _apiKey != '') {
       if (Platform.isAndroid) {
-        Netmera.setBaseUrl(_baseUrl);
+        Netmera.skipAppConfigAndSetBaseUrl(_baseUrl);
       } else {
         Netmera.setBaseUrl(_baseUrl);
       }

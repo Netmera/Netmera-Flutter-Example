@@ -18,36 +18,37 @@ PODS:
   - MMWormhole (2.0.0):
     - MMWormhole/Core (= 2.0.0)
   - MMWormhole/Core (2.0.0)
-  - Netmera (3.22.0):
-    - Netmera/NetmeraWithAdId (= 3.22.0)
-  - Netmera/AdIdSupport (3.22.0)
-  - Netmera/Application (3.22.0):
+  - Netmera (3.23.3):
+    - Netmera/NetmeraWithAdId (= 3.23.3)
+  - Netmera/AdIdSupport (3.23.3)
+  - Netmera/Application (3.23.3):
     - AFNetworking/NSURLSession (>= 3.1.0)
     - FMDB
     - MMWormhole (~> 2.0.0)
-    - NetmeraCore (= 3.22.0)
+    - NetmeraCore (= 3.23.3)
     - UICKeyChainStore (~> 2.0)
-  - Netmera/NetmeraWithAdId (3.22.0):
+  - Netmera/NetmeraWithAdId (3.23.3):
     - Netmera/AdIdSupport
     - Netmera/Application
-  - Netmera/NotificationContentExtension (3.22.0):
+  - Netmera/NotificationContentExtension (3.23.3):
     - MMWormhole (~> 2.0.0)
-    - NetmeraCore (= 3.22.0)
-  - Netmera/NotificationServiceExtension (3.22.0):
-    - NetmeraCore (= 3.22.0)
-  - netmera_flutter_sdk (2.4.0):
+    - NetmeraCore (= 3.23.3)
+  - Netmera/NotificationServiceExtension (3.23.3):
+    - NetmeraCore (= 3.23.3)
+  - netmera_flutter_sdk (2.4.1):
     - Flutter
-    - Netmera (= 3.22.0)
-  - NetmeraCore (3.22.0)
+    - Netmera (= 3.23.3)
+  - NetmeraCore (3.23.3)
   - Toast (4.1.0)
   - UICKeyChainStore (2.2.1)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
+  - flutter_config (from `.symlinks/plugins/flutter_config/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
-  - Netmera (= 3.22.0)
-  - Netmera/NotificationContentExtension (= 3.22.0)
-  - Netmera/NotificationServiceExtension (= 3.22.0)
+  - Netmera (= 3.23.3)
+  - Netmera/NotificationContentExtension (= 3.23.3)
+  - Netmera/NotificationServiceExtension (= 3.23.3)
   - netmera_flutter_sdk (from `.symlinks/plugins/netmera_flutter_sdk/ios`)
 
 SPEC REPOS:
@@ -63,6 +64,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
+  flutter_config:
+    :path: ".symlinks/plugins/flutter_config/ios"
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
   netmera_flutter_sdk:
@@ -71,15 +74,16 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworking: 3bd23d814e976cd148d7d44c3ab78017b744cd58
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  flutter_config: f48f0d47a284f1791aacce2687eabb3309ba7a41
   fluttertoast: 31b00dabfa7fb7bacd9e7dbee580d7a2ff4bf265
   FMDB: aa44149f6fb634b1ac54f64f47064bb0d0c5a032
   MMWormhole: 0cd3fd35a9118b2e2d762b499f54eeaace0be791
-  Netmera: 8c70c680e02c5ae22acd327e92e69101e124c428
-  netmera_flutter_sdk: 8d211264f03355f8adcdbd1bc41678a8cf45c868
-  NetmeraCore: c7800f59d413aaf3c794b9d803768df512733297
+  Netmera: 9d0420e9078df611955a12134c3dd918f438ba4b
+  netmera_flutter_sdk: 6f82c5d8526e7ef22429b76512a69c12d4915fb1
+  NetmeraCore: e8191d14ffe89d8fe2fbfd7626b0469cc720da0e
   Toast: ec33c32b8688982cecc6348adeae667c1b9938da
   UICKeyChainStore: ba3bff2c762b12db1e516f395c837dd25298b05e
 
-PODFILE CHECKSUM: abbca92872d48ae8a245d95e8f911dbddb9e31f8
+PODFILE CHECKSUM: 8a71cfd6b3b6b526df0d8170a0362897df68ea86
 
 COCOAPODS: 1.14.0
