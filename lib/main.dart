@@ -13,6 +13,7 @@ import 'package:netmera_flutter_example/page_user.dart';
 import 'package:netmera_flutter_sdk/Netmera.dart';
 import 'package:netmera_flutter_sdk/NetmeraPushBroadcastReceiver.dart';
 import 'package:flutter_config/flutter_config.dart';
+import 'package:flutter/services.dart';
 
 import 'page_category.dart';
 
@@ -93,7 +94,9 @@ class _MyAppState extends State<HomePage> {
   bool _isPushEnabled = true;
   bool _isPopUpPresentationEnabled = true;
   static String _pushTokenString = "";
-  String testVar = FlutterConfig.get('NETMERA_TEST_API_KEY');
+  static const platform = MethodChannel('nm_flutter_example_channel');
+  TextEditingController _controllerApiKey = TextEditingController();
+  TextEditingController _controllerBaseUrl = TextEditingController();
 
   @override
   void initState() {
@@ -148,26 +151,34 @@ class _MyAppState extends State<HomePage> {
         Netmera.setBaseUrl(_baseUrl);
       }
       Netmera.setApiKey(_apiKey);
-      // SharedPreferencesModule.setApiKey(apiKey);
-      // SharedPreferencesModule.setBaseUrl(baseUrl);
+      platform.invokeMethod('setApiKey', {"apiKey": _apiKey});
+      platform.invokeMethod('setBaseUrl', {"baseUrl": _baseUrl});
     }
+
+    onCancelPress();
   }
 
   onSetLongPress() {
     if (_baseUrl == 'b' && _apiKey == 'b') {
       setState(() {
-        // _baseUrl = Config.NETMERA_PREPROD_BASE_URL ?? '';
-        // _apiKey = Config.NETMERA_PREPROD_API_KEY ?? '';
+        _baseUrl = FlutterConfig.get('NETMERA_PREPROD_BASE_URL');
+        _controllerBaseUrl.text = FlutterConfig.get('NETMERA_PREPROD_BASE_URL');
+        _apiKey = FlutterConfig.get('NETMERA_PREPROD_API_KEY');
+        _controllerApiKey.text = FlutterConfig.get('NETMERA_PREPROD_API_KEY');
       });
     } else if (_baseUrl == 'c' && _apiKey == 'c') {
       setState(() {
-        // _baseUrl = Consfig.NETMERA_TEST_BASE_URL ?? '';
-        // _apiKey = Config.NETMERA_TEST_API_KEY ?? '';
+        _baseUrl = FlutterConfig.get('NETMERA_TEST_BASE_URL');
+        _controllerBaseUrl.text = FlutterConfig.get('NETMERA_TEST_BASE_URL');
+        _apiKey = FlutterConfig.get('NETMERA_TEST_API_KEY');
+        _controllerApiKey.text = FlutterConfig.get('NETMERA_TEST_API_KEY');
       });
     } else if (_baseUrl == 'd' && _apiKey == 'd') {
       setState(() {
-        // _baseUrl = Config.NETMERA_PROD_BASE_URL ?? '';
-        // _apiKey = Config.NETMERA_PROD_API_KEY ?? '';
+        _baseUrl = FlutterConfig.get('NETMERA_PROD_BASE_URL');
+        _controllerBaseUrl.text = FlutterConfig.get('NETMERA_PROD_BASE_URL');
+        _apiKey = FlutterConfig.get('NETMERA_PROD_API_KEY');
+        _controllerApiKey.text = FlutterConfig.get('NETMERA_PROD_API_KEY');
       });
     }
   }
@@ -190,6 +201,7 @@ class _MyAppState extends State<HomePage> {
                               _baseUrl = text;
                             });
                           },
+                          controller: _controllerBaseUrl,
                         ),
                         TextField(
                           decoration: const InputDecoration(
@@ -200,6 +212,7 @@ class _MyAppState extends State<HomePage> {
                               _apiKey = text;
                             });
                           },
+                          controller: _controllerApiKey,
                         ),
                       ])),
               actions: [
@@ -251,7 +264,7 @@ class _MyAppState extends State<HomePage> {
   currentExternalId() {
     Netmera.getCurrentExternalId().then((externalId) {
       Fluttertoast.showToast(
-          msg: 'Current External Id: $testVar',
+          msg: 'Current External Id: $externalId',
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,

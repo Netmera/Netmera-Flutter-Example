@@ -4,9 +4,12 @@
 
 import UIKit
 import Flutter
+import flutter_config
 
 @UIApplicationMain
-@objc class AppDelegate: FlutterAppDelegate,NetmeraPushDelegate {
+@objc class AppDelegate: FlutterAppDelegate, NetmeraPushDelegate {
+    private let CHANNEL = "nm_flutter_example_channel"
+    
     override func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
@@ -25,18 +28,35 @@ import Flutter
             self.application(application, didReceiveRemoteNotification: notification as! [AnyHashable : Any])
         }
         
-        var keys: NSDictionary?
+        let netmeraApiKey = UserDefaults.standard.string(forKey: "apiKey") ?? flutter_config.FlutterConfigPlugin.env(for: "NETMERA_PREPROD_API_KEY")
+        let baseUrl = UserDefaults.standard.string(forKey: "baseUrl") ?? flutter_config.FlutterConfigPlugin.env(for: "NETMERA_PREPROD_BASE_URL")
         
-        if let path = Bundle.main.path(forResource: "keys", ofType: "plist") {
-            keys = NSDictionary(contentsOfFile: path)
-        }
-        if let dict = keys {
-            let netmeraApiKey = dict["netmera-api-key"] as? String
+        FNetmera.logging(true) // Enable Netmera logging
+        FNetmera.initNetmera(netmeraApiKey ?? "") // Your Netmera api key.
+        Netmera.setBaseURL(baseUrl ?? "")
+        FNetmera.setPushDelegate(self)
+        Netmera.setAppGroupName("group.com.netmera.flutter") // Your app group name
         
-            FNetmera.logging(true) // Enable Netmera logging
-            FNetmera.initNetmera(netmeraApiKey) // Your Netmera api key.
-            FNetmera.setPushDelegate(self)
-            Netmera.setAppGroupName("group.com.netmera.flutter") // Your app group name
+        
+        if let flutterViewController = window?.rootViewController as? FlutterViewController {
+            let methodChannel = FlutterMethodChannel(name: CHANNEL, binaryMessenger: flutterViewController.binaryMessenger)
+                    
+            methodChannel.setMethodCallHandler { (call: FlutterMethodCall, result: FlutterResult) in
+                switch call.method {
+                    case "setApiKey":
+                    if let apiKeyDict = call.arguments as? [String: Any], let apiKey = apiKeyDict["apiKey"] as? String {
+                            UserDefaults.standard.set(apiKey, forKey: "apiKey")
+                            result(nil)
+                        }
+                    case "setBaseUrl":
+                    if let baseUrlDict = call.arguments as? [String: Any], let baseUrl = baseUrlDict["baseUrl"] as? String {
+                            UserDefaults.standard.set(baseUrl, forKey: "baseUrl")
+                            result(nil)
+                        }
+                    default:
+                        break
+                }
+            }
         }
         
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
