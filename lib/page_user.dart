@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:netmera_flutter_sdk/Netmera.dart';
 import 'package:netmera_flutter_sdk/NetmeraUser.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({Key? key}) : super(key: key);
@@ -20,7 +21,7 @@ class _UserPageState extends State<UserPage> {
   TextEditingController msisdnController = TextEditingController();
   String _selectedGender = NetmeraUser.GENDER_NOT_SPECIFIED.toString();
 
-  updateUser() {
+  updateUserAsync() {
     NetmeraUser user = NetmeraUser();
     user.setUserId(userController.text);
     user.setName(nameController.text);
@@ -29,6 +30,31 @@ class _UserPageState extends State<UserPage> {
     user.setMsisdn(msisdnController.text);
     user.setGender(int.parse(_selectedGender));
     Netmera.updateUser(user);
+  }
+
+  updateUserSync() {
+    NetmeraUser user = NetmeraUser();
+    user.setUserId(userController.text);
+    user.setName(nameController.text);
+    user.setSurname(surnameController.text);
+    user.setEmail(emailController.text);
+    user.setMsisdn(msisdnController.text);
+    user.setGender(int.parse(_selectedGender));
+
+    print("a");
+
+    Netmera.updateUser(user).then((_) {
+      print("b");
+
+      Fluttertoast.showToast(
+          msg: 'User updated successfully!',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: const Color.fromARGB(255, 166, 186, 171),
+          textColor: Colors.white,
+          fontSize: 16.0);
+    });
   }
 
   List<DropdownMenuItem<String>> getGenderList() {
@@ -106,10 +132,21 @@ class _UserPageState extends State<UserPage> {
                             }))
                   ])),
               Container(
-                margin: const EdgeInsets.only(top: 30),
-                child: ElevatedButton(
-                  onPressed: updateUser,
-                  child: const Text('Update User'),
+                margin: const EdgeInsets.only(top: 30, right: 32, left: 32),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    ElevatedButton(
+                      onPressed: updateUserSync,
+                      child: const Text('Update User Sync'),
+                    ),
+                    Container(
+                        margin: const EdgeInsets.only(top: 8),
+                        child: ElevatedButton(
+                          onPressed: updateUserAsync,
+                          child: const Text('Update User Async'),
+                        )),
+                  ],
                 ),
               )
             ],
