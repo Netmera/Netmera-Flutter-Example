@@ -132,7 +132,7 @@ class _MyAppState extends State<HomePage> {
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
+            backgroundColor: const Color.fromARGB(255, 166, 186, 171),
             textColor: Colors.white,
             fontSize: 16.0);
       });
@@ -268,7 +268,7 @@ class _MyAppState extends State<HomePage> {
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
+          backgroundColor: const Color.fromARGB(255, 166, 186, 171),
           textColor: Colors.white,
           fontSize: 16.0);
     });
@@ -301,7 +301,7 @@ class _MyAppState extends State<HomePage> {
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
+          backgroundColor: const Color.fromARGB(255, 166, 186, 171),
           textColor: Colors.white,
           fontSize: 16.0);
     });
@@ -345,7 +345,7 @@ class _MyAppState extends State<HomePage> {
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
+        backgroundColor: const Color.fromARGB(255, 166, 186, 171),
         textColor: Colors.white,
         fontSize: 16.0);
   }
