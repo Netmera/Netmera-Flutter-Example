@@ -1,5 +1,5 @@
 # Uncomment this line to define a global platform for your project
-# platform :ios, '11.0'
+# platform :ios, '12.0'
 
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
@@ -31,9 +31,9 @@ use_frameworks!
 use_modular_headers!
 
 # Add these pods to receive Media Push
-pod "Netmera", "3.14.10-WithoutDependency"
-pod "Netmera/NotificationServiceExtension", "3.14.10-WithoutDependency"
-pod "Netmera/NotificationContentExtension", "3.14.10-WithoutDependency"
+pod "Netmera", "3.23.3"
+pod "Netmera/NotificationServiceExtension", "3.23.3"
+pod "Netmera/NotificationContentExtension", "3.23.3"
 
 platform :ios, '12.0'
 
