@@ -15,11 +15,18 @@ class _CouponPageState extends State<CouponPage> {
   String max = "";
   String page = "";
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
   onFetchCouponsPress() {
     if (max != "" && page != "") {
       Netmera.fetchCoupons(int.parse(page), int.parse(max))
           .then((fetchedCoupons) {
-        coupons = fetchedCoupons;
+        setState(() {
+          coupons = fetchedCoupons;
+        });
       }).catchError((error) {
         debugPrint(error);
         Fluttertoast.showToast(
@@ -78,13 +85,50 @@ class _CouponPageState extends State<CouponPage> {
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(top: 32, bottom: 16),
+            margin: const EdgeInsets.only(top: 32, bottom: 32),
             child: ElevatedButton(
               onPressed: onFetchCouponsPress,
               child: const Text('FETCH COUPONS'),
             ),
           ),
-          const Text('No coupons found')
+          coupons.isEmpty
+              ? const Text('No coupons found')
+              : Expanded(
+                  child: ListView.builder(
+                      itemCount: coupons.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final item = coupons[index];
+                        return Container(
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 10.0, horizontal: 24),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Coupon id: ${item.getCouponId()}',
+                                style: const TextStyle(color: Colors.black),
+                              ),
+                              Text(
+                                'Coupon Name: ${item.getName()}',
+                                style: const TextStyle(color: Colors.black),
+                              ),
+                              Text(
+                                'Code: ${item.getCode()}',
+                                style: const TextStyle(color: Colors.black),
+                              ),
+                              Text(
+                                'Assign Date: ${item.getAssignDate()}',
+                                style: const TextStyle(color: Colors.black),
+                              ),
+                              Text(
+                                'Expire Date: ${item.getExpireDate()}',
+                                style: const TextStyle(color: Colors.black),
+                              ),
+                            ],
+                          ),
+                        );
+                      }),
+                ),
         ],
       ),
     );
