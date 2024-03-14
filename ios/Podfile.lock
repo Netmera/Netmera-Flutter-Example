@@ -41,6 +41,8 @@ PODS:
   - NetmeraCore (3.23.3)
   - Toast (4.1.0)
   - UICKeyChainStore (2.2.1)
+  - uni_links (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
@@ -50,6 +52,7 @@ DEPENDENCIES:
   - Netmera/NotificationContentExtension (= 3.23.3)
   - Netmera/NotificationServiceExtension (= 3.23.3)
   - netmera_flutter_sdk (from `.symlinks/plugins/netmera_flutter_sdk/ios`)
+  - uni_links (from `.symlinks/plugins/uni_links/ios`)
 
 SPEC REPOS:
   trunk:
@@ -70,6 +73,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/fluttertoast/ios"
   netmera_flutter_sdk:
     :path: ".symlinks/plugins/netmera_flutter_sdk/ios"
+  uni_links:
+    :path: ".symlinks/plugins/uni_links/ios"
 
 SPEC CHECKSUMS:
   AFNetworking: 3bd23d814e976cd148d7d44c3ab78017b744cd58
@@ -83,6 +88,7 @@ SPEC CHECKSUMS:
   NetmeraCore: e8191d14ffe89d8fe2fbfd7626b0469cc720da0e
   Toast: ec33c32b8688982cecc6348adeae667c1b9938da
   UICKeyChainStore: ba3bff2c762b12db1e516f395c837dd25298b05e
+  uni_links: d97da20c7701486ba192624d99bffaaffcfc298a
 
 PODFILE CHECKSUM: 8a71cfd6b3b6b526df0d8170a0362897df68ea86
 

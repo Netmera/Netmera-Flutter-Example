@@ -14,6 +14,7 @@ import 'package:netmera_flutter_sdk/Netmera.dart';
 import 'package:netmera_flutter_sdk/NetmeraPushBroadcastReceiver.dart';
 import 'package:flutter_config/flutter_config.dart';
 import 'package:flutter/services.dart';
+import 'package:uni_links/uni_links.dart';
 
 import 'page_category.dart';
 
@@ -101,6 +102,8 @@ class _MyAppState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+
+    initUniLinks();
 
     initBroadcastReceiver();
 
@@ -352,6 +355,21 @@ class _MyAppState extends State<HomePage> {
 
   turnOffSendingEventAndUserUpdate() {
     Netmera.turnOffSendingEventAndUserUpdate(false);
+  }
+
+  Future<void> initUniLinks() async {
+    try {
+      final uri = await getInitialUri();
+      if (uri != null) {
+        Fluttertoast.showToast(
+            msg: 'Initial url is: $uri',
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.TOP,
+            backgroundColor: const Color.fromARGB(255, 166, 186, 171),
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+    } catch (error) {}
   }
 
   @override
