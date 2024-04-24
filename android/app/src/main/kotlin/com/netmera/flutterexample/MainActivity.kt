@@ -29,13 +29,13 @@ class MainActivity : FlutterActivity() {
             CHANNEL
         ).setMethodCallHandler { call, result ->
             when (call.method) {
-                "setApiKey" -> {
+                Methods.SET_API_KEY.methodName -> {
                     val apiKey = call.argument<String>("apiKey")
                     setApiKey(apiKey)
                     result.success(null)
                 }
 
-                "setBaseUrl" -> {
+                Methods.SET_BASE_URL.methodName -> {
                     val url = call.argument<String>("baseUrl")
                     setBaseUrl(url)
                     result.success(null)
@@ -59,6 +59,9 @@ class MainActivity : FlutterActivity() {
         editor.putString("baseUrl", url)
         editor.apply()
     }
+}
 
-
+private enum class Methods(val methodName: String) {
+    SET_API_KEY("setApiKey"),
+    SET_BASE_URL("setBaseUrl"),
 }

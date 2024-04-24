@@ -43,12 +43,12 @@ import flutter_config
                     
             methodChannel.setMethodCallHandler { (call: FlutterMethodCall, result: FlutterResult) in
                 switch call.method {
-                    case "setApiKey":
+                case MethodName.SET_API_KEY.rawValue:
                     if let apiKeyDict = call.arguments as? [String: Any], let apiKey = apiKeyDict["apiKey"] as? String {
                             UserDefaults.standard.set(apiKey, forKey: "apiKey")
                             result(nil)
                         }
-                    case "setBaseUrl":
+                case MethodName.SET_BASE_URL.rawValue:
                     if let baseUrlDict = call.arguments as? [String: Any], let baseUrl = baseUrlDict["baseUrl"] as? String {
                             UserDefaults.standard.set(baseUrl, forKey: "baseUrl")
                             result(nil)
@@ -95,4 +95,9 @@ import flutter_config
         completionHandler([UNNotificationPresentationOptions.alert])
     }
     
+}
+
+private enum MethodName: String {
+    case SET_API_KEY = "setApiKey"
+    case SET_BASE_URL = "setBaseUrl"
 }

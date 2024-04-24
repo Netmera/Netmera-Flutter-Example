@@ -49,4 +49,3 @@ app.*.map.json
 /android/app/agconnect-services.json
 /android/app/google-services.json
 /ios/Runner/GoogleService-Info.plist
-/ios/NetmeraTSExample/GoogleService-Info.plist

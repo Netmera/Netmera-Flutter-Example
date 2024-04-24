@@ -66,9 +66,9 @@ android {
 
     defaultConfig {
         applicationId "com.netmera.flutterexample"
-        compileSdkVersion flutter.compileSdkVersion
-        minSdkVersion flutter.minSdkVersion
-        targetSdkVersion flutter.targetSdkVersion
+        compileSdkVersion 33
+        minSdkVersion 21
+        targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
 
