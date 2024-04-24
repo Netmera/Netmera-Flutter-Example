@@ -13,6 +13,8 @@ import 'package:netmera_flutter_sdk/events/commerce/NetmeraLineItem.dart';
 
 import 'package:netmera_flutter_example/model/MyNetmeraEvent.dart';
 
+import 'main.dart';
+
 class EventPage extends StatefulWidget {
   const EventPage({Key? key}) : super(key: key);
 
@@ -89,26 +91,11 @@ class _EventPageState extends State<EventPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                ElevatedButton(
-                  onPressed: sendLoginEvent,
-                  child: const Text('Login Event'),
-                ),
-                ElevatedButton(
-                  onPressed: sendRegisterEvent,
-                  child: const Text('Register Event'),
-                ),
-                ElevatedButton(
-                  onPressed: sendViewCartEvent,
-                  child: const Text('View Cart Event'),
-                ),
-                ElevatedButton(
-                  onPressed: sendPurchaseEvent,
-                  child: const Text('Purchase Event'),
-                ),
-                ElevatedButton(
-                  onPressed: sendTestEvent,
-                  child: const Text('Custom Test Event'),
-                ),
+                button('Login Event', sendLoginEvent),
+                button('Register Event', sendRegisterEvent),
+                button('View Cart Event', sendViewCartEvent),
+                button('Purchase Event', sendPurchaseEvent),
+                button('Custom Test Event', sendTestEvent),
               ],
             )));
   }

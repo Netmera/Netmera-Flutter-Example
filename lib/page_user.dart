@@ -6,6 +6,8 @@ import 'package:netmera_flutter_sdk/Netmera.dart';
 import 'package:netmera_flutter_sdk/NetmeraUser.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import 'main.dart';
+
 class UserPage extends StatefulWidget {
   const UserPage({Key? key}) : super(key: key);
 
@@ -136,16 +138,8 @@ class _UserPageState extends State<UserPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    ElevatedButton(
-                      onPressed: updateUserSync,
-                      child: const Text('Update User Sync'),
-                    ),
-                    Container(
-                        margin: const EdgeInsets.only(top: 8),
-                        child: ElevatedButton(
-                          onPressed: updateUserAsync,
-                          child: const Text('Update User Async'),
-                        )),
+                    button('Update User Sync', updateUserSync),
+                    button('Update User Async', updateUserAsync),
                   ],
                 ),
               )

@@ -411,115 +411,74 @@ class _MyAppState extends State<HomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ElevatedButton(
-                      onPressed: enableData,
-                      child: const Text('ENABLE DATA'),
-                    ),
-                    ElevatedButton(
-                      onPressed: disableData,
-                      child: const Text('DISABLE DATA'),
-                    ),
+                    button('ENABLE DATA', enableData),
+                    button('DISABLE DATA', disableData),
                   ],
                 ),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 8),
-                child: ElevatedButton(
-                  onPressed: enableLocationAndGeofence,
-                  child: const Text('ENABLE LOCATION & GEOFENCE'),
-                ),
+                child: button('ENABLE LOCATION & GEOFENCE', enableLocationAndGeofence),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 8),
-                child: ElevatedButton(
-                  onPressed: requestPushNotificationAuthorization,
-                  child: const Text('REQUEST PUSH NOTIFICATION AUTHORIZATION'),
-                ),
+                child: button('REQUEST PUSH NOTIFICATION AUTHORIZATION',
+                    requestPushNotificationAuthorization),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 8),
-                child: ElevatedButton(
-                  onPressed: navigateToCoupons,
-                  child: const Text('COUPONS'),
-                ),
+                child: button('COUPONS', navigateToCoupons),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 8),
-                child: ElevatedButton(
-                  onPressed: currentExternalId,
-                  child: const Text('CURRENT EXTERNAL ID'),
-                ),
+                child: button('CURRENT EXTERNAL ID', currentExternalId),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 8),
-                child: ElevatedButton(
-                  onPressed: navigateToEvents,
-                  child: const Text('EVENTS'),
-                ),
+                child: button('EVENTS', navigateToEvents),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 8),
-                child: ElevatedButton(
-                  onPressed: navigateToUser,
-                  child: const Text('USER'),
-                ),
+                child: button('USER', navigateToUser),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 8),
-                child: ElevatedButton(
-                  onPressed: navigateToPushInbox,
-                  child: const Text('PUSH INBOX'),
-                ),
+                child: button('PUSH INBOX', navigateToPushInbox),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 8),
-                child: ElevatedButton(
-                  onPressed: navigateToCategory,
-                  child: const Text('CATEGORY'),
-                ),
+                child: button('CATEGORY', navigateToCategory),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 8),
-                child: ElevatedButton(
-                  onPressed: isPushEnabled,
-                  child: const Text('IS PUSH ENABLED'),
-                ),
+                child: button('IS PUSH ENABLED', isPushEnabled),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 8),
-                child: ElevatedButton(
-                    onPressed: enableOrDisablePush,
-                    child:
-                        Text(_isPushEnabled ? 'DISABLE PUSH' : 'ENABLE PUSH')),
+                child: button(_isPushEnabled ? 'DISABLE PUSH' : 'ENABLE PUSH',
+                    enableOrDisablePush),
               ),
               Container(
                   margin: const EdgeInsets.only(top: 8),
-                  child: ElevatedButton(
-                    onPressed: disableOrEnablePopUpPresentation,
-                    child: Text(_isPopUpPresentationEnabled
-                        ? 'DISABLE PRESENTATION STATE'
-                        : 'ENABLE PRESENTATION STATE'),
-                  )),
-              Container(
-                margin: const EdgeInsets.only(top: 8),
-                child: ElevatedButton(
-                  onPressed: setNetmeraMaxActiveRegion,
-                  child: const Text('SET NETMERA MAX ACTIVE REGION'),
-                ),
+                  child: button(
+                      _isPopUpPresentationEnabled
+                      ? 'DISABLE PRESENTATION STATE'
+                      : 'ENABLE PRESENTATION STATE',
+                      disableOrEnablePopUpPresentation),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 8),
-                child: ElevatedButton(
-                  onPressed: toastPushTest,
-                  child: const Text('TOAST PUSH TOKEN'),
-                ),
+                child: button('SET NETMERA MAX ACTIVE REGION',
+                    setNetmeraMaxActiveRegion),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 8),
-                child: ElevatedButton(
-                  onPressed: turnOffSendingEventAndUserUpdate,
-                  child: const Text('TURN OFF SENDING EVENT AND USER UPDATE'),
-                ),
+                child: button('TOAST PUSH TOKEN', toastPushTest),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 8),
+                child: button('TURN OFF SENDING EVENT AND USER UPDATE',
+                    turnOffSendingEventAndUserUpdate),
               ),
               Container(
                   margin: const EdgeInsets.only(top: 8, bottom: 16),
@@ -538,4 +497,17 @@ class _MyAppState extends State<HomePage> {
       ))),
     );
   }
+}
+
+ElevatedButton button(String text, VoidCallback onPressed) {
+  return ElevatedButton(
+    onPressed: onPressed,
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.blue,
+    ),
+    child: Text(
+      text,
+      style: const TextStyle(color: Colors.white),
+    ),
+  );
 }
