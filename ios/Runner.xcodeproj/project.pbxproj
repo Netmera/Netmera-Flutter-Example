@@ -14,16 +14,15 @@
 		0DD1707C288092C300B85E5C /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD1707B288092C300B85E5C /* NotificationViewController.swift */; };
 		0DD1707F288092C300B85E5C /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DD1707D288092C300B85E5C /* MainInterface.storyboard */; };
 		0DD17083288092C300B85E5C /* NetmeraFlutterNotificationContentExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0DD17075288092C200B85E5C /* NetmeraFlutterNotificationContentExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		0DED2CA5281EE64900E10CD0 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0DED2CA4281EE53A00E10CD0 /* keys.plist */; };
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
+		196C2D4C2910BCFE532BE040 /* Pods_NetmeraFlutterNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71775CF8D1FD73C98302E932 /* Pods_NetmeraFlutterNotificationServiceExtension.framework */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
-		71D8CB6CD217A5C181E1F7A3 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABB100076CC5807178D9711 /* Pods_Runner.framework */; };
-		71E12B65F4BA81732A77689D /* Pods_NetmeraFlutterNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B5F84654536FDD2FA2BF33 /* Pods_NetmeraFlutterNotificationServiceExtension.framework */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
-		CE4C436106B53CF1DC82F82C /* Pods_NetmeraFlutterNotificationContentExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D8725FC03F6EC3B4561286 /* Pods_NetmeraFlutterNotificationContentExtension.framework */; };
+		C6EE7CF06D399F635C93CEBA /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CF6747AC28704A51AE37D91 /* Pods_Runner.framework */; };
+		DB67A283D8ABCDD12C32EC46 /* Pods_NetmeraFlutterNotificationContentExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93DB26BBA545A7E0A3026DA4 /* Pods_NetmeraFlutterNotificationContentExtension.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,7 +68,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		053651FA04BA649F90333C02 /* Pods-NetmeraFlutterNotificationContentExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetmeraFlutterNotificationContentExtension.release.xcconfig"; path = "Target Support Files/Pods-NetmeraFlutterNotificationContentExtension/Pods-NetmeraFlutterNotificationContentExtension.release.xcconfig"; sourceTree = "<group>"; };
 		0DD1706328808F7400B85E5C /* NetmeraFlutterNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NetmeraFlutterNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DD1706528808F7400B85E5C /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		0DD1706728808F7400B85E5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -82,19 +80,22 @@
 		0DD17080288092C300B85E5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0DD170882880938800B85E5C /* NetmeraFlutterNotificationContentExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NetmeraFlutterNotificationContentExtension-Bridging-Header.h"; sourceTree = "<group>"; };
 		0DD17089288094F500B85E5C /* NetmeraFlutterNotificationContentExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NetmeraFlutterNotificationContentExtension.entitlements; sourceTree = "<group>"; };
-		0DED2CA4281EE53A00E10CD0 /* keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
-		103506EEB401D346F0FEA740 /* Pods-NetmeraFlutterNotificationContentExtension.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetmeraFlutterNotificationContentExtension.profile.xcconfig"; path = "Target Support Files/Pods-NetmeraFlutterNotificationContentExtension/Pods-NetmeraFlutterNotificationContentExtension.profile.xcconfig"; sourceTree = "<group>"; };
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
-		1A9C9E53A5AA71FFCEB5409C /* Pods-NetmeraFlutterNotificationContentExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetmeraFlutterNotificationContentExtension.debug.xcconfig"; path = "Target Support Files/Pods-NetmeraFlutterNotificationContentExtension/Pods-NetmeraFlutterNotificationContentExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		15193CC8073DCDB033B72EBB /* Pods-NetmeraFlutterNotificationContentExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetmeraFlutterNotificationContentExtension.release.xcconfig"; path = "Target Support Files/Pods-NetmeraFlutterNotificationContentExtension/Pods-NetmeraFlutterNotificationContentExtension.release.xcconfig"; sourceTree = "<group>"; };
+		2C5EA1BEBAE612138F8C78A7 /* Pods-NetmeraFlutterNotificationContentExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetmeraFlutterNotificationContentExtension.debug.xcconfig"; path = "Target Support Files/Pods-NetmeraFlutterNotificationContentExtension/Pods-NetmeraFlutterNotificationContentExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
-		44581E3AF7EBE8F7050B4D5D /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
-		68D8725FC03F6EC3B4561286 /* Pods_NetmeraFlutterNotificationContentExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NetmeraFlutterNotificationContentExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6ABB100076CC5807178D9711 /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6F94748806BE3DBB216E8361 /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
+		41EAEA0E09631E7E76DA4E04 /* Pods-NetmeraFlutterNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetmeraFlutterNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-NetmeraFlutterNotificationServiceExtension/Pods-NetmeraFlutterNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		4DD9C43B3203856036CB293A /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
+		6255E7510B635CF1246C9AF0 /* Pods-NetmeraFlutterNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetmeraFlutterNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-NetmeraFlutterNotificationServiceExtension/Pods-NetmeraFlutterNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
+		71775CF8D1FD73C98302E932 /* Pods_NetmeraFlutterNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NetmeraFlutterNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		71DBA8DFC51E6300A90ECC4B /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
+		7CF6747AC28704A51AE37D91 /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8407DF113C182533B2ECB48F /* Pods-NetmeraFlutterNotificationContentExtension.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetmeraFlutterNotificationContentExtension.profile.xcconfig"; path = "Target Support Files/Pods-NetmeraFlutterNotificationContentExtension/Pods-NetmeraFlutterNotificationContentExtension.profile.xcconfig"; sourceTree = "<group>"; };
+		93DB26BBA545A7E0A3026DA4 /* Pods_NetmeraFlutterNotificationContentExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NetmeraFlutterNotificationContentExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = Flutter/Debug.xcconfig; sourceTree = "<group>"; };
 		9740EEB31CF90195004384FC /* Generated.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Generated.xcconfig; path = Flutter/Generated.xcconfig; sourceTree = "<group>"; };
 		97C146EE1CF9000F007C117D /* Runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Runner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,12 +103,9 @@
 		97C146FD1CF9000F007C117D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C06611645372901B1FC568E2 /* Pods-NetmeraFlutterNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetmeraFlutterNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-NetmeraFlutterNotificationServiceExtension/Pods-NetmeraFlutterNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
-		C48E1A3459E4470742759C81 /* Pods-NetmeraFlutterNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetmeraFlutterNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-NetmeraFlutterNotificationServiceExtension/Pods-NetmeraFlutterNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		C95543BE27EF36DC00359764 /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
-		D07E7654B4609CCA7AA0386C /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
-		DE0508173C3D2C452EA39C0D /* Pods-NetmeraFlutterNotificationServiceExtension.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetmeraFlutterNotificationServiceExtension.profile.xcconfig"; path = "Target Support Files/Pods-NetmeraFlutterNotificationServiceExtension/Pods-NetmeraFlutterNotificationServiceExtension.profile.xcconfig"; sourceTree = "<group>"; };
-		E3B5F84654536FDD2FA2BF33 /* Pods_NetmeraFlutterNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NetmeraFlutterNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDA07FB4F5A970C8DFB0BCFD /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
+		EF46A3A4843D8048CFF08BDD /* Pods-NetmeraFlutterNotificationServiceExtension.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetmeraFlutterNotificationServiceExtension.profile.xcconfig"; path = "Target Support Files/Pods-NetmeraFlutterNotificationServiceExtension/Pods-NetmeraFlutterNotificationServiceExtension.profile.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,7 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71E12B65F4BA81732A77689D /* Pods_NetmeraFlutterNotificationServiceExtension.framework in Frameworks */,
+				196C2D4C2910BCFE532BE040 /* Pods_NetmeraFlutterNotificationServiceExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,7 +123,7 @@
 			files = (
 				0DD17079288092C200B85E5C /* UserNotificationsUI.framework in Frameworks */,
 				0DD17077288092C200B85E5C /* UserNotifications.framework in Frameworks */,
-				CE4C436106B53CF1DC82F82C /* Pods_NetmeraFlutterNotificationContentExtension.framework in Frameworks */,
+				DB67A283D8ABCDD12C32EC46 /* Pods_NetmeraFlutterNotificationContentExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,7 +131,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71D8CB6CD217A5C181E1F7A3 /* Pods_Runner.framework in Frameworks */,
+				C6EE7CF06D399F635C93CEBA /* Pods_Runner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,15 +163,15 @@
 		19DCB992CA8DB2F79A4DB4E6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D07E7654B4609CCA7AA0386C /* Pods-Runner.debug.xcconfig */,
-				6F94748806BE3DBB216E8361 /* Pods-Runner.release.xcconfig */,
-				44581E3AF7EBE8F7050B4D5D /* Pods-Runner.profile.xcconfig */,
-				C06611645372901B1FC568E2 /* Pods-NetmeraFlutterNotificationServiceExtension.debug.xcconfig */,
-				C48E1A3459E4470742759C81 /* Pods-NetmeraFlutterNotificationServiceExtension.release.xcconfig */,
-				DE0508173C3D2C452EA39C0D /* Pods-NetmeraFlutterNotificationServiceExtension.profile.xcconfig */,
-				1A9C9E53A5AA71FFCEB5409C /* Pods-NetmeraFlutterNotificationContentExtension.debug.xcconfig */,
-				053651FA04BA649F90333C02 /* Pods-NetmeraFlutterNotificationContentExtension.release.xcconfig */,
-				103506EEB401D346F0FEA740 /* Pods-NetmeraFlutterNotificationContentExtension.profile.xcconfig */,
+				2C5EA1BEBAE612138F8C78A7 /* Pods-NetmeraFlutterNotificationContentExtension.debug.xcconfig */,
+				15193CC8073DCDB033B72EBB /* Pods-NetmeraFlutterNotificationContentExtension.release.xcconfig */,
+				8407DF113C182533B2ECB48F /* Pods-NetmeraFlutterNotificationContentExtension.profile.xcconfig */,
+				41EAEA0E09631E7E76DA4E04 /* Pods-NetmeraFlutterNotificationServiceExtension.debug.xcconfig */,
+				6255E7510B635CF1246C9AF0 /* Pods-NetmeraFlutterNotificationServiceExtension.release.xcconfig */,
+				EF46A3A4843D8048CFF08BDD /* Pods-NetmeraFlutterNotificationServiceExtension.profile.xcconfig */,
+				4DD9C43B3203856036CB293A /* Pods-Runner.debug.xcconfig */,
+				71DBA8DFC51E6300A90ECC4B /* Pods-Runner.release.xcconfig */,
+				DDA07FB4F5A970C8DFB0BCFD /* Pods-Runner.profile.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -181,11 +179,11 @@
 		7180AC2EAFA1F3514743BDB3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6ABB100076CC5807178D9711 /* Pods_Runner.framework */,
-				E3B5F84654536FDD2FA2BF33 /* Pods_NetmeraFlutterNotificationServiceExtension.framework */,
 				0DD17076288092C200B85E5C /* UserNotifications.framework */,
 				0DD17078288092C200B85E5C /* UserNotificationsUI.framework */,
-				68D8725FC03F6EC3B4561286 /* Pods_NetmeraFlutterNotificationContentExtension.framework */,
+				93DB26BBA545A7E0A3026DA4 /* Pods_NetmeraFlutterNotificationContentExtension.framework */,
+				71775CF8D1FD73C98302E932 /* Pods_NetmeraFlutterNotificationServiceExtension.framework */,
+				7CF6747AC28704A51AE37D91 /* Pods_Runner.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -232,7 +230,6 @@
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
 				97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */,
 				97C147021CF9000F007C117D /* Info.plist */,
-				0DED2CA4281EE53A00E10CD0 /* keys.plist */,
 				1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */,
 				1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */,
 				74858FAE1ED2DC5600515810 /* AppDelegate.swift */,
@@ -248,7 +245,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0DD1706F28808F7400B85E5C /* Build configuration list for PBXNativeTarget "NetmeraFlutterNotificationServiceExtension" */;
 			buildPhases = (
-				9E3749E9932C79C9A94C5BCC /* [CP] Check Pods Manifest.lock */,
+				F7118CF05AC5FBFAF710D37D /* [CP] Check Pods Manifest.lock */,
 				0DD1705F28808F7400B85E5C /* Sources */,
 				0DD1706028808F7400B85E5C /* Frameworks */,
 				0DD1706128808F7400B85E5C /* Resources */,
@@ -266,7 +263,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0DD17087288092C300B85E5C /* Build configuration list for PBXNativeTarget "NetmeraFlutterNotificationContentExtension" */;
 			buildPhases = (
-				2DEAAD90F3F56A10830379F4 /* [CP] Check Pods Manifest.lock */,
+				68185B6A595ABF233F6969E4 /* [CP] Check Pods Manifest.lock */,
 				0DD17071288092C200B85E5C /* Sources */,
 				0DD17072288092C200B85E5C /* Frameworks */,
 				0DD17073288092C200B85E5C /* Resources */,
@@ -284,15 +281,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 97C147051CF9000F007C117D /* Build configuration list for PBXNativeTarget "Runner" */;
 			buildPhases = (
-				3AF26DE5F79B5A48D60BF792 /* [CP] Check Pods Manifest.lock */,
+				64D013E21492F964671BF7E9 /* [CP] Check Pods Manifest.lock */,
+				9705A1C41CF9048500538489 /* Embed Frameworks */,
 				9740EEB61CF901F6004384FC /* Run Script */,
 				97C146EA1CF9000F007C117D /* Sources */,
 				97C146EB1CF9000F007C117D /* Frameworks */,
 				97C146EC1CF9000F007C117D /* Resources */,
-				9705A1C41CF9048500538489 /* Embed Frameworks */,
-				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
-				61AE1B59914524AE4864BB52 /* [CP] Embed Pods Frameworks */,
 				0DD1706B28808F7400B85E5C /* Embed App Extensions */,
+				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
+				F834DA44C900FD317C069302 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -312,7 +309,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1340;
-				LastUpgradeCheck = 1300;
+				LastUpgradeCheck = 1510;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					0DD1706228808F7400B85E5C = {
@@ -367,7 +364,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0DED2CA5281EE64900E10CD0 /* keys.plist in Resources */,
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
@@ -378,29 +374,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2DEAAD90F3F56A10830379F4 /* [CP] Check Pods Manifest.lock */ = {
+		3B06AD1E1E4923F5004D2608 /* Thin Binary */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
+				"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}",
 			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
+			name = "Thin Binary";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-NetmeraFlutterNotificationContentExtension-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" embed_and_thin";
 		};
-		3AF26DE5F79B5A48D60BF792 /* [CP] Check Pods Manifest.lock */ = {
+		64D013E21492F964671BF7E9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -422,37 +412,26 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3B06AD1E1E4923F5004D2608 /* Thin Binary */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}",
-			);
-			name = "Thin Binary";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" embed_and_thin";
-		};
-		61AE1B59914524AE4864BB52 /* [CP] Embed Pods Frameworks */ = {
+		68185B6A595ABF233F6969E4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NetmeraFlutterNotificationContentExtension-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9740EEB61CF901F6004384FC /* Run Script */ = {
@@ -470,7 +449,7 @@
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build";
 		};
-		9E3749E9932C79C9A94C5BCC /* [CP] Check Pods Manifest.lock */ = {
+		F7118CF05AC5FBFAF710D37D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -490,6 +469,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F834DA44C900FD317C069302 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -565,7 +561,7 @@
 /* Begin XCBuildConfiguration section */
 		0DD1706C28808F7400B85E5C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C06611645372901B1FC568E2 /* Pods-NetmeraFlutterNotificationServiceExtension.debug.xcconfig */;
+			baseConfigurationReference = 41EAEA0E09631E7E76DA4E04 /* Pods-NetmeraFlutterNotificationServiceExtension.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -604,7 +600,7 @@
 		};
 		0DD1706D28808F7400B85E5C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C48E1A3459E4470742759C81 /* Pods-NetmeraFlutterNotificationServiceExtension.release.xcconfig */;
+			baseConfigurationReference = 6255E7510B635CF1246C9AF0 /* Pods-NetmeraFlutterNotificationServiceExtension.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -640,7 +636,7 @@
 		};
 		0DD1706E28808F7400B85E5C /* Profile */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DE0508173C3D2C452EA39C0D /* Pods-NetmeraFlutterNotificationServiceExtension.profile.xcconfig */;
+			baseConfigurationReference = EF46A3A4843D8048CFF08BDD /* Pods-NetmeraFlutterNotificationServiceExtension.profile.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -676,7 +672,7 @@
 		};
 		0DD17084288092C300B85E5C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1A9C9E53A5AA71FFCEB5409C /* Pods-NetmeraFlutterNotificationContentExtension.debug.xcconfig */;
+			baseConfigurationReference = 2C5EA1BEBAE612138F8C78A7 /* Pods-NetmeraFlutterNotificationContentExtension.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -716,7 +712,7 @@
 		};
 		0DD17085288092C300B85E5C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 053651FA04BA649F90333C02 /* Pods-NetmeraFlutterNotificationContentExtension.release.xcconfig */;
+			baseConfigurationReference = 15193CC8073DCDB033B72EBB /* Pods-NetmeraFlutterNotificationContentExtension.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -753,7 +749,7 @@
 		};
 		0DD17086288092C300B85E5C /* Profile */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 103506EEB401D346F0FEA740 /* Pods-NetmeraFlutterNotificationContentExtension.profile.xcconfig */;
+			baseConfigurationReference = 8407DF113C182533B2ECB48F /* Pods-NetmeraFlutterNotificationContentExtension.profile.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";

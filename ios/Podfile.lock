@@ -1,55 +1,95 @@
 PODS:
+  - AFNetworking/NSURLSession (4.0.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (4.0.1)
+  - AFNetworking/Security (4.0.1)
+  - AFNetworking/Serialization (4.0.1)
   - Flutter (1.0.0)
+  - flutter_config (0.0.1):
+    - Flutter
   - fluttertoast (0.0.2):
     - Flutter
     - Toast
-  - Netmera (3.14.10-WithoutDependency):
-    - Netmera/Core (= 3.14.10-WithoutDependency)
-    - Netmera/NetmeraWithAdId (= 3.14.10-WithoutDependency)
-  - Netmera/AdIdSupport (3.14.10-WithoutDependency)
-  - Netmera/Application (3.14.10-WithoutDependency):
-    - Netmera/Core
-  - Netmera/Core (3.14.10-WithoutDependency)
-  - Netmera/NetmeraWithAdId (3.14.10-WithoutDependency):
+  - FMDB (2.7.9):
+    - FMDB/standard (= 2.7.9)
+  - FMDB/standard (2.7.9)
+  - MMWormhole (2.0.0):
+    - MMWormhole/Core (= 2.0.0)
+  - MMWormhole/Core (2.0.0)
+  - Netmera (3.23.3):
+    - Netmera/NetmeraWithAdId (= 3.23.3)
+  - Netmera/AdIdSupport (3.23.3)
+  - Netmera/Application (3.23.3):
+    - AFNetworking/NSURLSession (>= 3.1.0)
+    - FMDB
+    - MMWormhole (~> 2.0.0)
+    - NetmeraCore (= 3.23.3)
+    - UICKeyChainStore (~> 2.0)
+  - Netmera/NetmeraWithAdId (3.23.3):
     - Netmera/AdIdSupport
     - Netmera/Application
-  - Netmera/NotificationContentExtension (3.14.10-WithoutDependency):
-    - Netmera/Core
-  - Netmera/NotificationServiceExtension (3.14.10-WithoutDependency):
-    - Netmera/Core
-  - netmera_flutter_sdk (2.2.0):
+  - Netmera/NotificationContentExtension (3.23.3):
+    - MMWormhole (~> 2.0.0)
+    - NetmeraCore (= 3.23.3)
+  - Netmera/NotificationServiceExtension (3.23.3):
+    - NetmeraCore (= 3.23.3)
+  - netmera_flutter_sdk (2.4.1):
     - Flutter
-    - Netmera (= 3.14.10-WithoutDependency)
-  - Toast (4.0.0)
+    - Netmera (= 3.23.3)
+  - NetmeraCore (3.23.3)
+  - Toast (4.1.0)
+  - UICKeyChainStore (2.2.1)
+  - uni_links (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
+  - flutter_config (from `.symlinks/plugins/flutter_config/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
-  - Netmera (= 3.14.10-WithoutDependency)
-  - Netmera/NotificationContentExtension (= 3.14.10-WithoutDependency)
-  - Netmera/NotificationServiceExtension (= 3.14.10-WithoutDependency)
+  - Netmera (= 3.23.3)
+  - Netmera/NotificationContentExtension (= 3.23.3)
+  - Netmera/NotificationServiceExtension (= 3.23.3)
   - netmera_flutter_sdk (from `.symlinks/plugins/netmera_flutter_sdk/ios`)
+  - uni_links (from `.symlinks/plugins/uni_links/ios`)
 
 SPEC REPOS:
   trunk:
+    - AFNetworking
+    - FMDB
+    - MMWormhole
     - Netmera
+    - NetmeraCore
     - Toast
+    - UICKeyChainStore
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
+  flutter_config:
+    :path: ".symlinks/plugins/flutter_config/ios"
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
   netmera_flutter_sdk:
     :path: ".symlinks/plugins/netmera_flutter_sdk/ios"
+  uni_links:
+    :path: ".symlinks/plugins/uni_links/ios"
 
 SPEC CHECKSUMS:
-  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  fluttertoast: 16fbe6039d06a763f3533670197d01fc73459037
-  Netmera: bc77f9c5508471dac9e99ee7d33a25fd285bf9dd
-  netmera_flutter_sdk: 344fd05c8525299ce6583ebbdc0e0ed3ca571df4
-  Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
+  AFNetworking: 3bd23d814e976cd148d7d44c3ab78017b744cd58
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  flutter_config: f48f0d47a284f1791aacce2687eabb3309ba7a41
+  fluttertoast: 31b00dabfa7fb7bacd9e7dbee580d7a2ff4bf265
+  FMDB: aa44149f6fb634b1ac54f64f47064bb0d0c5a032
+  MMWormhole: 0cd3fd35a9118b2e2d762b499f54eeaace0be791
+  Netmera: 9d0420e9078df611955a12134c3dd918f438ba4b
+  netmera_flutter_sdk: 6f82c5d8526e7ef22429b76512a69c12d4915fb1
+  NetmeraCore: e8191d14ffe89d8fe2fbfd7626b0469cc720da0e
+  Toast: ec33c32b8688982cecc6348adeae667c1b9938da
+  UICKeyChainStore: ba3bff2c762b12db1e516f395c837dd25298b05e
+  uni_links: d97da20c7701486ba192624d99bffaaffcfc298a
 
-PODFILE CHECKSUM: bc7b3d0f2bb1a9e276fb7bce0913fa7825193376
+PODFILE CHECKSUM: 8a71cfd6b3b6b526df0d8170a0362897df68ea86
 
-COCOAPODS: 1.12.0
+COCOAPODS: 1.14.0

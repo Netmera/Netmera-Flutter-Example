@@ -13,11 +13,13 @@ import 'package:netmera_flutter_sdk/events/commerce/NetmeraLineItem.dart';
 
 import 'package:netmera_flutter_example/model/MyNetmeraEvent.dart';
 
+import 'main.dart';
+
 class EventPage extends StatefulWidget {
   const EventPage({Key? key}) : super(key: key);
 
   @override
-  _EventPageState createState() => _EventPageState();
+  State<EventPage> createState() => _EventPageState();
 }
 
 class _EventPageState extends State<EventPage> {
@@ -79,30 +81,22 @@ class _EventPageState extends State<EventPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        ElevatedButton(
-          child: const Text('Login Event'),
-          onPressed: sendLoginEvent,
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("Events"),
         ),
-        ElevatedButton(
-          child: const Text('Register Event'),
-          onPressed: sendRegisterEvent,
-        ),
-        ElevatedButton(
-          child: const Text('View Cart Event'),
-          onPressed: sendViewCartEvent,
-        ),
-        ElevatedButton(
-          child: const Text('Purchase Event'),
-          onPressed: sendPurchaseEvent,
-        ),
-        ElevatedButton(
-          child: const Text('Custom Test Event'),
-          onPressed: sendTestEvent,
-        ),
-      ],
-    );
+        body: Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                button('Login Event', sendLoginEvent),
+                button('Register Event', sendRegisterEvent),
+                button('View Cart Event', sendViewCartEvent),
+                button('Purchase Event', sendPurchaseEvent),
+                button('Custom Test Event', sendTestEvent),
+              ],
+            )));
   }
 }

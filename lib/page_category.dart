@@ -20,10 +20,18 @@ class _CategoryPageState extends State<CategoryPage> {
 
   List<DropdownMenuItem<String>> getCategoryStatusList() {
     List<DropdownMenuItem<String>> items = List.empty(growable: true);
-    items.add(DropdownMenuItem(value: Netmera.PUSH_OBJECT_STATUS_ALL.toString(), child: const Text("ALL")));
-    items.add(DropdownMenuItem(value: Netmera.PUSH_OBJECT_STATUS_READ.toString(), child: const Text("READ")));
-    items.add(DropdownMenuItem(value: Netmera.PUSH_OBJECT_STATUS_UNREAD.toString(), child: const Text("UNREAD")));
-    items.add(DropdownMenuItem(value: Netmera.PUSH_OBJECT_STATUS_DELETED.toString(), child: const Text("DELETED")));
+    items.add(DropdownMenuItem(
+        value: Netmera.PUSH_OBJECT_STATUS_ALL.toString(),
+        child: const Text("ALL")));
+    items.add(DropdownMenuItem(
+        value: Netmera.PUSH_OBJECT_STATUS_READ.toString(),
+        child: const Text("READ")));
+    items.add(DropdownMenuItem(
+        value: Netmera.PUSH_OBJECT_STATUS_UNREAD.toString(),
+        child: const Text("UNREAD")));
+    items.add(DropdownMenuItem(
+        value: Netmera.PUSH_OBJECT_STATUS_DELETED.toString(),
+        child: const Text("DELETED")));
     return items;
   }
 
@@ -96,7 +104,9 @@ class _CategoryPageState extends State<CategoryPage> {
         selectedCategories.add(_categoryList[1].getCategoryName()!);
       }
 
-      Netmera.updateStatusByCategories(Netmera.PUSH_OBJECT_STATUS_READ, selectedCategories).then((netmeraError) {
+      Netmera.updateStatusByCategories(
+              Netmera.PUSH_OBJECT_STATUS_READ, selectedCategories)
+          .then((netmeraError) {
         fetchCategory();
       }).catchError((error) {
         debugPrint(error);
@@ -113,7 +123,9 @@ class _CategoryPageState extends State<CategoryPage> {
   }
 
   setUserCategoryPreference(NetmeraCategoryPreference item) async {
-    Netmera.setUserCategoryPreference(item.getCategoryId()!, !item.getOptInStatus()!).then((value) {
+    Netmera.setUserCategoryPreference(
+            item.getCategoryId()!, !item.getOptInStatus()!)
+        .then((value) {
       debugPrint("Successfully set user category preference list");
     }).catchError((error) {
       debugPrint(error);
@@ -128,15 +140,28 @@ class _CategoryPageState extends State<CategoryPage> {
           final categoryItem = _categoryList[index];
           return Padding(
             padding: const EdgeInsets.all(10.0),
-            child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-              Text('Category Name: ' + (categoryItem.getCategoryName() == null ? "null" : categoryItem.getCategoryName()!)),
-              Text('Read Count: ' + (categoryItem.getReadCount() == null ? "null" : categoryItem.getReadCount()!.toString())),
-              Text('Unread Count: ' +
-                  (categoryItem.getUnReadCount() == null ? "null" : categoryItem.getUnReadCount()!.toString())),
-              Text('Deleted Count: ' +
-                  (categoryItem.getDeletedCount() == null ? "null" : categoryItem.getDeletedCount()!.toString())),
-              Text('Last Message: ' + (categoryItem.getLastMessage().toString())),
-            ]),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text('Category Name: ' +
+                      (categoryItem.getCategoryName() == null
+                          ? "null"
+                          : categoryItem.getCategoryName()!)),
+                  Text('Read Count: ' +
+                      (categoryItem.getReadCount() == null
+                          ? "null"
+                          : categoryItem.getReadCount()!.toString())),
+                  Text('Unread Count: ' +
+                      (categoryItem.getUnReadCount() == null
+                          ? "null"
+                          : categoryItem.getUnReadCount()!.toString())),
+                  Text('Deleted Count: ' +
+                      (categoryItem.getDeletedCount() == null
+                          ? "null"
+                          : categoryItem.getDeletedCount()!.toString())),
+                  Text('Last Message: ' +
+                      (categoryItem.getLastMessage().toString())),
+                ]),
           );
         },
         separatorBuilder: (context, index) {
@@ -153,17 +178,24 @@ class _CategoryPageState extends State<CategoryPage> {
             child: Row(children: [
               Expanded(
                 child: IntrinsicHeight(
-                  child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-                    Text('Category Id: ' +
-                        (preferenceItem.getCategoryId() == null ? "null" : preferenceItem.getCategoryId()!.toString())),
-                    Text('Category Name: ' +
-                        (preferenceItem.getCategoryName() == null ? "null" : preferenceItem.getCategoryName()!)),
-                  ]),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Text('Category Id: ' +
+                            (preferenceItem.getCategoryId() == null
+                                ? "null"
+                                : preferenceItem.getCategoryId()!.toString())),
+                        Text('Category Name: ' +
+                            (preferenceItem.getCategoryName() == null
+                                ? "null"
+                                : preferenceItem.getCategoryName()!)),
+                      ]),
                 ),
               ),
               IntrinsicHeight(
                 child: ElevatedButton(
-                  child: Text(preferenceItem.getOptInStatus() ? 'Disable' : 'Enable'),
+                  child: Text(
+                      preferenceItem.getOptInStatus() ? 'Disable' : 'Enable'),
                   onPressed: () => {setUserCategoryPreference(preferenceItem)},
                 ),
               ),
@@ -180,85 +212,92 @@ class _CategoryPageState extends State<CategoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 1.0),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0, bottom: 5.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Expanded(
-                  child: IntrinsicHeight(
-                    child: DropdownButton(
-                        value: _currentStatus,
-                        items: getCategoryStatusList(),
-                        onChanged: (String? status) {
-                          setState(() {
-                            _currentStatus = status!;
-                          });
-                        }),
-                  ),
-                ),
-                Expanded(
-                  child: IntrinsicHeight(
-                    child: ElevatedButton(
-                      child: const Text('Fetch Category'),
-                      onPressed: fetchCategory,
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text("Category"),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.only(top: 1.0),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 16.0, right: 16.0, top: 16.0, bottom: 5.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: IntrinsicHeight(
+                        child: DropdownButton(
+                            value: _currentStatus,
+                            items: getCategoryStatusList(),
+                            onChanged: (String? status) {
+                              setState(() {
+                                _currentStatus = status!;
+                              });
+                            }),
+                      ),
                     ),
-                  ),
-                ),
-                Expanded(
-                  child: IntrinsicHeight(
-                    child: ElevatedButton(
-                      child: const Text('Fetch Next Category Page'),
-                      onPressed: fetchNextCategoryPage,
+                    Expanded(
+                      child: IntrinsicHeight(
+                        child: ElevatedButton(
+                          child: const Text('Fetch Category'),
+                          onPressed: fetchCategory,
+                        ),
+                      ),
                     ),
-                  ),
+                    Expanded(
+                      child: IntrinsicHeight(
+                        child: ElevatedButton(
+                          child: const Text('Fetch Next Category Page'),
+                          onPressed: fetchNextCategoryPage,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 5.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: IntrinsicHeight(
+                        child: ElevatedButton(
+                          child: const Text('Handle Last Message'),
+                          onPressed: handleLastMessage,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: IntrinsicHeight(
+                        child: ElevatedButton(
+                          child: const Text(
+                              'Update Status For First Two Categories'),
+                          onPressed: updateStatusCategories,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: IntrinsicHeight(
+                        child: ElevatedButton(
+                          child: const Text('User Category Preference List'),
+                          onPressed: getUserCategoryPreferenceList,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: categoryListView(context),
+              ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 5.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Expanded(
-                  child: IntrinsicHeight(
-                    child: ElevatedButton(
-                      child: const Text('Handle Last Message'),
-                      onPressed: handleLastMessage,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: IntrinsicHeight(
-                    child: ElevatedButton(
-                      child: const Text('Update Status For First Two Categories'),
-                      onPressed: updateStatusCategories,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: IntrinsicHeight(
-                    child: ElevatedButton(
-                      child: const Text('User Category Preference List'),
-                      onPressed: getUserCategoryPreferenceList,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: categoryListView(context),
-          ),
-        ],
-      ),
-    );
+        ));
   }
 }

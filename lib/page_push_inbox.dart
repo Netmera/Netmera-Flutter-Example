@@ -21,10 +21,18 @@ class _PushInboxPageState extends State<PushInboxPage> {
 
   List<DropdownMenuItem<String>> getInboxList() {
     List<DropdownMenuItem<String>> items = List.empty(growable: true);
-    items.add(DropdownMenuItem(value: Netmera.PUSH_OBJECT_STATUS_ALL.toString(), child: const Text("ALL")));
-    items.add(DropdownMenuItem(value: Netmera.PUSH_OBJECT_STATUS_READ.toString(), child: const Text("READ")));
-    items.add(DropdownMenuItem(value: Netmera.PUSH_OBJECT_STATUS_UNREAD.toString(), child: const Text("UNREAD")));
-    items.add(DropdownMenuItem(value: Netmera.PUSH_OBJECT_STATUS_DELETED.toString(), child: const Text("DELETED")));
+    items.add(DropdownMenuItem(
+        value: Netmera.PUSH_OBJECT_STATUS_ALL.toString(),
+        child: const Text("ALL")));
+    items.add(DropdownMenuItem(
+        value: Netmera.PUSH_OBJECT_STATUS_READ.toString(),
+        child: const Text("READ")));
+    items.add(DropdownMenuItem(
+        value: Netmera.PUSH_OBJECT_STATUS_UNREAD.toString(),
+        child: const Text("UNREAD")));
+    items.add(DropdownMenuItem(
+        value: Netmera.PUSH_OBJECT_STATUS_DELETED.toString(),
+        child: const Text("DELETED")));
     return items;
   }
 
@@ -101,7 +109,8 @@ class _PushInboxPageState extends State<PushInboxPage> {
   handleInteractiveAction() async {
     if (_pushInboxList.isNotEmpty) {
       for (var element in _pushInboxList) {
-        if (element.getInteractiveActions() != null && element.getInteractiveActions()!.isNotEmpty) {
+        if (element.getInteractiveActions() != null &&
+            element.getInteractiveActions()!.isNotEmpty) {
           Netmera.handleInteractiveAction(element.getInteractiveActions()![0]);
           return;
         }
@@ -167,122 +176,129 @@ class _PushInboxPageState extends State<PushInboxPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 1.0),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0, bottom: 5.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Expanded(
-                  child: IntrinsicHeight(
-                    child: DropdownButton(
-                        value: _currentStatus,
-                        items: getInboxList(),
-                        onChanged: (String? status) {
-                          setState(() {
-                            _currentStatus = status!;
-                          });
-                        }),
-                  ),
-                ),
-                Expanded(
-                  child: IntrinsicHeight(
-                    child: ElevatedButton(
-                      child: const Text('Fetch Inbox'),
-                      onPressed: fetchInbox,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Push Inbox"),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(top: 16.0),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 16.0, right: 16.0, top: 16.0, bottom: 5.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Expanded(
+                    child: IntrinsicHeight(
+                      child: DropdownButton(
+                          value: _currentStatus,
+                          items: getInboxList(),
+                          onChanged: (String? status) {
+                            setState(() {
+                              _currentStatus = status!;
+                            });
+                          }),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: IntrinsicHeight(
-                    child: ElevatedButton(
-                      child: const Text('Fetch Next Page'),
-                      onPressed: fetchNextPage,
+                  Expanded(
+                    child: IntrinsicHeight(
+                      child: ElevatedButton(
+                        child: const Text('Fetch Inbox'),
+                        onPressed: fetchInbox,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                  Expanded(
+                    child: IntrinsicHeight(
+                      child: ElevatedButton(
+                        child: const Text('Fetch Next Page'),
+                        onPressed: fetchNextPage,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 5.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Expanded(
-                  child: IntrinsicHeight(
-                    child: ElevatedButton(
-                      child: const Text('Update All'),
-                      onPressed: updateAll,
+            Padding(
+              padding:
+                  const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 5.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Expanded(
+                    child: IntrinsicHeight(
+                      child: ElevatedButton(
+                        child: const Text('Update All'),
+                        onPressed: updateAll,
+                      ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: IntrinsicHeight(
-                    child: ElevatedButton(
-                      child: const Text('Update Status(Unread 2 elem.)'),
-                      onPressed: inboxUpdateStatus,
+                  Expanded(
+                    child: IntrinsicHeight(
+                      child: ElevatedButton(
+                        child: const Text('Update Status(Unread 2 elem.)'),
+                        onPressed: inboxUpdateStatus,
+                      ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: IntrinsicHeight(
-                    child: ElevatedButton(
-                      child: const Text('Inbox Count For Status'),
-                      onPressed: inboxCountForStatus,
+                  Expanded(
+                    child: IntrinsicHeight(
+                      child: ElevatedButton(
+                        child: const Text('Inbox Count For Status'),
+                        onPressed: inboxCountForStatus,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Expanded(
-                  child: IntrinsicHeight(
-                    child: ElevatedButton(
-                      child: const Text('Count For Status'),
-                      onPressed: countForStatus,
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Expanded(
+                    child: IntrinsicHeight(
+                      child: ElevatedButton(
+                        child: const Text('Count For Status'),
+                        onPressed: countForStatus,
+                      ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: IntrinsicHeight(
-                    child: ElevatedButton(
-                      child: const Text('Handle Push Object'),
-                      onPressed: handlePushObject,
+                  Expanded(
+                    child: IntrinsicHeight(
+                      child: ElevatedButton(
+                        child: const Text('Handle Push Object'),
+                        onPressed: handlePushObject,
+                      ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: IntrinsicHeight(
-                    child: ElevatedButton(
-                      child: const Text('Handle Interactive Action'),
-                      onPressed: handleInteractiveAction,
+                  Expanded(
+                    child: IntrinsicHeight(
+                      child: ElevatedButton(
+                        child: const Text('Handle Interactive Action'),
+                        onPressed: handleInteractiveAction,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Text(
-            "Count For Status:" + _count,
-            textAlign: TextAlign.left,
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
-          Expanded(
-            child: _pushInboxListView(context),
-          ),
-        ],
+            Text(
+              "Count For Status:" + _count,
+              textAlign: TextAlign.left,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            Expanded(
+              child: _pushInboxListView(context),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -294,22 +310,56 @@ class _PushInboxPageState extends State<PushInboxPage> {
         final inboxItem = _pushInboxList[index];
         return Padding(
           padding: const EdgeInsets.all(10.0),
-          child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-            Text('Title: ' + (inboxItem.getTitle() == null ? "null" : inboxItem.getTitle()!)),
-            Text('Subtitle: ' + (inboxItem.getSubtitle() == null ? "null" : inboxItem.getSubtitle()!)),
-            Text('Body: ' + (inboxItem.getBody() == null ? "null" : inboxItem.getBody()!)),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+            Text('Title: ' +
+                (inboxItem.getTitle() == null
+                    ? "null"
+                    : inboxItem.getTitle()!)),
+            Text('Subtitle: ' +
+                (inboxItem.getSubtitle() == null
+                    ? "null"
+                    : inboxItem.getSubtitle()!)),
+            Text('Body: ' +
+                (inboxItem.getBody() == null ? "null" : inboxItem.getBody()!)),
             Text('Push Type: ' + inboxItem.getPushType().toString()),
-            Text('Push Id: ' + (inboxItem.getPushId() == null ? "null" : inboxItem.getPushId()!)),
-            Text('Push Instance Id: ' + (inboxItem.getPushInstanceId() == null ? "null" : inboxItem.getPushInstanceId()!)),
-            Text('Send Date: ' + (inboxItem.getSendDate() == null ? "null" : inboxItem.getSendDate()!)),
+            Text('Push Id: ' +
+                (inboxItem.getPushId() == null
+                    ? "null"
+                    : inboxItem.getPushId()!)),
+            Text('Push Instance Id: ' +
+                (inboxItem.getPushInstanceId() == null
+                    ? "null"
+                    : inboxItem.getPushInstanceId()!)),
+            Text('Send Date: ' +
+                (inboxItem.getSendDate() == null
+                    ? "null"
+                    : inboxItem.getSendDate()!)),
             Text('Inbox Status: ' + inboxItem.getInboxStatus().toString()),
-            Text('Action Deeplink Url: ' + (inboxItem.getDeepLink() == null ? "null" : inboxItem.getDeepLink()!)),
-            Text('Action Web Page Url: ' + (inboxItem.getWebPage() == null ? "null" : inboxItem.getWebPage()!)),
-            Text('External Id: ' + (inboxItem.getExternalId() == null ? "null" : inboxItem.getExternalId()!)),
+            Text('Action Deeplink Url: ' +
+                (inboxItem.getDeepLink() == null
+                    ? "null"
+                    : inboxItem.getDeepLink()!)),
+            Text('Action Web Page Url: ' +
+                (inboxItem.getWebPage() == null
+                    ? "null"
+                    : inboxItem.getWebPage()!)),
+            Text('External Id: ' +
+                (inboxItem.getExternalId() == null
+                    ? "null"
+                    : inboxItem.getExternalId()!)),
             Text('Media Attachment Url: ' +
-                (inboxItem.getMediaAttachmentUrl() == null ? "null" : inboxItem.getMediaAttachmentUrl()!)),
-            Text('Categories: ' + (inboxItem.getCategories() == null ? "null" : inboxItem.getCategories().toString())),
-            Text('Custom Json: ' + (inboxItem.getCustomJson() == null ? "null" : inboxItem.getCustomJson().toString())),
+                (inboxItem.getMediaAttachmentUrl() == null
+                    ? "null"
+                    : inboxItem.getMediaAttachmentUrl()!)),
+            Text('Categories: ' +
+                (inboxItem.getCategories() == null
+                    ? "null"
+                    : inboxItem.getCategories().toString())),
+            Text('Custom Json: ' +
+                (inboxItem.getCustomJson() == null
+                    ? "null"
+                    : inboxItem.getCustomJson().toString())),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -338,7 +388,8 @@ class _PushInboxPageState extends State<PushInboxPage> {
         final carouselItem = carousel[index];
         return Padding(
           padding: const EdgeInsets.all(10.0),
-          child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
             Text('id: ' + (carouselItem["id"] ?? "null")),
             Text('bpp: ' + (carouselItem["bpp"] ?? "null")),
             Text('ctext: ' + (carouselItem["ctext"] ?? "null")),
