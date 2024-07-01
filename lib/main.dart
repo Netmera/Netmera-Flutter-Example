@@ -297,6 +297,10 @@ class _MyAppState extends State<HomePage> {
         context, MaterialPageRoute(builder: (context) => const CategoryPage()));
   }
 
+  kill() {
+    Netmera.kill();
+  }
+
   isPushEnabled() {
     Netmera.isPushEnabled().then((enabled) {
       Fluttertoast.showToast(
@@ -479,6 +483,11 @@ class _MyAppState extends State<HomePage> {
                 margin: const EdgeInsets.only(top: 8),
                 child: button('TURN OFF SENDING EVENT AND USER UPDATE',
                     turnOffSendingEventAndUserUpdate),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 8),
+                child: button('KILL NETMERA',
+                    kill),
               ),
               Container(
                   margin: const EdgeInsets.only(top: 8, bottom: 16),

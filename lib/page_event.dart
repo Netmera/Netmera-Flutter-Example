@@ -23,16 +23,24 @@ class EventPage extends StatefulWidget {
 }
 
 class _EventPageState extends State<EventPage> {
-  emptyAction() {}
+  TextEditingController revenueController = TextEditingController();
 
   void sendLoginEvent() {
     NetmeraEventLogin loginEvent = NetmeraEventLogin();
     loginEvent.setUserId("TestUserId");
+    if (revenueController.text != '') {
+      var revenue = double.parse(revenueController.text);
+      loginEvent.setRevenue(revenue);
+    }
     Netmera.sendEvent(loginEvent);
   }
 
   void sendRegisterEvent() {
     NetmeraEventRegister registerEvent = NetmeraEventRegister();
+    if (revenueController.text != '') {
+      var revenue = double.parse(revenueController.text);
+      registerEvent.setRevenue(revenue);
+    }
     Netmera.sendEvent(registerEvent);
   }
 
@@ -40,6 +48,10 @@ class _EventPageState extends State<EventPage> {
     NetmeraEventCartView cartViewEvent = NetmeraEventCartView();
     cartViewEvent.setItemCount(3);
     cartViewEvent.setSubTotal(15.99);
+    if (revenueController.text != '') {
+      var revenue = double.parse(revenueController.text);
+      cartViewEvent.setRevenue(revenue);
+    }
     Netmera.sendEvent(cartViewEvent);
   }
 
@@ -69,6 +81,10 @@ class _EventPageState extends State<EventPage> {
 
     // Set custom attributes
     purchaseEvent.setInstallment("test installment");
+    if (revenueController.text != '') {
+      var revenue = double.parse(revenueController.text);
+      purchaseEvent.setRevenue(revenue);
+    }
     Netmera.sendEvent(purchaseEvent);
   }
 
@@ -76,6 +92,10 @@ class _EventPageState extends State<EventPage> {
     //Custom event
     TestEvent testEvent = TestEvent();
     testEvent.setNo(3); //Custom attribute
+    if (revenueController.text != '') {
+      var revenue = double.parse(revenueController.text);
+      testEvent.setRevenue(revenue);
+    }
     Netmera.sendEvent(testEvent);
   }
 
@@ -85,18 +105,24 @@ class _EventPageState extends State<EventPage> {
         appBar: AppBar(
           title: Text("Events"),
         ),
-        body: Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                button('Login Event', sendLoginEvent),
-                button('Register Event', sendRegisterEvent),
-                button('View Cart Event', sendViewCartEvent),
-                button('Purchase Event', sendPurchaseEvent),
-                button('Custom Test Event', sendTestEvent),
-              ],
-            )));
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 50.0, right: 50.0, bottom: 20),
+              child: TextField(
+                controller: revenueController,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(labelText: 'Revenue'),
+              ),
+            ),
+            button('Login Event', sendLoginEvent),
+            button('Register Event', sendRegisterEvent),
+            button('View Cart Event', sendViewCartEvent),
+            button('Purchase Event', sendPurchaseEvent),
+            button('Custom Test Event', sendTestEvent),
+          ],
+        )
+    );
   }
 }
