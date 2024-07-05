@@ -2,33 +2,43 @@
 /// Copyright (c) 2022 Inomera Research.
 ///
 
+import 'package:netmera_flutter_sdk/events/NetmeraEvent.dart';
 import 'package:netmera_flutter_sdk/events/commerce/NetmeraEventPurchase.dart';
-import 'package:netmera_flutter_sdk/events/media/NetmeraEventContentRate.dart';
 
-class TestEvent extends NetmeraEventContentRate {
+class NetmeraEventContentRate extends NetmeraEvent {
+  final String _EVENT_CODE = "jjnam";
+
   @override
-  getCode() => "prc";
-
+  String eventCode() {
+    return _EVENT_CODE;
+  }
+  
   late int _no;
 
   setNo(int no) {
     _no = no;
   }
 
-  int getNo() => _no;
-
   @override
-  Map<String, Object?> toJson() {
-    Map<String, Object?> map = super.toJson();
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> map = super.toJson();
     map['ec'] = _no;
     return map;
   }
-}
-
-class CustomPurchaseEvent extends NetmeraEventPurchase{
 
   @override
-  getCode() => "jrs";
+  String getCode() {
+    return _EVENT_CODE;
+  }
+}
+
+class CustomPurchaseEvent extends NetmeraEventPurchase {
+  final String _EVENT_CODE = "qwthb";
+
+  @override
+  String eventCode() {
+    return _EVENT_CODE;
+  }
 
   late String _installment;
 
@@ -36,11 +46,9 @@ class CustomPurchaseEvent extends NetmeraEventPurchase{
     _installment = installment;
   }
 
-  String getInstallment() => _installment;
-
   @override
-  Map<String, Object?> toJson() {
-    Map<String, Object?> map = super.toJson();
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> map = super.toJson();
     map['ea'] = _installment;
     return map;
   }

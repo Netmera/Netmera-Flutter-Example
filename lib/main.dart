@@ -35,11 +35,19 @@ void main() async {
 }
 
 void initBroadcastReceiver() {
-  void _onPushRegister(Map<dynamic, dynamic> bundle) async {
+   void _onPushRegister(Map<dynamic, dynamic> bundle) async {
     print("onPushRegister: $bundle");
-    _MyAppState._pushTokenString = bundle['pushToken'];
+    var pushToken = bundle['pushToken'];
+    if (pushToken is List<int>) {
+      String tokenString = pushToken.map((byte) => byte.toRadixString(16).padLeft(2, '0')).join();
+      _MyAppState._pushTokenString = tokenString;
+    } else if (pushToken is String) {
+      _MyAppState._pushTokenString = pushToken;
+    } else {
+      print("Unexpected push token format: ${pushToken.runtimeType}");
+    }
   }
-
+  
   void _onPushReceive(Map<dynamic, dynamic> bundle) async {
     print("onPushReceive: $bundle");
   }

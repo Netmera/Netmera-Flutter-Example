@@ -90,7 +90,7 @@ class _EventPageState extends State<EventPage> {
 
   void sendTestEvent() {
     //Custom event
-    TestEvent testEvent = TestEvent();
+    NetmeraEventContentRate testEvent = NetmeraEventContentRate();
     testEvent.setNo(3); //Custom attribute
     if (revenueController.text != '') {
       var revenue = double.parse(revenueController.text);
