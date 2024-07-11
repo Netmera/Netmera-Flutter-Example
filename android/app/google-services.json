@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "850720650930",
+    "project_id": "netmeraexamples",
+    "storage_bucket": "netmeraexamples.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:850720650930:android:11a229b35efc05a7657bab",
+        "android_client_info": {
+          "package_name": "com.netmera.flutterexample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "850720650930-bb6l68u27p973lavddbgop3vu9pt79oq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkpz48qmSOEhhkXoQC6En6erUCJSDsbJQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "850720650930-bb6l68u27p973lavddbgop3vu9pt79oq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "850720650930-9iguskhrovohdlcv8927e1op2noh5has.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.netmerareactnativeexample"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:850720650930:android:ec6107b18de858d5657bab",
+        "android_client_info": {
+          "package_name": "com.netmerareactnativeexample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "850720650930-bb6l68u27p973lavddbgop3vu9pt79oq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkpz48qmSOEhhkXoQC6En6erUCJSDsbJQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "850720650930-bb6l68u27p973lavddbgop3vu9pt79oq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "850720650930-9iguskhrovohdlcv8927e1op2noh5has.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.netmerareactnativeexample"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
