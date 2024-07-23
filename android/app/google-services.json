@@ -1,79 +1,64 @@
 {
   "project_info": {
-    "project_number": "850720650930",
-    "project_id": "netmeraexamples",
-    "storage_bucket": "netmeraexamples.appspot.com"
+    "project_number": "655729015885",
+    "project_id": "netmera-cross-examples",
+    "storage_bucket": "netmera-cross-examples.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:850720650930:android:11a229b35efc05a7657bab",
+        "mobilesdk_app_id": "1:655729015885:android:8875e94e64c44386837004",
         "android_client_info": {
-          "package_name": "com.netmera.flutterexample"
+          "package_name": "com.initialcode.unity.example"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "850720650930-bb6l68u27p973lavddbgop3vu9pt79oq.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBkpz48qmSOEhhkXoQC6En6erUCJSDsbJQ"
+          "current_key": "AIzaSyAVaVTSnXWF1eC_J1csmOwKrdcjRr6aduU"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "850720650930-bb6l68u27p973lavddbgop3vu9pt79oq.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "850720650930-9iguskhrovohdlcv8927e1op2noh5has.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.netmerareactnativeexample"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:850720650930:android:ec6107b18de858d5657bab",
+        "mobilesdk_app_id": "1:655729015885:android:c43c3fed281b782d837004",
         "android_client_info": {
-          "package_name": "com.netmerareactnativeexample"
+          "package_name": "com.netmera.flutterexample"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "850720650930-bb6l68u27p973lavddbgop3vu9pt79oq.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBkpz48qmSOEhhkXoQC6En6erUCJSDsbJQ"
+          "current_key": "AIzaSyAVaVTSnXWF1eC_J1csmOwKrdcjRr6aduU"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "850720650930-bb6l68u27p973lavddbgop3vu9pt79oq.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "850720650930-9iguskhrovohdlcv8927e1op2noh5has.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.netmerareactnativeexample"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:655729015885:android:43c13f803d597173837004",
+        "android_client_info": {
+          "package_name": "com.netmerareactnativeexample"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVaVTSnXWF1eC_J1csmOwKrdcjRr6aduU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
         }
       }
     }
