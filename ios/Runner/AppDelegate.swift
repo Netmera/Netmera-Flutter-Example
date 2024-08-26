@@ -4,12 +4,14 @@
 
 import UIKit
 import Flutter
-import flutter_config
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate, NetmeraPushDelegate {
     private let CHANNEL = "nm_flutter_example_channel"
-    
+
+    let NETMERA_PREPROD_API_KEY = "preprod_api_key"
+    let NETMERA_PREPROD_BASE_URL = "https://preprod.example.com"
+
     override func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
@@ -28,8 +30,8 @@ import flutter_config
             self.application(application, didReceiveRemoteNotification: notification as! [AnyHashable : Any])
         }
         
-        let netmeraApiKey = UserDefaults.standard.string(forKey: "apiKey") ?? flutter_config.FlutterConfigPlugin.env(for: "NETMERA_PREPROD_API_KEY")
-        let baseUrl = UserDefaults.standard.string(forKey: "baseUrl") ?? flutter_config.FlutterConfigPlugin.env(for: "NETMERA_PREPROD_BASE_URL")
+        let netmeraApiKey = UserDefaults.standard.string(forKey: "apiKey") ?? NETMERA_PREPROD_API_KEY
+        let baseUrl = UserDefaults.standard.string(forKey: "baseUrl") ?? NETMERA_PREPROD_BASE_URL
         
         FNetmera.logging(true) // Enable Netmera logging
         FNetmera.initNetmera(netmeraApiKey ?? "") // Your Netmera api key.

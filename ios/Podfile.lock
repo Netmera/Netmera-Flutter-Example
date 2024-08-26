@@ -7,8 +7,6 @@ PODS:
   - AFNetworking/Security (4.0.1)
   - AFNetworking/Serialization (4.0.1)
   - Flutter (1.0.0)
-  - flutter_config (0.0.1):
-    - Flutter
   - fluttertoast (0.0.2):
     - Flutter
     - Toast
@@ -37,7 +35,7 @@ PODS:
     - NetmeraCore (= 3.23.12)
   - Netmera/NotificationServiceExtension (3.23.12):
     - NetmeraCore (= 3.23.12)
-  - netmera_flutter_sdk (2.4.3):
+  - netmera_flutter_sdk (2.4.4):
     - Flutter
     - Netmera (= 3.23.12)
   - NetmeraCore (3.23.12)
@@ -48,7 +46,6 @@ PODS:
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
-  - flutter_config (from `.symlinks/plugins/flutter_config/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - Netmera (= 3.23.12)
   - Netmera/NotificationContentExtension (= 3.23.12)
@@ -69,8 +66,6 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
-  flutter_config:
-    :path: ".symlinks/plugins/flutter_config/ios"
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
   netmera_flutter_sdk:
@@ -81,7 +76,6 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworking: 3bd23d814e976cd148d7d44c3ab78017b744cd58
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  flutter_config: f48f0d47a284f1791aacce2687eabb3309ba7a41
   fluttertoast: 31b00dabfa7fb7bacd9e7dbee580d7a2ff4bf265
   FMDB: 728731dd336af3936ce00f91d9d8495f5718a0e6
   MMWormhole: 0cd3fd35a9118b2e2d762b499f54eeaace0be791

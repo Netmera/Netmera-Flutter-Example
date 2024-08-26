@@ -18,7 +18,6 @@ if (flutterRoot == null) {
     throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
 }
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
-apply from: project(':flutter_config').projectDir.getPath() + "/dotenv.gradle"
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) {
@@ -75,6 +74,8 @@ android {
         buildConfigField "String", "NETMERA_API_KEY", "\"" + getNetmeraApiKey() + "\""
         buildConfigField "String", "GCM_SENDER_ID", "\"" + getGCMSenderId() + "\""
         buildConfigField "String", "HMS_SENDER_ID", "\"" + getHMSSenderId() + "\""
+        buildConfigField "String", "NETMERA_PREPROD_API_KEY", "\"gFtyH_nz5WCdXraTsOOgL25er1sBpuQdQifBgEOsCjX1LonJ8uhsFbN8XY3rHBtlDlb2cjjgXyE\""
+        buildConfigField "String", "NETMERA_PREPROD_BASE_URL", "\"https://preprod.netmera.com\""
 
         multiDexEnabled true
     }

@@ -12,11 +12,11 @@ import 'package:netmera_flutter_example/page_push_inbox.dart';
 import 'package:netmera_flutter_example/page_user.dart';
 import 'package:netmera_flutter_sdk/Netmera.dart';
 import 'package:netmera_flutter_sdk/NetmeraPushBroadcastReceiver.dart';
-import 'package:flutter_config/flutter_config.dart';
 import 'package:flutter/services.dart';
 import 'package:uni_links/uni_links.dart';
 
 import 'page_category.dart';
+import 'config.dart';
 
 // This method must be a top-level function
 @pragma('vm:entry-point')
@@ -26,8 +26,6 @@ void _onPushReceiveBackgroundHandler(Map<dynamic, dynamic> bundle) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // This method must be called before the runApp and the provided handler must be a top-level function.
-  await FlutterConfig.loadEnvVariables();
 
   NetmeraPushBroadcastReceiver.onPushReceiveBackground(
       _onPushReceiveBackgroundHandler);
@@ -169,27 +167,27 @@ class _MyAppState extends State<HomePage> {
     onCancelPress();
   }
 
-  onSetLongPress() {
+onSetLongPress() {
     if (_baseUrl == 'b' && _apiKey == 'b') {
       setState(() {
-        _baseUrl = FlutterConfig.get('NETMERA_PREPROD_BASE_URL');
-        _controllerBaseUrl.text = FlutterConfig.get('NETMERA_PREPROD_BASE_URL');
-        _apiKey = FlutterConfig.get('NETMERA_PREPROD_API_KEY');
-        _controllerApiKey.text = FlutterConfig.get('NETMERA_PREPROD_API_KEY');
+        _baseUrl = Config.NETMERA_PREPROD_BASE_URL;
+        _controllerBaseUrl.text = Config.NETMERA_PREPROD_BASE_URL;
+        _apiKey = Config.NETMERA_PREPROD_API_KEY;
+        _controllerApiKey.text = Config.NETMERA_PREPROD_API_KEY;
       });
     } else if (_baseUrl == 'c' && _apiKey == 'c') {
       setState(() {
-        _baseUrl = FlutterConfig.get('NETMERA_TEST_BASE_URL');
-        _controllerBaseUrl.text = FlutterConfig.get('NETMERA_TEST_BASE_URL');
-        _apiKey = FlutterConfig.get('NETMERA_TEST_API_KEY');
-        _controllerApiKey.text = FlutterConfig.get('NETMERA_TEST_API_KEY');
+        _baseUrl = Config.NETMERA_TEST_BASE_URL;
+        _controllerBaseUrl.text = Config.NETMERA_TEST_BASE_URL;
+        _apiKey = Config.NETMERA_TEST_API_KEY;
+        _controllerApiKey.text = Config.NETMERA_TEST_API_KEY;
       });
     } else if (_baseUrl == 'd' && _apiKey == 'd') {
       setState(() {
-        _baseUrl = FlutterConfig.get('NETMERA_PROD_BASE_URL');
-        _controllerBaseUrl.text = FlutterConfig.get('NETMERA_PROD_BASE_URL');
-        _apiKey = FlutterConfig.get('NETMERA_PROD_API_KEY');
-        _controllerApiKey.text = FlutterConfig.get('NETMERA_PROD_API_KEY');
+        _baseUrl = Config.NETMERA_PROD_BASE_URL;
+        _controllerBaseUrl.text = Config.NETMERA_PROD_BASE_URL;
+        _apiKey = Config.NETMERA_PROD_API_KEY;
+        _controllerApiKey.text = Config.NETMERA_PROD_API_KEY;
       });
     }
   }
