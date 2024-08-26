@@ -86,7 +86,7 @@ SPEC CHECKSUMS:
   FMDB: 728731dd336af3936ce00f91d9d8495f5718a0e6
   MMWormhole: 0cd3fd35a9118b2e2d762b499f54eeaace0be791
   Netmera: 7d9e84f0958d4de96295d704b67aa72ef20a29bc
-  netmera_flutter_sdk: 4f2e14469d32ada92e42cdabcaffd34e96d26f05
+  netmera_flutter_sdk: 920c64540dc9c198023f73f642edcd1718f256af
   NetmeraCore: 9037b58ff38b4747fc1c1e0dbd2f33c5f7adaacc
   Toast: 1f5ea13423a1e6674c4abdac5be53587ae481c4e
   UICKeyChainStore: ba3bff2c762b12db1e516f395c837dd25298b05e
