@@ -9,8 +9,8 @@ import Flutter
 @objc class AppDelegate: FlutterAppDelegate, NetmeraPushDelegate {
     private let CHANNEL = "nm_flutter_example_channel"
 
-    let NETMERA_PREPROD_API_KEY = "preprod_api_key"
-    let NETMERA_PREPROD_BASE_URL = "https://preprod.example.com"
+    let NETMERA_PREPROD_API_KEY = "gFtyH_nz5WCdXraTsOOgL25er1sBpuQdQifBgEOsCjX1LonJ8uhsFbN8XY3rHBtlDlb2cjjgXyE"
+    let NETMERA_PREPROD_BASE_URL = "https://preprod.netmera.com"
 
     override func application(
         _ application: UIApplication,
