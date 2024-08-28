@@ -850,7 +850,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = "2.4.4-beta01";
+				MARKETING_VERSION = "2.4.4-beta02";
 				PRODUCT_BUNDLE_IDENTIFIER = com.netmera.flutterexample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -982,7 +982,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = "2.4.4-beta01";
+				MARKETING_VERSION = "2.4.4-beta02";
 				PRODUCT_BUNDLE_IDENTIFIER = com.netmera.flutterexample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -1008,7 +1008,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = "2.4.4-beta01";
+				MARKETING_VERSION = "2.4.4-beta02";
 				PRODUCT_BUNDLE_IDENTIFIER = com.netmera.flutterexample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
