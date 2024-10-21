@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Netmera konum izninize ihtiyaç duymaktadır.</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -23,22 +25,22 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
-    <array>
-    	<dict>
-    		<key>CFBundleTypeRole</key>
-    		<string>Viewer</string>
-    		<key>CFBundleURLName</key>
-   			<string>com.netmera.flutterexample</string>
-   			<key>CFBundleURLSchemes</key>
-   			<array>
-   				<string>netmeraflutterexample</string>
-   			</array>
-    	</dict>
-    	<dict/>
-    	<dict/>
-   	</array>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>CFBundleURLName</key>
+			<string>com.netmera.flutterexample</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>netmeraflutterexample</string>
+			</array>
+		</dict>
+		<dict/>
+		<dict/>
+	</array>
 	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>

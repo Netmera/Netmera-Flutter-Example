@@ -65,11 +65,11 @@ android {
 
     defaultConfig {
         applicationId "com.netmera.flutterexample"
-        compileSdkVersion 33
+        compileSdkVersion 34
         minSdkVersion 21
-        targetSdkVersion 33
+        targetSdkVersion 34
         versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
+        versionName "2.4.4-beta05"
 
         buildConfigField "String", "NETMERA_API_KEY", "\"" + getNetmeraApiKey() + "\""
         buildConfigField "String", "GCM_SENDER_ID", "\"" + getGCMSenderId() + "\""
