@@ -189,6 +189,13 @@ onSetLongPress() {
         _apiKey = Config.NETMERA_PROD_API_KEY;
         _controllerApiKey.text = Config.NETMERA_PROD_API_KEY;
       });
+    } else if (_baseUrl == 'e' && _apiKey == 'e') {
+      setState(() {
+        _baseUrl = Config.NETMERA_UAT_BASE_URL;
+        _controllerBaseUrl.text = Config.NETMERA_UAT_BASE_URL;
+        _apiKey = Config.NETMERA_UAT_API_KEY;
+        _controllerApiKey.text = Config.NETMERA_UAT_API_KEY;
+      });
     }
   }
 
