@@ -9,7 +9,7 @@ import Flutter
 @objc class AppDelegate: FlutterAppDelegate, NetmeraPushDelegate {
     private let CHANNEL = "nm_flutter_example_channel"
 
-    let NETMERA_UAT_API_KEY = "gFtyH_nz5WDqpkkpQX-3Qn4e8xbxuQronOkkqhUjXw50my32OqV7lQlSPYMqNhYWGXQxPbXLLKQ"
+    let NETMERA_UAT_API_KEY = "gFtyH_nz5WCdXraTsOOgL25er1sBpuQdFa8bAMVGhv9Xo5voVRPFY2gFcVkuTQeZIgoa3gN1rww"
     let NETMERA_UAT_BASE_URL = "https://sdk-cloud-uat.sdpaas.com"
 
     override func application(

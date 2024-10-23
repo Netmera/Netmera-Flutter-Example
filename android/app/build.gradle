@@ -74,7 +74,7 @@ android {
         buildConfigField "String", "NETMERA_API_KEY", "\"" + getNetmeraApiKey() + "\""
         buildConfigField "String", "GCM_SENDER_ID", "\"" + getGCMSenderId() + "\""
         buildConfigField "String", "HMS_SENDER_ID", "\"" + getHMSSenderId() + "\""
-        buildConfigField "String", "NETMERA_UAT_API_KEY", "\"gFtyH_nz5WDqpkkpQX-3Qn4e8xbxuQronOkkqhUjXw50my32OqV7lQlSPYMqNhYWGXQxPbXLLKQ\""
+        buildConfigField "String", "NETMERA_UAT_API_KEY", "\"gFtyH_nz5WCdXraTsOOgL25er1sBpuQdFa8bAMVGhv9Xo5voVRPFY2gFcVkuTQeZIgoa3gN1rww\""
         buildConfigField "String", "NETMERA_UAT_BASE_URL", "\"https://sdk-cloud-uat.sdpaas.com\""
 
         multiDexEnabled true
