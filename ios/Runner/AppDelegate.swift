@@ -9,8 +9,8 @@ import Flutter
 @objc class AppDelegate: FlutterAppDelegate, NetmeraPushDelegate {
     private let CHANNEL = "nm_flutter_example_channel"
 
-    let NETMERA_PREPROD_API_KEY = "gFtyH_nz5WCdXraTsOOgL25er1sBpuQdQifBgEOsCjX1LonJ8uhsFbN8XY3rHBtlDlb2cjjgXyE"
-    let NETMERA_PREPROD_BASE_URL = "https://preprod.netmera.com"
+    let NETMERA_UAT_API_KEY = "gFtyH_nz5WDqpkkpQX-3Qn4e8xbxuQronOkkqhUjXw50my32OqV7lQlSPYMqNhYWGXQxPbXLLKQ"
+    let NETMERA_UAT_BASE_URL = "https://sdk-cloud-uat.sdpaas.com"
 
     override func application(
         _ application: UIApplication,
@@ -30,8 +30,8 @@ import Flutter
             self.application(application, didReceiveRemoteNotification: notification as! [AnyHashable : Any])
         }
         
-        let netmeraApiKey = UserDefaults.standard.string(forKey: "apiKey") ?? NETMERA_PREPROD_API_KEY
-        let baseUrl = UserDefaults.standard.string(forKey: "baseUrl") ?? NETMERA_PREPROD_BASE_URL
+        let netmeraApiKey = UserDefaults.standard.string(forKey: "apiKey") ?? NETMERA_UAT_API_KEY
+        let baseUrl = UserDefaults.standard.string(forKey: "baseUrl") ?? NETMERA_UAT_BASE_URL
         
         FNetmera.logging(true) // Enable Netmera logging
         FNetmera.initNetmera(netmeraApiKey ?? "") // Your Netmera api key.
