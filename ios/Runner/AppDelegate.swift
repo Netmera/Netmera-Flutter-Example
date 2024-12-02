@@ -68,15 +68,6 @@ import Flutter
         FNetmeraService.handleWork(ON_PUSH_REGISTER, dict: ["pushToken": deviceToken])
     }
     
-    override func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
-        if UIApplication.shared.applicationState == .active {
-            FNetmeraService.handleWork(ON_PUSH_RECEIVE, dict:["userInfo" : userInfo])
-        } else {
-            FNetmeraService.handleWork(ON_PUSH_RECEIVE_BACKGROUND, dict:["userInfo" : userInfo])
-        }
-    }
-    
-    
     @available(iOS 10.0, *)
     override func userNotificationCenter(_ center: UNUserNotificationCenter,
                                          didReceive response: UNNotificationResponse,
@@ -95,6 +86,12 @@ import Flutter
     @available(iOS 10.0, *)
     override func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([UNNotificationPresentationOptions.alert])
+        
+        if UIApplication.shared.applicationState == .active {
+            FNetmeraService.handleWork(ON_PUSH_RECEIVE, dict:["userInfo" : notification.request.content.userInfo])
+        } else {
+            FNetmeraService.handleWork(ON_PUSH_RECEIVE_BACKGROUND, dict:["userInfo" : notification.request.content.userInfo])
+        }
     }
     
 }
