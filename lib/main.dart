@@ -14,6 +14,8 @@ import 'package:netmera_flutter_sdk/Netmera.dart';
 import 'package:netmera_flutter_sdk/NetmeraPushBroadcastReceiver.dart';
 import 'package:flutter/services.dart';
 import 'package:uni_links/uni_links.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'page_category.dart';
 import 'config.dart';
@@ -76,6 +78,23 @@ void initBroadcastReceiver() {
   );
 }
 
+initFirebase() async {
+  await Firebase.initializeApp();
+
+  FirebaseMessaging.instance
+      .getToken()
+      .then((value) {
+    print("Custom push token: " + value!);
+    Netmera.onNetmeraNewToken(value);
+  });
+
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    if (Netmera.isNetmeraRemoteMessage(message.data)) {
+      Netmera.onNetmeraFirebasePushMessageReceived(message.from, message.data);
+    }
+  });
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -110,6 +129,7 @@ class _MyAppState extends State<HomePage> {
     super.initState();
 
     initUniLinks();
+    initFirebase();
 
     initBroadcastReceiver();
 
