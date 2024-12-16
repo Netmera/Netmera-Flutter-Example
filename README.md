@@ -149,7 +149,7 @@ func registerPlugins(registry: FlutterPluginRegistry) {
         //For triggering onPushReceive when app is killed and push clicked by user
         let notification = launchOptions?[.remoteNotification]
         if notification != nil {
-            self.application(application, didReceiveRemoteNotification: notification as! [AnyHashable : Any])
+            FNetmeraService.handleWork(ON_PUSH_RECEIVE, dict:["userInfo" : notification])
         }
 
     //This function is needed for sending messages to the dart side.
@@ -172,25 +172,15 @@ func registerPlugins(registry: FlutterPluginRegistry) {
         FNetmeraService.handleWork(ON_PUSH_RECEIVE, dict:["userInfo" : userInfo])
     }
 
-
     @available(iOS 10.0, *)
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                didReceive response: UNNotificationResponse,
-                                withCompletionHandler completionHandler:
-        @escaping () -> Void) {
-
-        if response.actionIdentifier == UNNotificationDismissActionIdentifier {
-            FNetmeraService.handleWork(ON_PUSH_DISMISS,dict:["userInfo" : response.notification.request.content.userInfo])
-        }
-        else if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
-            FNetmeraService.handleWork(ON_PUSH_OPEN, dict:["userInfo" : response.notification.request.content.userInfo])
-        }
-        completionHandler()
-    }
-
-    @available(iOS 10.0, *)
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    override func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([UNNotificationPresentationOptions.alert])
+        
+        if UIApplication.shared.applicationState == .active {
+            FNetmeraService.handleWork(ON_PUSH_RECEIVE, dict:["userInfo" : notification.request.content.userInfo])
+        } else {
+            FNetmeraService.handleWork(ON_PUSH_RECEIVE_BACKGROUND, dict:["userInfo" : notification.request.content.userInfo])
+        }
     }
 }
 

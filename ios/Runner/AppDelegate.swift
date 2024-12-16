@@ -27,7 +27,7 @@ import Flutter
         //For triggering onPushReceive when app is killed and push clicked by user
         let notification = launchOptions?[.remoteNotification]
         if notification != nil {
-            self.application(application, didReceiveRemoteNotification: notification as! [AnyHashable : Any])
+            FNetmeraService.handleWork(ON_PUSH_RECEIVE, dict:["userInfo" : notification])
         }
         
         let netmeraApiKey = UserDefaults.standard.string(forKey: "apiKey") ?? NETMERA_UAT_API_KEY
