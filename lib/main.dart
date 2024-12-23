@@ -26,9 +26,19 @@ void _onPushReceiveBackgroundHandler(Map<dynamic, dynamic> bundle) async {
   print("onPushReceiveBackground: $bundle");
 }
 
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+
+  if (Netmera.isNetmeraRemoteMessage(message.data)) {
+    Netmera.onNetmeraFirebasePushMessageReceived(message.from, message.data);
+  }
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   NetmeraPushBroadcastReceiver.onPushReceiveBackground(
       _onPushReceiveBackgroundHandler);
   runApp(const MyApp());
