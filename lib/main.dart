@@ -13,6 +13,7 @@ import 'package:netmera_flutter_example/page_user.dart';
 import 'package:netmera_flutter_sdk/Netmera.dart';
 import 'package:netmera_flutter_sdk/NetmeraPushBroadcastReceiver.dart';
 import 'package:flutter/services.dart';
+import 'package:netmera_flutter_sdk/NotificationPermissionStatus.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -291,6 +292,39 @@ onSetLongPress() {
     Netmera.requestPermissionsForLocation();
   }
 
+  checkNotificationPermission() {
+    Netmera.checkNotificationPermission().then((status) {
+      String statusString;
+
+      switch (status) {
+        case NotificationPermissionStatus.notDetermined:
+          statusString = "NOT DETERMINED";
+          break;
+        case NotificationPermissionStatus.blocked:
+          statusString = "BLOCKED";
+          break;
+        case NotificationPermissionStatus.denied:
+          statusString = "DENIED";
+          break;
+        case NotificationPermissionStatus.granted:
+          statusString = "GRANTED";
+          break;
+        case null:
+          statusString = "UNDEFINED";
+          break;
+      }
+
+      Fluttertoast.showToast(
+            msg: statusString,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: const Color.fromARGB(255, 166, 186, 171),
+            textColor: Colors.white,
+            fontSize: 16.0);
+    });
+  }
+
   requestPushNotificationAuthorization() {
     Netmera.requestPushNotificationAuthorization();
   }
@@ -459,6 +493,11 @@ onSetLongPress() {
               Container(
                 margin: const EdgeInsets.only(top: 8),
                 child: button('ENABLE LOCATION & GEOFENCE', enableLocationAndGeofence),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 8),
+                child: button('CHECK NOTIFICATION PERMISSION',
+                    checkNotificationPermission),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 8),
