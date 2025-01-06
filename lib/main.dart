@@ -4,6 +4,7 @@
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:app_links/app_links.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:netmera_flutter_example/page_coupon.dart';
@@ -14,7 +15,6 @@ import 'package:netmera_flutter_sdk/Netmera.dart';
 import 'package:netmera_flutter_sdk/NetmeraPushBroadcastReceiver.dart';
 import 'package:flutter/services.dart';
 import 'package:netmera_flutter_sdk/NotificationPermissionStatus.dart';
-import 'package:uni_links/uni_links.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -139,7 +139,7 @@ class _MyAppState extends State<HomePage> {
   void initState() {
     super.initState();
 
-    initUniLinks();
+    initAppLinks();
     initFirebase();
 
     initBroadcastReceiver();
@@ -431,9 +431,10 @@ onSetLongPress() {
     Netmera.turnOffSendingEventAndUserUpdate(false);
   }
 
-  Future<void> initUniLinks() async {
+  Future<void> initAppLinks() async {
     try {
-      final uri = await getInitialUri();
+      final appLinks = AppLinks();
+      final uri = await appLinks.getInitialLink();
       if (uri != null) {
         Fluttertoast.showToast(
             msg: 'Initial url is: $uri',
@@ -443,6 +444,18 @@ onSetLongPress() {
             textColor: Colors.white,
             fontSize: 16.0);
       }
+
+      appLinks.uriLinkStream.listen((uri) {
+        if (uri != null) {
+          Fluttertoast.showToast(
+              msg: 'Deeplink url is: $uri',
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.TOP,
+              backgroundColor: const Color.fromARGB(255, 166, 186, 171),
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
+      });
     } catch (error) {}
   }
 
