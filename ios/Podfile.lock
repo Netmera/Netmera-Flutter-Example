@@ -6,6 +6,8 @@ PODS:
   - AFNetworking/Reachability (4.0.1)
   - AFNetworking/Security (4.0.1)
   - AFNetworking/Serialization (4.0.1)
+  - app_links (0.0.2):
+    - Flutter
   - Firebase/CoreOnly (11.4.0):
     - FirebaseCore (= 11.4.0)
   - Firebase/Messaging (11.4.0):
@@ -106,10 +108,9 @@ PODS:
   - PromisesObjC (2.4.0)
   - Toast (4.1.1)
   - UICKeyChainStore (2.2.1)
-  - uni_links (0.0.1):
-    - Flutter
 
 DEPENDENCIES:
+  - app_links (from `.symlinks/plugins/app_links/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - Flutter (from `Flutter`)
@@ -118,7 +119,6 @@ DEPENDENCIES:
   - Netmera/NotificationContentExtension (= 3.24.1)
   - Netmera/NotificationServiceExtension (= 3.24.1)
   - netmera_flutter_sdk (from `.symlinks/plugins/netmera_flutter_sdk/ios`)
-  - uni_links (from `.symlinks/plugins/uni_links/ios`)
 
 SPEC REPOS:
   trunk:
@@ -140,6 +140,8 @@ SPEC REPOS:
     - UICKeyChainStore
 
 EXTERNAL SOURCES:
+  app_links:
+    :path: ".symlinks/plugins/app_links/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
   firebase_messaging:
@@ -150,11 +152,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/fluttertoast/ios"
   netmera_flutter_sdk:
     :path: ".symlinks/plugins/netmera_flutter_sdk/ios"
-  uni_links:
-    :path: ".symlinks/plugins/uni_links/ios"
 
 SPEC CHECKSUMS:
   AFNetworking: 3bd23d814e976cd148d7d44c3ab78017b744cd58
+  app_links: e7a6750a915a9e161c58d91bc610e8cd1d4d0ad0
   Firebase: cf1b19f21410b029b6786a54e9764a0cacad3c99
   firebase_core: 9efc3ecf689cdbc90f13f4dc58108c83ea46b266
   firebase_messaging: 6bf60adb4b33a848d135e16bc363fb4924f98fba
@@ -175,7 +176,6 @@ SPEC CHECKSUMS:
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   Toast: 1f5ea13423a1e6674c4abdac5be53587ae481c4e
   UICKeyChainStore: ba3bff2c762b12db1e516f395c837dd25298b05e
-  uni_links: d97da20c7701486ba192624d99bffaaffcfc298a
 
 PODFILE CHECKSUM: d18a18f215867b619741dd49daefc5bca44348fa
 
