@@ -7,11 +7,6 @@ import 'package:netmera_flutter_sdk/events/commerce/NetmeraEventPurchase.dart';
 
 class NetmeraEventContentRate extends NetmeraEvent {
   final String _EVENT_CODE = "jjnam";
-
-  @override
-  String eventCode() {
-    return _EVENT_CODE;
-  }
   
   late int _no;
 
@@ -36,7 +31,7 @@ class CustomPurchaseEvent extends NetmeraEventPurchase {
   final String _EVENT_CODE = "qwthb";
 
   @override
-  String eventCode() {
+  String getCode() {
     return _EVENT_CODE;
   }
 
