@@ -348,11 +348,14 @@ Therefore, before calling the method, make sure your project targets an API of 3
  Netmera.requestPushNotificationAuthorization();
 ```
 
-You can call the `areNotificationsEnabled()` method if you need to know the status of permissions.
+You can call the `checkNotificationPermission()` method if you need to know the status of permissions.
 
 ``` 
- Netmera.areNotificationsEnabled().then((enabled) {
-      // Use the enabled status of permission as boolean
+ Netmera.checkNotificationPermission().then((status) {
+      // NotificationPermissionStatus.notDetermined
+      // NotificationPermissionStatus.blocked
+      // NotificationPermissionStatus.denied
+      // NotificationPermissionStatus.granted
  });
 ```
 
