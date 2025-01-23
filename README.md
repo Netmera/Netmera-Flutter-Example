@@ -196,9 +196,9 @@ void _onPushReceive(Map<dynamic, dynamic> bundle) async {
 
 ```
 // For receiving Media Push, you must add Netmera pods to top of your Podfile.
-pod "Netmera", "3.14.10-WithoutDependency"
-pod "Netmera/NotificationServiceExtension", "3.14.10-WithoutDependency"
-pod "Netmera/NotificationContentExtension", "3.14.10-WithoutDependency"
+pod "Netmera", "3.24.9"
+pod "Netmera/NotificationServiceExtension", "3.24.9"
+pod "Netmera/NotificationContentExtension", "3.24.9"
 ```
 
 ### Setup - Dart Part
