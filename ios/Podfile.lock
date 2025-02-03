@@ -24,7 +24,7 @@ PODS:
     - FirebaseCoreInternal (~> 11.0)
     - GoogleUtilities/Environment (~> 8.0)
     - GoogleUtilities/Logger (~> 8.0)
-  - FirebaseCoreInternal (11.6.0):
+  - FirebaseCoreInternal (11.7.0):
     - "GoogleUtilities/NSData+zlib (~> 8.0)"
   - FirebaseInstallations (11.4.0):
     - FirebaseCore (~> 11.0)
@@ -84,27 +84,27 @@ PODS:
     - nanopb/encode (= 3.30910.0)
   - nanopb/decode (3.30910.0)
   - nanopb/encode (3.30910.0)
-  - Netmera (3.24.1):
-    - Netmera/NetmeraWithAdId (= 3.24.1)
-  - Netmera/AdIdSupport (3.24.1)
-  - Netmera/Application (3.24.1):
+  - Netmera (3.24.9):
+    - Netmera/NetmeraWithAdId (= 3.24.9)
+  - Netmera/AdIdSupport (3.24.9)
+  - Netmera/Application (3.24.9):
     - AFNetworking/NSURLSession (>= 3.1.0)
     - FMDB
     - MMWormhole (~> 2.0.0)
-    - NetmeraCore (= 3.24.1)
+    - NetmeraCore (= 3.24.9)
     - UICKeyChainStore (~> 2.0)
-  - Netmera/NetmeraWithAdId (3.24.1):
+  - Netmera/NetmeraWithAdId (3.24.9):
     - Netmera/AdIdSupport
     - Netmera/Application
-  - Netmera/NotificationContentExtension (3.24.1):
+  - Netmera/NotificationContentExtension (3.24.9):
     - MMWormhole (~> 2.0.0)
-    - NetmeraCore (= 3.24.1)
-  - Netmera/NotificationServiceExtension (3.24.1):
-    - NetmeraCore (= 3.24.1)
-  - netmera_flutter_sdk (2.4.6):
+    - NetmeraCore (= 3.24.9)
+  - Netmera/NotificationServiceExtension (3.24.9):
+    - NetmeraCore (= 3.24.9)
+  - netmera_flutter_sdk (2.5.0):
     - Flutter
-    - Netmera (= 3.24.1)
-  - NetmeraCore (3.24.1)
+    - Netmera (= 3.24.9)
+  - NetmeraCore (3.24.9)
   - PromisesObjC (2.4.0)
   - Toast (4.1.1)
   - UICKeyChainStore (2.2.1)
@@ -115,9 +115,9 @@ DEPENDENCIES:
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - Flutter (from `Flutter`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
-  - Netmera (= 3.24.1)
-  - Netmera/NotificationContentExtension (= 3.24.1)
-  - Netmera/NotificationServiceExtension (= 3.24.1)
+  - Netmera (= 3.24.9)
+  - Netmera/NotificationContentExtension (= 3.24.9)
+  - Netmera/NotificationServiceExtension (= 3.24.9)
   - netmera_flutter_sdk (from `.symlinks/plugins/netmera_flutter_sdk/ios`)
 
 SPEC REPOS:
@@ -160,7 +160,7 @@ SPEC CHECKSUMS:
   firebase_core: 9efc3ecf689cdbc90f13f4dc58108c83ea46b266
   firebase_messaging: 6bf60adb4b33a848d135e16bc363fb4924f98fba
   FirebaseCore: e0510f1523bc0eb21653cac00792e1e2bd6f1771
-  FirebaseCoreInternal: d98ab91e2d80a56d7b246856a8885443b302c0c2
+  FirebaseCoreInternal: d6c17dafc8dc33614733a8b52df78fcb4394c881
   FirebaseInstallations: 6ef4a1c7eb2a61ee1f74727d7f6ce2e72acf1414
   FirebaseMessaging: f8a160d99c2c2e5babbbcc90c4a3e15db036aee2
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
@@ -170,13 +170,13 @@ SPEC CHECKSUMS:
   GoogleUtilities: 26a3abef001b6533cf678d3eb38fd3f614b7872d
   MMWormhole: 0cd3fd35a9118b2e2d762b499f54eeaace0be791
   nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
-  Netmera: 1990e4d36fae3a02a942067ac1c8c427f8863a2a
-  netmera_flutter_sdk: 00157cc582a1fd4eb0e2a35d593386d1632d0a85
-  NetmeraCore: 7cad23bf1eb2d5486d9f57840fbad000472f595b
+  Netmera: 86249df11af1f790e9d3faa44d5dfdd1f44639e2
+  netmera_flutter_sdk: 45673753968c6aa0908ee8ce08ef76eea609dfae
+  NetmeraCore: c60c5fbadac485655ff98442bb319161852850d0
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   Toast: 1f5ea13423a1e6674c4abdac5be53587ae481c4e
   UICKeyChainStore: ba3bff2c762b12db1e516f395c837dd25298b05e
 
-PODFILE CHECKSUM: d18a18f215867b619741dd49daefc5bca44348fa
+PODFILE CHECKSUM: 1d240c202a4051b4696a3d8f80f237b861c33be1
 
 COCOAPODS: 1.15.2

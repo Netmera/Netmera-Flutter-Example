@@ -196,9 +196,9 @@ void _onPushReceive(Map<dynamic, dynamic> bundle) async {
 
 ```
 // For receiving Media Push, you must add Netmera pods to top of your Podfile.
-pod "Netmera", "3.14.10-WithoutDependency"
-pod "Netmera/NotificationServiceExtension", "3.14.10-WithoutDependency"
-pod "Netmera/NotificationContentExtension", "3.14.10-WithoutDependency"
+pod "Netmera", "3.24.9"
+pod "Netmera/NotificationServiceExtension", "3.24.9"
+pod "Netmera/NotificationContentExtension", "3.24.9"
 ```
 
 ### Setup - Dart Part
@@ -348,11 +348,14 @@ Therefore, before calling the method, make sure your project targets an API of 3
  Netmera.requestPushNotificationAuthorization();
 ```
 
-You can call the `areNotificationsEnabled()` method if you need to know the status of permissions.
+You can call the `checkNotificationPermission()` method if you need to know the status of permissions.
 
 ``` 
- Netmera.areNotificationsEnabled().then((enabled) {
-      // Use the enabled status of permission as boolean
+ Netmera.checkNotificationPermission().then((status) {
+      // NotificationPermissionStatus.notDetermined
+      // NotificationPermissionStatus.blocked
+      // NotificationPermissionStatus.denied
+      // NotificationPermissionStatus.granted
  });
 ```
 

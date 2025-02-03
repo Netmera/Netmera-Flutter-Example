@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  netmera_flutter_sdk: 2.4.6-beta01
+  netmera_flutter_sdk: 2.5.0-beta02
 
   fluttertoast: ^8.2.4
   cupertino_icons: ^1.0.6
