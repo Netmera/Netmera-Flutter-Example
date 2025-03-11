@@ -5,7 +5,7 @@
 import UIKit
 import Flutter
 
-@UIApplicationMain
+@main
 @objc class AppDelegate: FlutterAppDelegate, NetmeraPushDelegate {
     private let CHANNEL = "nm_flutter_example_channel"
 

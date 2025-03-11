@@ -1,6 +1,7 @@
 plugins {
     id "com.android.application"
     id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
     id "com.google.gms.google-services"
     id "com.huawei.agconnect"
 }
@@ -12,12 +13,6 @@ if (localPropertiesFile.exists()) {
         localProperties.load(reader)
     }
 }
-
-def flutterRoot = localProperties.getProperty('flutter.sdk')
-if (flutterRoot == null) {
-    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
-}
-apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) {
@@ -103,7 +98,6 @@ android {
     }
 
     buildFeatures.buildConfig true
-//    android.buildFeatures.buildConfig true
 }
 
 flutter {
@@ -111,7 +105,6 @@ flutter {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'com.android.support:multidex:1.0.3'
 }

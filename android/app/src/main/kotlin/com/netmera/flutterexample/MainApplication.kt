@@ -1,16 +1,16 @@
 ///
-/// Copyright (c) 2022 Inomera Research.
+/// Copyright (c) 2025 Inomera Research.
 ///
 
 package com.netmera.flutterexample
 
+import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import com.netmera.netmera_flutter_sdk.FNetmera
 import com.netmera.netmera_flutter_sdk.FNetmeraConfiguration
-import io.flutter.app.FlutterApplication
 
-class MainApplication : FlutterApplication() {
+class MainApplication : Application() {
     private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate() {
