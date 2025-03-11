@@ -38,9 +38,9 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.3'
-        classpath 'com.google.gms:google-services:4.3.10'
-        classpath 'com.huawei.agconnect:agcp:1.6.3.300'
+        classpath 'com.android.tools.build:gradle:<YOUR_AGP_VERSION>'
+        classpath 'com.google.gms:google-services:<YOUR_GMS_VERSION>'
+        classpath 'com.huawei.agconnect:agcp:<YOUR_AGCP_VERSION>'
     }
 }
 
@@ -60,7 +60,7 @@ allprojects {
 
  dependencies {
  
-     implementation 'androidx.core:core:1.1.0'
+     implementation 'androidx.core:core:1.7.0'
      
  }
 ```
