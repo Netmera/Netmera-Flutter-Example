@@ -18,7 +18,7 @@ class _MandatoryEventPageState extends State<MandatoryEventPage> {
   List<DateTime>? _dateAttrMandatoryfalseArray;
   List<String>? _surnameMandatoryfalseArray;
   int? _ageMandotoryfalse;
-  TestEventGulsen? event;
+  Mandatoryevent? event;
 
   final TextEditingController _boolArrayController = TextEditingController();
   final TextEditingController _doubleController = TextEditingController();
@@ -297,13 +297,12 @@ class _MandatoryEventPageState extends State<MandatoryEventPage> {
                   return;
                 }
 
-                event = TestEventGulsen(
+                event = Mandatoryevent(
                   booelenattrMandatorytrueArray:
                       _booelenattrMandatorytrueArray!,
                   doubleattrMandatorytrue: _doubleattrMandatorytrue!,
                   longattrMandatorytrue: _longattrMandatorytrue!,
-                  timestampMandatorytrue:
-                      _timestampMandatorytrue!.millisecondsSinceEpoch,
+                  timestampMandatorytrue: _timestampMandatorytrue!,
                   nameMandatorytrue: _nameMandatorytrue!,
                 );
 
@@ -311,17 +310,14 @@ class _MandatoryEventPageState extends State<MandatoryEventPage> {
                   event?.setAgeMandotoryfalse(_ageMandotoryfalse!);
                 }
                 if (_dateAttrMandatoryfalseArray != null) {
-                  List<int> timeStamps = [];
-                  _dateAttrMandatoryfalseArray?.forEach((element) {
-                    timeStamps.add(element.millisecondsSinceEpoch);
-                  });
-                  event?.setDateAttrMandatoryfalseArray(timeStamps);
+                  event?.setDateAttrMandatoryfalseArray(
+                      _dateAttrMandatoryfalseArray!);
                 }
                 if (_surnameMandatoryfalseArray != null) {
                   event?.setSurnameMandatoryfalseArray(
                       _surnameMandatoryfalseArray!);
                 }
-
+    
                 Netmera.sendEvent(event!);
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text("Event sent successfully")),

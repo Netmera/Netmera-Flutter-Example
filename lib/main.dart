@@ -586,7 +586,7 @@ onSetLongPress() {
               Container(
                 margin: const EdgeInsets.only(top: 8),
                 child: button('MANDATORY EVENT',
-                    navigateToCategory),
+                    navigateToMandatoryEvent),
               ),
               Container(
                   margin: const EdgeInsets.only(top: 8, bottom: 16),
