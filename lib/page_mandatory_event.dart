@@ -87,7 +87,8 @@ class _MandatoryEventPageState extends State<MandatoryEventPage> {
                 errorText: _doubleError,
                 isRequired: true,
               ),
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
+              keyboardType:
+                  TextInputType.numberWithOptions(decimal: true, signed: true),
               onChanged: (value) {
                 setState(() {
                   if (value.isEmpty) {
@@ -317,7 +318,7 @@ class _MandatoryEventPageState extends State<MandatoryEventPage> {
                   event?.setSurnameMandatoryfalseArray(
                       _surnameMandatoryfalseArray!);
                 }
-    
+
                 Netmera.sendEvent(event!);
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text("Event sent successfully")),

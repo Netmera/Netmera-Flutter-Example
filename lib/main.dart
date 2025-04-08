@@ -537,6 +537,10 @@ onSetLongPress() {
               ),
               Container(
                 margin: const EdgeInsets.only(top: 8),
+                child: button('MANDATORY EVENT', navigateToMandatoryEvent),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 8),
                 child: button('USER', navigateToUser),
               ),
               Container(
@@ -582,11 +586,6 @@ onSetLongPress() {
                 margin: const EdgeInsets.only(top: 8),
                 child: button('KILL NETMERA',
                     kill),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 8),
-                child: button('MANDATORY EVENT',
-                    navigateToMandatoryEvent),
               ),
               Container(
                   margin: const EdgeInsets.only(top: 8, bottom: 16),
