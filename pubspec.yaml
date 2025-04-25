@@ -1,8 +1,7 @@
 name: netmera_flutter_example
 description: NETMERA is a Mobile Application Engagement Platform. We offer a series of development tools and app communication features to help your mobile business ignite and soar.
 
-
-version: 2.5.1-beta01
+version: 2.5.2-beta01
 
 environment:
   sdk: '>=2.18.0 <4.0.0'
@@ -11,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  netmera_flutter_sdk: 2.5.0
+  netmera_flutter_sdk: 2.5.2-beta03
 
   fluttertoast: ^8.2.12
   cupertino_icons: ^1.0.6

@@ -20,6 +20,7 @@ import 'package:firebase_core/firebase_core.dart';
 
 import 'page_category.dart';
 import 'config.dart';
+import 'page_mandatory_event.dart';
 
 // This method must be a top-level function
 @pragma('vm:entry-point')
@@ -371,6 +372,11 @@ onSetLongPress() {
     Netmera.kill();
   }
 
+  navigateToMandatoryEvent() {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const MandatoryEventPage()));
+  }
+
   isPushEnabled() {
     Netmera.isPushEnabled().then((enabled) {
       Fluttertoast.showToast(
@@ -528,6 +534,10 @@ onSetLongPress() {
               Container(
                 margin: const EdgeInsets.only(top: 8),
                 child: button('EVENTS', navigateToEvents),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 8),
+                child: button('MANDATORY EVENT', navigateToMandatoryEvent),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 8),
