@@ -1,6 +1,6 @@
 import 'package:netmera_flutter_sdk/events/NetmeraEvent.dart';
 
-class Mandatoryevent extends NetmeraEvent{
+class MandatoryEvent extends NetmeraEvent{
 
     final String _EVENT_CODE = "xzzoe";
 
@@ -13,7 +13,7 @@ class Mandatoryevent extends NetmeraEvent{
     List<String>? _surnameMandatoryfalseArray;
     int? _ageMandotoryfalse;
 
-    Mandatoryevent({
+    MandatoryEvent({
         required List<bool> booelenattrMandatorytrueArray,
         required double doubleattrMandatorytrue,
         required int longattrMandatorytrue,

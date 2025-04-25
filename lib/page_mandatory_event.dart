@@ -18,7 +18,7 @@ class _MandatoryEventPageState extends State<MandatoryEventPage> {
   List<DateTime>? _dateAttrMandatoryfalseArray;
   List<String>? _surnameMandatoryfalseArray;
   int? _ageMandotoryfalse;
-  Mandatoryevent? event;
+  MandatoryEvent? event;
 
   final TextEditingController _boolArrayController = TextEditingController();
   final TextEditingController _doubleController = TextEditingController();
@@ -298,7 +298,7 @@ class _MandatoryEventPageState extends State<MandatoryEventPage> {
                   return;
                 }
 
-                event = Mandatoryevent(
+                event = MandatoryEvent(
                   booelenattrMandatorytrueArray:
                       _booelenattrMandatorytrueArray!,
                   doubleattrMandatorytrue: _doubleattrMandatorytrue!,
