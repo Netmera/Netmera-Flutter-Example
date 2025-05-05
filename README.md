@@ -75,10 +75,10 @@ apply plugin: 'com.huawei.agconnect'
 
 6) Create an application class as shown below.
 
-- Your Application class must extends `FlutterApplication`.
+- Your Application class must extends `Application`.
 
 ``` 
-    public class NMApp extends FlutterApplication {
+    public class NMApp extends Application {
     
         @Override
         public void onCreate() {
