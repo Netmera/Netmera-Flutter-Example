@@ -252,10 +252,10 @@ packages:
     dependency: "direct main"
     description:
       name: netmera_flutter_sdk
-      sha256: ff150b844070b343c20effd99b08930982e55a593ccf2a12fef7035d79d4e327
+      sha256: f615a7dd0d839277d4722fa5495c7f7a91f9615816006d0c5bf178a35bd085e6
       url: "https://pub.dev"
     source: hosted
-    version: "2.5.4-beta01"
+    version: "2.5.4-beta02"
   path:
     dependency: transitive
     description:
