@@ -250,6 +250,16 @@ void initBroadcastReceiver() {
 
 2) If you have custom Firebase Messaging integration, please see usage below.
 
+1- Add the following line to your `AndroidManifest.xml` file inside the `application` tag to remove Netmera's default FCM service
+
+```
+<service
+    android:name="com.netmera.nmfcm.NMFirebaseService"
+    tools:node="remove" />
+```
+
+2- Update `FirebaseMessaging` methods like below
+
 ```
 FirebaseMessaging messaging = FirebaseMessaging.instance;
 
@@ -283,6 +293,16 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage remoteMessage) as
 ```
 
 3) If you have custom Huawei Messaging integration, please see usage below.
+
+1- Add the following line to your `AndroidManifest.xml` file inside the `application` tag to remove Netmera's default HMS service
+
+```
+<service
+   android:name="com.netmera.nmhms.NMHuaweiService"
+   tools:node="remove" />
+```
+
+2- Update `HuaweiPushKit` methods like below
 
 ```
 Push.getTokenStream.listen((String token) {
