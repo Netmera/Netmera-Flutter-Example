@@ -31,10 +31,10 @@ class _UserPageState extends State<UserPage> {
     user.setEmail(emailController.text);
     user.setMsisdn(msisdnController.text);
     user.setGender(int.parse(_selectedGender));
-    Netmera.updateUser(user);
+    Netmera.updateUserAsync(user);
   }
 
-  updateUserSync() {
+  updateUser() {
     NetmeraUser user = NetmeraUser();
     user.setUserId(userController.text);
     user.setName(nameController.text);
@@ -43,11 +43,7 @@ class _UserPageState extends State<UserPage> {
     user.setMsisdn(msisdnController.text);
     user.setGender(int.parse(_selectedGender));
 
-    print("a");
-
     Netmera.updateUser(user).then((_) {
-      print("b");
-
       Fluttertoast.showToast(
           msg: 'User updated successfully!',
           toastLength: Toast.LENGTH_SHORT,
@@ -138,7 +134,7 @@ class _UserPageState extends State<UserPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    button('Update User Sync', updateUserSync),
+                    button('Update User', updateUser),
                     button('Update User Async', updateUserAsync),
                   ],
                 ),

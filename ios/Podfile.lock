@@ -92,7 +92,7 @@ PODS:
     - NetmeraCore (= 3.25.0)
   - Netmera/NotificationServiceExtension (3.25.0):
     - NetmeraCore (= 3.25.0)
-  - netmera_flutter_sdk (2.5.4):
+  - netmera_flutter_sdk (2.6.0):
     - Flutter
     - Netmera (= 3.25.0)
   - NetmeraCore (3.25.0)
@@ -158,7 +158,7 @@ SPEC CHECKSUMS:
   MMWormhole: 0cd3fd35a9118b2e2d762b499f54eeaace0be791
   nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
   Netmera: b6b34e1c31420885677cd8754523f9d82e7a9541
-  netmera_flutter_sdk: 84363beee96ebec9c79247643da2c06551385b20
+  netmera_flutter_sdk: f74d4f8b9c2876f25411fef702c18bdeeee920dd
   NetmeraCore: 73df25f21a4f902191cde4aa9f40780f5316be2d
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   UICKeyChainStore: ba3bff2c762b12db1e516f395c837dd25298b05e
