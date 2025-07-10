@@ -46,6 +46,18 @@
             android:name="com.netmera.nmfcm.NMFirebaseService"
             tools:node="remove" />
 
+        <service
+            android:name="com.netmera.nmhms.NMHuaweiService"
+            tools:node="remove" />
+
+        <receiver
+            android:name="com.huawei.hms.flutter.push.receiver.BackgroundMessageBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.huawei.hms.flutter.push.receiver.BACKGROUND_REMOTE_MESSAGE"/>
+            </intent-filter>
+        </receiver>
+
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data

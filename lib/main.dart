@@ -7,6 +7,7 @@ import 'dart:ui';
 import 'package:app_links/app_links.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:huawei_push/huawei_push.dart' as HMS;
 import 'package:netmera_flutter_example/page_coupon.dart';
 import 'package:netmera_flutter_example/page_event.dart';
 import 'package:netmera_flutter_example/page_push_inbox.dart';
@@ -34,6 +35,14 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
   if (Netmera.isNetmeraRemoteMessage(message.data)) {
     Netmera.onNetmeraFirebasePushMessageReceived(message.from, message.data);
+  }
+}
+
+@pragma('vm:entry-point')
+void backgroundMessageCallback(HMS.RemoteMessage remoteMessage) async {
+  Map<String, String> map = remoteMessage.dataOfMap ?? new Map();
+  if (Netmera.isNetmeraRemoteMessage(map)) {
+    Netmera.onNetmeraHuaweiPushMessageReceived(remoteMessage.from, map);
   }
 }
 
@@ -107,6 +116,22 @@ initFirebase() async {
   });
 }
 
+initHMSPush() async {
+  HMS.Push.getTokenStream.listen((String token) {
+    Netmera.onNetmeraNewToken(token);
+  });
+
+  HMS.Push.onMessageReceivedStream.listen((HMS.RemoteMessage remoteMessage) {
+    Map<String, String> map = remoteMessage.dataOfMap ?? new Map();
+    if (Netmera.isNetmeraRemoteMessage(map)) {
+      Netmera.onNetmeraHuaweiPushMessageReceived(remoteMessage.from, map);
+    }
+  });
+
+  bool backgroundMessageHandler = await HMS.Push.registerBackgroundMessageHandler(backgroundMessageCallback);
+  print("HMS backgroundMessageHandler registered: $backgroundMessageHandler");
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -142,6 +167,7 @@ class _MyAppState extends State<HomePage> {
 
     initAppLinks();
     initFirebase();
+    initHMSPush();
 
     initBroadcastReceiver();
 

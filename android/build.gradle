@@ -18,6 +18,14 @@ allprojects {
         maven {url 'https://maven.google.com'}
         maven {url 'https://developer.huawei.com/repo/'}
     }
+
+    subprojects {
+        afterEvaluate { project ->
+            if (project.name == "huawei_push") {
+                project.android.namespace = "com.huawei.hms.flutter.push"
+            }
+        }
+    }
 }
 
 rootProject.buildDir = '../build'

@@ -192,6 +192,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
+  huawei_push:
+    dependency: "direct main"
+    description:
+      path: flutter-hms-push
+      ref: HEAD
+      resolved-ref: a86fe8cadc4afbad5e2be9eddc44e41d314db335
+      url: "https://github.com/crasowas/hms-flutter-plugin.git"
+    source: git
+    version: "6.12.0+302"
   leak_tracker:
     dependency: transitive
     description:
