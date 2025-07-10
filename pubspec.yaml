@@ -10,12 +10,18 @@ dependencies:
   flutter:
     sdk: flutter
 
-  netmera_flutter_sdk: 2.5.4-beta02
+  netmera_flutter_sdk: 2.6.0-beta01
 
   fluttertoast: ^8.2.12
   cupertino_icons: ^1.0.6
   app_links: ^6.3.3
   firebase_messaging: ^15.1.5
+
+  #This fork is used because Huawei flutter packages are not compatible with current flutter versions.
+  huawei_push:
+    git:
+      url: https://github.com/crasowas/hms-flutter-plugin.git
+      path: flutter-hms-push
 
 dev_dependencies:
   flutter_test:

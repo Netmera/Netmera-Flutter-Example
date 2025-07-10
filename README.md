@@ -315,6 +315,13 @@ Push.onMessageReceivedStream.listen((RemoteMessage remoteMessage) {
     Netmera.onNetmeraHuaweiPushMessageReceived(remoteMessage.from, map);
   }
 });
+
+void backgroundMessageCallback(RemoteMessage remoteMessage) async {
+  Map<String, String> map = remoteMessage.dataOfMap ?? new Map();
+  if (Netmera.isNetmeraRemoteMessage(map)) {
+    Netmera.onNetmeraHuaweiPushMessageReceived(remoteMessage.from, map);
+  }
+}
 ```
 
 
