@@ -17,8 +17,8 @@ PODS:
     - FirebaseCoreInternal (~> 11.0)
     - GoogleUtilities/Environment (~> 8.0)
     - GoogleUtilities/Logger (~> 8.0)
-  - FirebaseCoreInternal (11.7.0):
-    - "GoogleUtilities/NSData+zlib (~> 8.0)"
+  - FirebaseCoreInternal (11.15.0):
+    - "GoogleUtilities/NSData+zlib (~> 8.1)"
   - FirebaseInstallations (11.4.0):
     - FirebaseCore (~> 11.0)
     - GoogleUtilities/Environment (~> 8.0)
@@ -44,28 +44,28 @@ PODS:
   - GoogleDataTransport (10.1.0):
     - nanopb (~> 3.30910.0)
     - PromisesObjC (~> 2.4)
-  - GoogleUtilities/AppDelegateSwizzler (8.0.2):
+  - GoogleUtilities/AppDelegateSwizzler (8.1.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
     - GoogleUtilities/Privacy
-  - GoogleUtilities/Environment (8.0.2):
+  - GoogleUtilities/Environment (8.1.0):
     - GoogleUtilities/Privacy
-  - GoogleUtilities/Logger (8.0.2):
+  - GoogleUtilities/Logger (8.1.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Privacy
-  - GoogleUtilities/Network (8.0.2):
+  - GoogleUtilities/Network (8.1.0):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Privacy
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (8.0.2)":
+  - "GoogleUtilities/NSData+zlib (8.1.0)":
     - GoogleUtilities/Privacy
-  - GoogleUtilities/Privacy (8.0.2)
-  - GoogleUtilities/Reachability (8.0.2):
+  - GoogleUtilities/Privacy (8.1.0)
+  - GoogleUtilities/Reachability (8.1.0):
     - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
-  - GoogleUtilities/UserDefaults (8.0.2):
+  - GoogleUtilities/UserDefaults (8.1.0):
     - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
   - MMWormhole (2.0.0):
@@ -76,26 +76,26 @@ PODS:
     - nanopb/encode (= 3.30910.0)
   - nanopb/decode (3.30910.0)
   - nanopb/encode (3.30910.0)
-  - Netmera (3.25.0):
-    - Netmera/NetmeraWithAdId (= 3.25.0)
-  - Netmera/AdIdSupport (3.25.0)
-  - Netmera/Application (3.25.0):
+  - Netmera (3.27.0):
+    - Netmera/NetmeraWithAdId (= 3.27.0)
+  - Netmera/AdIdSupport (3.27.0)
+  - Netmera/Application (3.27.0):
     - FMDB
     - MMWormhole (~> 2.0.0)
-    - NetmeraCore (= 3.25.0)
+    - NetmeraCore (= 3.27.0)
     - UICKeyChainStore (~> 2.0)
-  - Netmera/NetmeraWithAdId (3.25.0):
+  - Netmera/NetmeraWithAdId (3.27.0):
     - Netmera/AdIdSupport
     - Netmera/Application
-  - Netmera/NotificationContentExtension (3.25.0):
+  - Netmera/NotificationContentExtension (3.27.0):
     - MMWormhole (~> 2.0.0)
-    - NetmeraCore (= 3.25.0)
-  - Netmera/NotificationServiceExtension (3.25.0):
-    - NetmeraCore (= 3.25.0)
-  - netmera_flutter_sdk (2.6.0):
+    - NetmeraCore (= 3.27.0)
+  - Netmera/NotificationServiceExtension (3.27.0):
+    - NetmeraCore (= 3.27.0)
+  - netmera_flutter_sdk (2.8.0):
     - Flutter
-    - Netmera (= 3.25.0)
-  - NetmeraCore (3.25.0)
+    - Netmera (= 3.27.0)
+  - NetmeraCore (3.27.0)
   - PromisesObjC (2.4.0)
   - UICKeyChainStore (2.2.1)
 
@@ -105,9 +105,9 @@ DEPENDENCIES:
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - Flutter (from `Flutter`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
-  - Netmera (= 3.25.0)
-  - Netmera/NotificationContentExtension (= 3.25.0)
-  - Netmera/NotificationServiceExtension (= 3.25.0)
+  - Netmera (= 3.27.0)
+  - Netmera/NotificationContentExtension (= 3.27.0)
+  - Netmera/NotificationServiceExtension (= 3.27.0)
   - netmera_flutter_sdk (from `.symlinks/plugins/netmera_flutter_sdk/ios`)
 
 SPEC REPOS:
@@ -147,22 +147,22 @@ SPEC CHECKSUMS:
   firebase_core: 84a16d041be8bc166b6e00350f89849e06daf9d1
   firebase_messaging: 48ce5cf82b70ac47ed9cb9277f97bb77d1d01a38
   FirebaseCore: e0510f1523bc0eb21653cac00792e1e2bd6f1771
-  FirebaseCoreInternal: d6c17dafc8dc33614733a8b52df78fcb4394c881
+  FirebaseCoreInternal: 9afa45b1159304c963da48addb78275ef701c6b4
   FirebaseInstallations: 6ef4a1c7eb2a61ee1f74727d7f6ce2e72acf1414
   FirebaseMessaging: f8a160d99c2c2e5babbbcc90c4a3e15db036aee2
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   fluttertoast: 2c67e14dce98bbdb200df9e1acf610d7a6264ea1
   FMDB: 728731dd336af3936ce00f91d9d8495f5718a0e6
   GoogleDataTransport: aae35b7ea0c09004c3797d53c8c41f66f219d6a7
-  GoogleUtilities: 26a3abef001b6533cf678d3eb38fd3f614b7872d
+  GoogleUtilities: 00c88b9a86066ef77f0da2fab05f65d7768ed8e1
   MMWormhole: 0cd3fd35a9118b2e2d762b499f54eeaace0be791
   nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
-  Netmera: b6b34e1c31420885677cd8754523f9d82e7a9541
-  netmera_flutter_sdk: f74d4f8b9c2876f25411fef702c18bdeeee920dd
-  NetmeraCore: 73df25f21a4f902191cde4aa9f40780f5316be2d
+  Netmera: 533bb1afb13962e40d8a99780c0a5761c52cc0d8
+  netmera_flutter_sdk: 2dfa218ebaaecfc3fe6609aea69db18cec131978
+  NetmeraCore: 05125a48c87116d8ac87f9aad588d1295a0f4f7e
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   UICKeyChainStore: ba3bff2c762b12db1e516f395c837dd25298b05e
 
-PODFILE CHECKSUM: e52a34f2153b493defd0302c83ff9e42f4e08840
+PODFILE CHECKSUM: f6d0e5cf5fc524343c5aaeb09874ce327adf2e78
 
 COCOAPODS: 1.16.2

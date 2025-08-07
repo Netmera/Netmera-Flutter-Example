@@ -25,22 +25,22 @@ class _UserPageState extends State<UserPage> {
 
   updateUserAsync() {
     NetmeraUser user = NetmeraUser();
-    user.setUserId(userController.text);
-    user.setName(nameController.text);
-    user.setSurname(surnameController.text);
-    user.setEmail(emailController.text);
-    user.setMsisdn(msisdnController.text);
+    if (userController.text != "") user.setUserId(userController.text);
+    if (nameController.text != "") user.setName(nameController.text);
+    if (surnameController.text != "") user.setSurname(surnameController.text);
+    if (emailController.text != "") user.setEmail(emailController.text);
+    if (msisdnController.text != "") user.setMsisdn(msisdnController.text);
     user.setGender(int.parse(_selectedGender));
     Netmera.updateUserAsync(user);
   }
 
   updateUser() {
     NetmeraUser user = NetmeraUser();
-    user.setUserId(userController.text);
-    user.setName(nameController.text);
-    user.setSurname(surnameController.text);
-    user.setEmail(emailController.text);
-    user.setMsisdn(msisdnController.text);
+    if (userController.text != "") user.setUserId(userController.text);
+    if (nameController.text != "") user.setName(nameController.text);
+    if (surnameController.text != "") user.setSurname(surnameController.text);
+    if (emailController.text != "") user.setEmail(emailController.text);
+    if (msisdnController.text != "") user.setMsisdn(msisdnController.text);
     user.setGender(int.parse(_selectedGender));
 
     Netmera.updateUser(user).then((_) {
