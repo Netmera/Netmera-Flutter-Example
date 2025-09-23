@@ -167,7 +167,10 @@ class _MyAppState extends State<HomePage> {
 
     initAppLinks();
     initFirebase();
-    initHMSPush();
+
+    if (Platform.isAndroid) {
+      initHMSPush();
+    }
 
     initBroadcastReceiver();
 
