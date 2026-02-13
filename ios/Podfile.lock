@@ -76,26 +76,26 @@ PODS:
     - nanopb/encode (= 3.30910.0)
   - nanopb/decode (3.30910.0)
   - nanopb/encode (3.30910.0)
-  - Netmera (3.27.0):
-    - Netmera/NetmeraWithAdId (= 3.27.0)
-  - Netmera/AdIdSupport (3.27.0)
-  - Netmera/Application (3.27.0):
+  - Netmera (3.27.5):
+    - Netmera/NetmeraWithAdId (= 3.27.5)
+  - Netmera/AdIdSupport (3.27.5)
+  - Netmera/Application (3.27.5):
     - FMDB
     - MMWormhole (~> 2.0.0)
-    - NetmeraCore (= 3.27.0)
+    - NetmeraCore (= 3.27.5)
     - UICKeyChainStore (~> 2.0)
-  - Netmera/NetmeraWithAdId (3.27.0):
+  - Netmera/NetmeraWithAdId (3.27.5):
     - Netmera/AdIdSupport
     - Netmera/Application
-  - Netmera/NotificationContentExtension (3.27.0):
+  - Netmera/NotificationContentExtension (3.27.5):
     - MMWormhole (~> 2.0.0)
-    - NetmeraCore (= 3.27.0)
-  - Netmera/NotificationServiceExtension (3.27.0):
-    - NetmeraCore (= 3.27.0)
-  - netmera_flutter_sdk (2.9.0):
+    - NetmeraCore (= 3.27.5)
+  - Netmera/NotificationServiceExtension (3.27.5):
+    - NetmeraCore (= 3.27.5)
+  - netmera_flutter_sdk (2.9.1):
     - Flutter
-    - Netmera (= 3.27.0)
-  - NetmeraCore (3.27.0)
+    - Netmera (= 3.27.5)
+  - NetmeraCore (3.27.5)
   - PromisesObjC (2.4.0)
   - UICKeyChainStore (2.2.1)
 
@@ -105,9 +105,9 @@ DEPENDENCIES:
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - Flutter (from `Flutter`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
-  - Netmera (= 3.27.0)
-  - Netmera/NotificationContentExtension (= 3.27.0)
-  - Netmera/NotificationServiceExtension (= 3.27.0)
+  - Netmera (= 3.27.5)
+  - Netmera/NotificationContentExtension (= 3.27.5)
+  - Netmera/NotificationServiceExtension (= 3.27.5)
   - netmera_flutter_sdk (from `.symlinks/plugins/netmera_flutter_sdk/ios`)
 
 SPEC REPOS:
@@ -157,12 +157,12 @@ SPEC CHECKSUMS:
   GoogleUtilities: 00c88b9a86066ef77f0da2fab05f65d7768ed8e1
   MMWormhole: 0cd3fd35a9118b2e2d762b499f54eeaace0be791
   nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
-  Netmera: 533bb1afb13962e40d8a99780c0a5761c52cc0d8
-  netmera_flutter_sdk: f0ddcf491fd32efdfdb40a1fb371d2063f3a1b97
-  NetmeraCore: 05125a48c87116d8ac87f9aad588d1295a0f4f7e
+  Netmera: 6707b85ecd64f5fc0bcd732e8c4488c4aaf1fc7d
+  netmera_flutter_sdk: d95a803adc72a28609b46e687b85d75a368a4b43
+  NetmeraCore: 7a8083702a934f3f2b2d79bc0cce05ff1584941a
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   UICKeyChainStore: ba3bff2c762b12db1e516f395c837dd25298b05e
 
-PODFILE CHECKSUM: 683f4eacb7f5f25323e3440682ca71196d415ec3
+PODFILE CHECKSUM: 9cd8c0165c169b6e14d0a64ba33a6d2daa635ae0
 
 COCOAPODS: 1.16.2
