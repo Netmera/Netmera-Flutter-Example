@@ -31,9 +31,11 @@ use_frameworks!
 use_modular_headers!
 
 # Add these pods to receive Media Push
-pod "Netmera", "3.27.5"
-pod "Netmera/NotificationServiceExtension", "3.27.5"
-pod "Netmera/NotificationContentExtension", "3.27.5"
+# pod "Netmera", "3.27.5"
+# pod "Netmera/NotificationServiceExtension", "3.27.5"
+# pod "Netmera/NotificationContentExtension", "3.27.5"
+pod 'NetmeraNotificationServiceExtension', "4.14.6"
+pod "NetmeraNotificationContentExtension", "4.14.6"
 
 platform :ios, '15.0'
 
@@ -51,5 +53,12 @@ end
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
+    target.build_configurations.each do |config|
+      if target.name.include?('Swinject')
+        target.build_configurations.each do |config|
+          config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
+        end
+      end
+    end
   end
 end

@@ -4,9 +4,11 @@
 
 import UIKit
 import Flutter
+import netmera_flutter_sdk
+import NetmeraNotification
 
 @main
-@objc class AppDelegate: FlutterAppDelegate, NetmeraPushDelegate {
+@objc class AppDelegate: FlutterAppDelegate {
     private let CHANNEL = "nm_flutter_example_channel"
 
     let NETMERA_UAT_API_KEY = "gFtyH_nz5WCdXraTsOOgL25er1sBpuQdFa8bAMVGhv9Xo5voVRPFY2gFcVkuTQeZIgoa3gN1rww"
@@ -27,17 +29,19 @@ import Flutter
         //For triggering onPushReceive when app is killed and push clicked by user
         let notification = launchOptions?[.remoteNotification]
         if notification != nil {
-            FNetmeraService.handleWork(ON_PUSH_RECEIVE, dict:["userInfo" : notification])
+            FNetmeraService.handleWork(FNetmeraService.ON_PUSH_RECEIVE, dict:["userInfo" : notification])
         }
         
         let netmeraApiKey = UserDefaults.standard.string(forKey: "apiKey") ?? NETMERA_UAT_API_KEY
         let baseUrl = UserDefaults.standard.string(forKey: "baseUrl") ?? NETMERA_UAT_BASE_URL
         
-        FNetmera.logging(true) // Enable Netmera logging
-        FNetmera.initNetmera(netmeraApiKey ?? "") // Your Netmera api key.
-        Netmera.setBaseURL(baseUrl ?? "")
-        FNetmera.setPushDelegate(self)
-        Netmera.setAppGroupName("group.com.netmera.flutter") // Your app group name
+        let params = NetmeraParams(
+            apiKey: netmeraApiKey,
+            baseUrl: baseUrl
+        )
+        Netmera.initialize()
+        Netmera.setLogLevel(.debug)
+        //Netmera.setAppGroupName("group.com.netmera.flutter") // Your app group name
         
         
         if let flutterViewController = window?.rootViewController as? FlutterViewController {
@@ -65,7 +69,7 @@ import Flutter
     }
     
     override func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        FNetmeraService.handleWork(ON_PUSH_REGISTER, dict: ["pushToken": deviceToken])
+        FNetmeraService.handleWork(FNetmeraService.ON_PUSH_REGISTER, dict: ["pushToken": deviceToken])
     }
     
     @available(iOS 10.0, *)
@@ -75,10 +79,10 @@ import Flutter
                                          @escaping () -> Void) {
         
         if response.actionIdentifier == UNNotificationDismissActionIdentifier {
-            FNetmeraService.handleWork(ON_PUSH_DISMISS,dict:["userInfo" : response.notification.request.content.userInfo])
+            FNetmeraService.handleWork(FNetmeraService.ON_PUSH_DISMISS,dict:["userInfo" : response.notification.request.content.userInfo])
         }
         else if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
-            FNetmeraService.handleWork(ON_PUSH_OPEN, dict:["userInfo" : response.notification.request.content.userInfo])
+            FNetmeraService.handleWork(FNetmeraService.ON_PUSH_OPEN, dict:["userInfo" : response.notification.request.content.userInfo])
         }
         completionHandler()
     }
@@ -88,9 +92,9 @@ import Flutter
         completionHandler([UNNotificationPresentationOptions.alert])
         
         if UIApplication.shared.applicationState == .active {
-            FNetmeraService.handleWork(ON_PUSH_RECEIVE, dict:["userInfo" : notification.request.content.userInfo])
+            FNetmeraService.handleWork(FNetmeraService.ON_PUSH_RECEIVE, dict:["userInfo" : notification.request.content.userInfo])
         } else {
-            FNetmeraService.handleWork(ON_PUSH_RECEIVE_BACKGROUND, dict:["userInfo" : notification.request.content.userInfo])
+            FNetmeraService.handleWork(FNetmeraService.ON_PUSH_RECEIVE_BACKGROUND, dict:["userInfo" : notification.request.content.userInfo])
         }
     }
     
