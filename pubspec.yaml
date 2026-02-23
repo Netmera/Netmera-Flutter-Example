@@ -4,7 +4,7 @@ description: NETMERA is a Mobile Application Engagement Platform. We offer a ser
 version: 2.5.2-beta01
 
 environment:
-  sdk: '>=2.18.0 <4.0.0'
+  sdk: '>=3.6.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -12,8 +12,8 @@ dependencies:
 
   netmera_flutter_sdk: 2.9.1-beta01
 
-  fluttertoast: ^8.2.12
-  cupertino_icons: ^1.0.6
+  fluttertoast: ^9.0.0
+  cupertino_icons: ^1.0.8
   app_links: ^6.3.3
   firebase_messaging: ^15.1.5
 
