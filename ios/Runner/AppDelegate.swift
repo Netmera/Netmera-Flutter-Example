@@ -9,7 +9,6 @@ import NetmeraCore
 
 @main
 @objc class AppDelegate: FlutterAppDelegate {
-    private let CHANNEL = "nm_flutter_example_channel"
 
     override func application(
         _ application: UIApplication,
@@ -36,27 +35,6 @@ import NetmeraCore
         let netmeraParams = NetmeraParams(apiKey: apiKey, baseUrl: baseUrl)
         Netmera.initialize(params: netmeraParams)
         Netmera.setLogLevel(.debug)
-        
-        if let flutterViewController = window?.rootViewController as? FlutterViewController {
-            let methodChannel = FlutterMethodChannel(name: CHANNEL, binaryMessenger: flutterViewController.binaryMessenger)
-                    
-            methodChannel.setMethodCallHandler { (call: FlutterMethodCall, result: FlutterResult) in
-                switch call.method {
-                case MethodName.SET_API_KEY.rawValue:
-                    if let apiKeyDict = call.arguments as? [String: Any], let apiKey = apiKeyDict["apiKey"] as? String {
-                            UserDefaults.standard.set(apiKey, forKey: "apiKey")
-                            result(nil)
-                        }
-                case MethodName.SET_BASE_URL.rawValue:
-                    if let baseUrlDict = call.arguments as? [String: Any], let baseUrl = baseUrlDict["baseUrl"] as? String {
-                            UserDefaults.standard.set(baseUrl, forKey: "baseUrl")
-                            result(nil)
-                        }
-                    default:
-                        break
-                }
-            }
-        }
         
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
     }

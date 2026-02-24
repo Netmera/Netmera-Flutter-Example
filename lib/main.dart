@@ -14,13 +14,11 @@ import 'package:netmera_flutter_example/page_push_inbox.dart';
 import 'package:netmera_flutter_example/page_user.dart';
 import 'package:netmera_flutter_sdk/Netmera.dart';
 import 'package:netmera_flutter_sdk/NetmeraPushBroadcastReceiver.dart';
-import 'package:flutter/services.dart';
 import 'package:netmera_flutter_sdk/NotificationPermissionStatus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'page_category.dart';
-import 'config.dart';
 import 'page_mandatory_event.dart';
 
 // This method must be a top-level function
@@ -153,14 +151,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _MyAppState extends State<HomePage> {
-  String _apiKey = "";
-  String _baseUrl = "";
   bool _isPushEnabled = true;
   bool _isPopUpPresentationEnabled = true;
   static String _pushTokenString = "";
-  static const platform = MethodChannel('nm_flutter_example_channel');
-  TextEditingController _controllerApiKey = TextEditingController();
-  TextEditingController _controllerBaseUrl = TextEditingController();
 
   @override
   void initState() {
@@ -208,107 +201,6 @@ class _MyAppState extends State<HomePage> {
             fontSize: 16.0);
       });
     });
-  }
-
-  onCancelPress() {
-    Navigator.pop(context);
-  }
-
-  onSetPress() {
-    if (_baseUrl != '' && _apiKey != '') {
-      if (Platform.isAndroid) {
-        Netmera.skipAppConfigAndSetBaseUrl(_baseUrl);
-      } else {
-        Netmera.setBaseUrl(_baseUrl);
-      }
-      Netmera.setApiKey(_apiKey);
-      platform.invokeMethod('setApiKey', {"apiKey": _apiKey});
-      platform.invokeMethod('setBaseUrl', {"baseUrl": _baseUrl});
-    }
-
-    onCancelPress();
-  }
-
-onSetLongPress() {
-    if (_baseUrl == 'b' && _apiKey == 'b') {
-      setState(() {
-        _baseUrl = Config.NETMERA_UAT_BASE_URL;
-        _controllerBaseUrl.text = Config.NETMERA_UAT_BASE_URL;
-        _apiKey = Config.NETMERA_UAT_API_KEY;
-        _controllerApiKey.text = Config.NETMERA_UAT_API_KEY;
-      });
-    } else if (_baseUrl == 'c' && _apiKey == 'c') {
-      setState(() {
-        _baseUrl = Config.NETMERA_TEST_BASE_URL;
-        _controllerBaseUrl.text = Config.NETMERA_TEST_BASE_URL;
-        _apiKey = Config.NETMERA_TEST_API_KEY;
-        _controllerApiKey.text = Config.NETMERA_TEST_API_KEY;
-      });
-    } else if (_baseUrl == 'd' && _apiKey == 'd') {
-      setState(() {
-        _baseUrl = Config.NETMERA_PROD_BASE_URL;
-        _controllerBaseUrl.text = Config.NETMERA_PROD_BASE_URL;
-        _apiKey = Config.NETMERA_PROD_API_KEY;
-        _controllerApiKey.text = Config.NETMERA_PROD_API_KEY;
-      });
-    }
-  }
-
-  setProperties() {
-    showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              content: SizedBox(
-                  height: 140,
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        TextField(
-                          decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              hintText: "BaseUrl"),
-                          onChanged: (text) {
-                            setState(() {
-                              _baseUrl = text;
-                            });
-                          },
-                          controller: _controllerBaseUrl,
-                        ),
-                        TextField(
-                          decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              hintText: "API Key"),
-                          onChanged: (text) {
-                            setState(() {
-                              _apiKey = text;
-                            });
-                          },
-                          controller: _controllerApiKey,
-                        ),
-                      ])),
-              actions: [
-                TextButton(
-                  onPressed: onCancelPress,
-                  child: const Text(
-                    'Cancel',
-                    style: TextStyle(
-                      color: Colors.blue, // Set your desired text color here
-                    ),
-                  ),
-                ),
-                TextButton(
-                  onPressed: onSetPress,
-                  onLongPress: onSetLongPress,
-                  child: const Text(
-                    'SET',
-                    style: TextStyle(
-                      color:
-                          Colors.deepPurple, // Set your desired text color here
-                    ),
-                  ),
-                ),
-              ],
-            ));
   }
 
   enableData() {
@@ -505,24 +397,15 @@ onSetLongPress() {
               child: Padding(
         padding: const EdgeInsets.only(left: 16.0, right: 16.0),
         child: Column(children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'Flutter Example',
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.grey),
-              ),
-              TextButton(
-                style: TextButton.styleFrom(
-                  textStyle: const TextStyle(fontSize: 13),
-                ),
-                onPressed: setProperties,
-                child: const Text('SET PROPERTIES'),
-              ),
-            ],
+          const Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Flutter Example',
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.grey),
+            ),
           ),
           Expanded(
               child: SingleChildScrollView(
