@@ -11,7 +11,7 @@
         android:name=".MainApplication"
         android:icon="@mipmap/ic_launcher"
         android:allowBackup="false"
-        android:label="NetmeraFlutterExample">
+        android:label="Flutter Example">
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
@@ -39,6 +39,18 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data android:scheme="netmeraflutterexample" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".config.NetmeraConfigActivity"
+            android:label="Flutter Config"
+            android:icon="@mipmap/ic_config_launcher"
+            android:exported="true"
+            android:theme="@style/LaunchTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 

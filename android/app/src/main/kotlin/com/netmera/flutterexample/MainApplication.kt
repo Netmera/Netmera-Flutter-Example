@@ -1,30 +1,27 @@
 ///
-/// Copyright (c) 2025 Inomera Research.
+/// Copyright (c) 2026 Netmera Research.
 ///
 
 package com.netmera.flutterexample
 
 import android.app.Application
-import android.content.Context
-import android.content.SharedPreferences
+import com.netmera.flutterexample.config.NetmeraConfigProvider
 import com.netmera.netmera_flutter_sdk.FNetmera
 import com.netmera.netmera_flutter_sdk.FNetmeraConfiguration
 
 class MainApplication : Application() {
-    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate() {
         super.onCreate()
 
-        sharedPreferences = applicationContext.getSharedPreferences("Preferences", MODE_PRIVATE)
+        val (apiKey, baseUrl) = NetmeraConfigProvider.configFromPreferences(this)
 
-        //Netmera Configuration
         val fNetmeraConfiguration = FNetmeraConfiguration.Builder()
-            .huaweiSenderId(BuildConfig.HMS_SENDER_ID) // Your HMS sender ID
-            .firebaseSenderId(BuildConfig.GCM_SENDER_ID) // Your GCM sender ID
-            .apiKey(sharedPreferences.getString("apiKey", BuildConfig.NETMERA_UAT_API_KEY)!!) // Your Netmera api key
-            .baseUrl(sharedPreferences.getString("baseUrl", BuildConfig.NETMERA_UAT_BASE_URL)!!) // Netmera base url
-            .logging(true) // This is for enabling Netmera logs.
+            .huaweiSenderId(BuildConfig.HMS_SENDER_ID)
+            .firebaseSenderId(BuildConfig.GCM_SENDER_ID)
+            .apiKey(apiKey)
+            .baseUrl(baseUrl)
+            .logging(true)
             .build(this)
 
         FNetmera.initNetmera(fNetmeraConfiguration)

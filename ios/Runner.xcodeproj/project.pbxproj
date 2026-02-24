@@ -26,6 +26,9 @@
 		C98627BB2F4C823300D460A2 /* Netmera-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = C98627BA2F4C823200D460A2 /* Netmera-Config.plist */; };
 		C98627BC2F4C823300D460A2 /* Netmera-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = C98627BA2F4C823200D460A2 /* Netmera-Config.plist */; };
 		C98627BD2F4C823300D460A2 /* Netmera-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = C98627BA2F4C823200D460A2 /* Netmera-Config.plist */; };
+		C98627C12F4C823300D460A2 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C98627C02F4C823200D460A2 /* Settings.bundle */; };
+		C98627D22F4C823200D460A2 /* NetmeraEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98627D02F4C823200D460A2 /* NetmeraEnvironment.swift */; };
+		C98627D32F4C823200D460A2 /* NetmeraConfigProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98627D12F4C823200D460A2 /* NetmeraConfigProvider.swift */; };
 		C98629282F4C845400D460A2 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD1706528808F7400B85E5C /* NotificationService.swift */; };
 		C98629292F4C847600D460A2 /* Pods_NetmeraFlutterNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71775CF8D1FD73C98302E932 /* Pods_NetmeraFlutterNotificationServiceExtension.framework */; };
 		DB67A283D8ABCDD12C32EC46 /* Pods_NetmeraFlutterNotificationContentExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93DB26BBA545A7E0A3026DA4 /* Pods_NetmeraFlutterNotificationContentExtension.framework */; };
@@ -113,6 +116,9 @@
 		C95543BE27EF36DC00359764 /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
 		C98626492F4C7D3C00D460A2 /* NetmeraFlutterNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NetmeraFlutterNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
 		C98627BA2F4C823200D460A2 /* Netmera-Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Netmera-Config.plist"; sourceTree = "<group>"; };
+		C98627C02F4C823200D460A2 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		C98627D02F4C823200D460A2 /* NetmeraEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraEnvironment.swift; sourceTree = "<group>"; };
+		C98627D12F4C823200D460A2 /* NetmeraConfigProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraConfigProvider.swift; sourceTree = "<group>"; };
 		DDA07FB4F5A970C8DFB0BCFD /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
 		EF46A3A4843D8048CFF08BDD /* Pods-NetmeraFlutterNotificationServiceExtension.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetmeraFlutterNotificationServiceExtension.profile.xcconfig"; path = "Target Support Files/Pods-NetmeraFlutterNotificationServiceExtension/Pods-NetmeraFlutterNotificationServiceExtension.profile.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -244,10 +250,21 @@
 				C921E6132CE62D7A00D1C1E6 /* GoogleService-Info.plist */,
 				1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */,
 				C98627BA2F4C823200D460A2 /* Netmera-Config.plist */,
+				C98627C02F4C823200D460A2 /* Settings.bundle */,
+				C98627CF2F4C823200D460A2 /* Config */,
 				74858FAE1ED2DC5600515810 /* AppDelegate.swift */,
 				74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */,
 			);
 			path = Runner;
+			sourceTree = "<group>";
+		};
+		C98627CF2F4C823200D460A2 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				C98627D02F4C823200D460A2 /* NetmeraEnvironment.swift */,
+				C98627D12F4C823200D460A2 /* NetmeraConfigProvider.swift */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -381,6 +398,7 @@
 			files = (
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
 				C98627BD2F4C823300D460A2 /* Netmera-Config.plist in Resources */,
+				C98627C12F4C823300D460A2 /* Settings.bundle in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				C921E6142CE62D7A00D1C1E6 /* GoogleService-Info.plist in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
@@ -459,9 +477,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -513,9 +535,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -546,6 +572,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
+				C98627D22F4C823200D460A2 /* NetmeraEnvironment.swift in Sources */,
+				C98627D32F4C823200D460A2 /* NetmeraConfigProvider.swift in Sources */,
 				C986264A2F4C7D9900D460A2 /* NotificationService.swift in Sources */,
 				C986264B2F4C7E5300D460A2 /* NotificationViewController.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,

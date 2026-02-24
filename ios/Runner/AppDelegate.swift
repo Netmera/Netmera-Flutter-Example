@@ -1,18 +1,15 @@
 ///
-/// Copyright (c) 2022 Inomera Research.
+/// Copyright (c) 2026 Netmera Research.
 ///
 
 import UIKit
 import Flutter
 import netmera_flutter_sdk
-import NetmeraNotification
+import NetmeraCore
 
 @main
 @objc class AppDelegate: FlutterAppDelegate {
     private let CHANNEL = "nm_flutter_example_channel"
-
-    let NETMERA_UAT_API_KEY = "gFtyH_nz5WCdXraTsOOgL25er1sBpuQdFa8bAMVGhv9Xo5voVRPFY2gFcVkuTQeZIgoa3gN1rww"
-    let NETMERA_UAT_BASE_URL = "https://sdk-cloud-uat.sdpaas.com"
 
     override func application(
         _ application: UIApplication,
@@ -32,17 +29,13 @@ import NetmeraNotification
             FNetmeraService.handleWork(FNetmeraService.ON_PUSH_RECEIVE, dict:["userInfo" : notification])
         }
         
-        let netmeraApiKey = UserDefaults.standard.string(forKey: "apiKey") ?? NETMERA_UAT_API_KEY
-        let baseUrl = UserDefaults.standard.string(forKey: "baseUrl") ?? NETMERA_UAT_BASE_URL
+        // Netmera config from iOS Settings (Config/NetmeraConfigProvider)
+        NetmeraConfigProvider.registerSettingsBundleDefaults()
+        let (apiKey, baseUrl) = NetmeraConfigProvider.configFromSettings()
         
-        let params = NetmeraParams(
-            apiKey: netmeraApiKey,
-            baseUrl: baseUrl
-        )
-        Netmera.initialize()
+        let netmeraParams = NetmeraParams(apiKey: apiKey, baseUrl: baseUrl)
+        Netmera.initialize(params: netmeraParams)
         Netmera.setLogLevel(.debug)
-        //Netmera.setAppGroupName("group.com.netmera.flutter") // Your app group name
-        
         
         if let flutterViewController = window?.rootViewController as? FlutterViewController {
             let methodChannel = FlutterMethodChannel(name: CHANNEL, binaryMessenger: flutterViewController.binaryMessenger)
@@ -98,9 +91,4 @@ import NetmeraNotification
         }
     }
     
-}
-
-private enum MethodName: String {
-    case SET_API_KEY = "setApiKey"
-    case SET_BASE_URL = "setBaseUrl"
 }
