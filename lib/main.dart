@@ -171,12 +171,6 @@ class _MyAppState extends State<HomePage> {
     // Add this to enable popup presentation on app start.
     Netmera.enablePopupPresentation();
 
-    if (Platform.isIOS) {
-      Netmera.requestPushNotificationAuthorization();
-      Netmera.setAppGroupName(
-          "group.com.netmera.flutter"); // Set your app group name
-    }
-
     Netmera.isPushEnabled().then((value) {
       if (value != null) {
         setState(() {
@@ -355,10 +349,6 @@ class _MyAppState extends State<HomePage> {
         fontSize: 16.0);
   }
 
-  turnOffSendingEventAndUserUpdate() {
-    Netmera.turnOffSendingEventAndUserUpdate(false);
-  }
-
   Future<void> initAppLinks() async {
     try {
       final appLinks = AppLinks();
@@ -490,11 +480,6 @@ class _MyAppState extends State<HomePage> {
               Container(
                 margin: const EdgeInsets.only(top: 8),
                 child: button('TOAST PUSH TOKEN', toastPushTest),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 8),
-                child: button('TURN OFF SENDING EVENT AND USER UPDATE',
-                    turnOffSendingEventAndUserUpdate),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 8),
