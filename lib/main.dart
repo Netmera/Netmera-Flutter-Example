@@ -179,6 +179,19 @@ class _MyAppState extends State<HomePage> {
       }
     });
 
+    void _onWidgetUrlTriggered(String url) {
+      Fluttertoast.showToast(
+          msg: 'Widget URL handle by app: $url',
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: const Color.fromARGB(255, 166, 186, 171),
+          textColor: Colors.white,
+          fontSize: 16.0);
+    }
+
+    Netmera.onWidgetUrlTriggered(_onWidgetUrlTriggered);
+
     String msg;
     Future.delayed(const Duration(milliseconds: 1000), () {
       Netmera.getCurrentExternalId().then((value) {

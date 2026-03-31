@@ -6,6 +6,7 @@ import UIKit
 import Flutter
 import netmera_flutter_sdk
 import NetmeraCore
+import NetmeraNotification
 
 @main
 @objc class AppDelegate: FlutterAppDelegate {
@@ -20,6 +21,7 @@ import NetmeraCore
         UNUserNotificationCenter.current().delegate = self
 
         initializeNetmera()
+        Netmera.setPushDelegate(self)
 
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
@@ -45,5 +47,15 @@ import NetmeraCore
         
         let netmeraParams = NetmeraParams(apiKey: apiKey, baseUrl: baseUrl)
         FNetmera.initialize(params: netmeraParams)
+    }
+}
+
+extension AppDelegate: NetmeraPushDelegate {
+    func urlOpeningDecision(for url: URL, push: NetmeraBasePush) -> PushDelegateDecision {
+        return .appHandles
+    }
+    
+    func openURL(_ url: URL, for push: NetmeraBasePush) {
+        FNetmera.handleOpenURL(url: url, forPushObject: push)
     }
 }
