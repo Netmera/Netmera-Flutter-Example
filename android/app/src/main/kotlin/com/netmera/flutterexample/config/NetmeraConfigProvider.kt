@@ -16,13 +16,13 @@ object NetmeraConfigProvider {
 
     fun configFromPreferences(context: Context): Pair<String, String> {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        val envKey = prefs.getString(KEY_ENVIRONMENT, NetmeraEnvironment.PREPROD.key)
+        val envKey = prefs.getString(KEY_ENVIRONMENT, NetmeraEnvironment.PROD.key)
         val env = NetmeraEnvironment.fromKey(envKey)
 
         return if (env == NetmeraEnvironment.CUSTOM) {
             Pair(
-                prefs.getString(KEY_API_KEY, NetmeraEnvironment.PREPROD.defaultApiKey) ?: NetmeraEnvironment.PREPROD.defaultApiKey,
-                prefs.getString(KEY_BASE_URL, NetmeraEnvironment.PREPROD.url) ?: NetmeraEnvironment.PREPROD.url
+                prefs.getString(KEY_API_KEY, NetmeraEnvironment.PROD.defaultApiKey) ?: NetmeraEnvironment.PROD.defaultApiKey,
+                prefs.getString(KEY_BASE_URL, NetmeraEnvironment.PROD.url) ?: NetmeraEnvironment.PROD.url
             )
         } else {
             Pair(env.defaultApiKey, env.url)

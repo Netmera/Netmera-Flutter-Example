@@ -99,7 +99,7 @@ class NetmeraConfigActivity : Activity() {
             setBackgroundColor(COLOR_INPUT_BG)
             layoutParams = linearParams(0, dp(16))
         }
-        val savedEnvKey = prefs.getString("environment", NetmeraEnvironment.PREPROD.key)
+        val savedEnvKey = prefs.getString("environment", NetmeraEnvironment.PROD.key)
         val savedIndex = envValues.indexOfFirst { it.key == savedEnvKey }.takeIf { it >= 0 } ?: 1
         spinner.setSelection(savedIndex)
         content.addView(spinner)
@@ -162,8 +162,8 @@ class NetmeraConfigActivity : Activity() {
         if (env == NetmeraEnvironment.CUSTOM) {
             baseUrlInput.isEnabled = true
             apiKeyInput.isEnabled = true
-            baseUrlInput.setText(prefs.getString("baseUrl", NetmeraEnvironment.PREPROD.url))
-            apiKeyInput.setText(prefs.getString("apiKey", NetmeraEnvironment.PREPROD.defaultApiKey))
+            baseUrlInput.setText(prefs.getString("baseUrl", NetmeraEnvironment.PROD.url))
+            apiKeyInput.setText(prefs.getString("apiKey", NetmeraEnvironment.PROD.defaultApiKey))
         } else {
             baseUrlInput.isEnabled = false
             apiKeyInput.isEnabled = false
@@ -181,8 +181,8 @@ class NetmeraConfigActivity : Activity() {
         )
         val pos = spinner.selectedItemPosition.coerceIn(0, envValues.lastIndex)
         val env = envValues[pos]
-        val baseUrl = baseUrlInput.text.toString().trim().ifEmpty { env.url.ifEmpty { NetmeraEnvironment.PREPROD.url } }
-        val apiKey = apiKeyInput.text.toString().trim().ifEmpty { env.defaultApiKey.ifEmpty { NetmeraEnvironment.PREPROD.defaultApiKey } }
+        val baseUrl = baseUrlInput.text.toString().trim().ifEmpty { env.url.ifEmpty { NetmeraEnvironment.PROD.url } }
+        val apiKey = apiKeyInput.text.toString().trim().ifEmpty { env.defaultApiKey.ifEmpty { NetmeraEnvironment.PROD.defaultApiKey } }
 
         NetmeraConfigProvider.saveConfig(prefs, env, baseUrl, apiKey)
         Toast.makeText(this, "Ayarlar kaydedildi. Uygulama kapatılıyor; ana ikondan tekrar açın.", Toast.LENGTH_LONG).apply {

@@ -33,14 +33,14 @@ enum NetmeraConfigProvider {
         let baseUrl: String
         let apiKey: String
         if environment == .custom {
-            baseUrl = ud.string(forKey: NetmeraSettingsKeys.baseURL) ?? NetmeraEnvironment.preprod.url
-            apiKey = ud.string(forKey: NetmeraSettingsKeys.APIKey) ?? NetmeraEnvironment.preprod.defaultApiKey
+            baseUrl = ud.string(forKey: NetmeraSettingsKeys.baseURL) ?? NetmeraEnvironment.prod.url
+            apiKey = ud.string(forKey: NetmeraSettingsKeys.APIKey) ?? NetmeraEnvironment.prod.defaultApiKey
         } else if let env = environment, !env.url.isEmpty {
             baseUrl = env.url
             apiKey = env.defaultApiKey
         } else {
-            baseUrl = ud.string(forKey: NetmeraSettingsKeys.baseURL) ?? NetmeraEnvironment.preprod.url
-            apiKey = ud.string(forKey: NetmeraSettingsKeys.APIKey) ?? NetmeraEnvironment.preprod.defaultApiKey
+            baseUrl = ud.string(forKey: NetmeraSettingsKeys.baseURL) ?? NetmeraEnvironment.prod.url
+            apiKey = ud.string(forKey: NetmeraSettingsKeys.APIKey) ?? NetmeraEnvironment.prod.defaultApiKey
         }
         return (apiKey, baseUrl)
     }
