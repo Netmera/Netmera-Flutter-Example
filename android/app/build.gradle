@@ -69,13 +69,11 @@ android {
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion 36
         versionCode flutterVersionCode.toInteger()
-        versionName "2.9.1-beta01"
+        versionName "3.0.0-beta01"
 
         buildConfigField "String", "NETMERA_API_KEY", "\"" + getNetmeraApiKey() + "\""
         buildConfigField "String", "GCM_SENDER_ID", "\"" + getGCMSenderId() + "\""
         buildConfigField "String", "HMS_SENDER_ID", "\"" + getHMSSenderId() + "\""
-        buildConfigField "String", "NETMERA_UAT_API_KEY", "\"gFtyH_nz5WCdXraTsOOgL25er1sBpuQdFa8bAMVGhv9Xo5voVRPFY2gFcVkuTQeZIgoa3gN1rww\""
-        buildConfigField "String", "NETMERA_UAT_BASE_URL", "\"https://sdk-cloud-uat.sdpaas.com\""
 
         multiDexEnabled true
     }
