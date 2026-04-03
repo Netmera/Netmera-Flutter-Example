@@ -20,7 +20,7 @@ import NetmeraNotification
         UNUserNotificationCenter.current().delegate = self
 
         initializeNetmera()
-        Netmera.setPushDelegate(self)
+        FNetmera.setPushDelegate(self)
 
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
@@ -59,6 +59,6 @@ extension AppDelegate: NetmeraPushDelegate {
     }
     
     func openURL(_ url: URL, for push: NetmeraBasePush) {
-        FNetmera.handleOpenURL(url: url, forPushObject: push)
+        FNetmera.openURL(url: url, forPushObject: push)
     }
 }
