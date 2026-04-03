@@ -4,7 +4,8 @@ description: NETMERA is a Mobile Application Engagement Platform. We offer a ser
 version: 2.5.2-beta01
 
 environment:
-  sdk: '>=3.6.0 <4.0.0'
+  sdk: '>=3.9.0 <4.0.0'
+  flutter: '>=3.41.0 <3.42.0'
 
 dependencies:
   flutter:
@@ -14,7 +15,7 @@ dependencies:
 
   fluttertoast: ^9.0.0
   cupertino_icons: ^1.0.8
-  app_links: ^6.3.3
+  app_links: ^7.0.0
   firebase_messaging: ^15.1.5
 
   #This fork is used because Huawei flutter packages are not compatible with current flutter versions.

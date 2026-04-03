@@ -9,13 +9,12 @@ import NetmeraCore
 import NetmeraNotification
 
 @main
-@objc class AppDelegate: FlutterAppDelegate {
+@objc class AppDelegate: FlutterAppDelegate, FlutterImplicitEngineDelegate {
 
     override func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        GeneratedPluginRegistrant.register(with: self)
         
         // Add it if you are using Firebase.
         UNUserNotificationCenter.current().delegate = self
@@ -24,6 +23,10 @@ import NetmeraNotification
         Netmera.setPushDelegate(self)
 
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+    }
+    
+    func didInitializeImplicitFlutterEngine(_ engineBridge: FlutterImplicitEngineBridge) {
+      GeneratedPluginRegistrant.register(with: engineBridge.pluginRegistry)
     }
     
     // Add it if you are using Firebase.
