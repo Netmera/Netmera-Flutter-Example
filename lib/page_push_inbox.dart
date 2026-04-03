@@ -8,8 +8,6 @@ import 'package:netmera_flutter_sdk/NetmeraInboxFilter.dart';
 import 'package:netmera_flutter_sdk/NetmeraPushInbox.dart';
 
 class PushInboxPage extends StatefulWidget {
-  const PushInboxPage({Key? key}) : super(key: key);
-
   @override
   _PushInboxPageState createState() => _PushInboxPageState();
 }
@@ -18,7 +16,6 @@ class _PushInboxPageState extends State<PushInboxPage> {
   String _currentStatus = Netmera.PUSH_OBJECT_STATUS_ALL.toString();
   String _count = "0";
   List<NetmeraPushInbox> _pushInboxList = List.empty(growable: true);
-  TextEditingController categoryListController = TextEditingController();
 
   List<DropdownMenuItem<String>> getInboxList() {
     List<DropdownMenuItem<String>> items = List.empty(growable: true);
@@ -71,12 +68,7 @@ class _PushInboxPageState extends State<PushInboxPage> {
     inboxFilter.setPageSize(2);
     inboxFilter.setStatus(int.parse(_currentStatus));
     inboxFilter.setIncludeExpiredObjects(true);
-    if (categoryListController.text != "") {
-      List<String> categoryList = categoryListController.text.split(" ");
-      inboxFilter.setCategories(categoryList);
-    } else {
-      inboxFilter.setCategories(null);
-    }
+    inboxFilter.setCategories(null);
     return inboxFilter;
   }
 
@@ -160,11 +152,7 @@ class _PushInboxPageState extends State<PushInboxPage> {
     NMInboxStatusCountFilter filter = NMInboxStatusCountFilter();
     filter.setStatus(int.parse(_currentStatus));
     filter.setIncludeExpired(true);
-    if (categoryListController.text != "") {
-      List<String> stringList = categoryListController.text.split(" ");
-      List<int> categoryList = stringList.map(int.parse).toList();
-      filter.setCategoryList(categoryList);
-    }
+    filter.setCategoryList([1]);
     Netmera.getInboxCountForStatus(filter).then((map) {
       String countStatusText = "ALL: " +
           map[Netmera.PUSH_OBJECT_STATUS_ALL.toString()].toString() +
@@ -187,33 +175,10 @@ class _PushInboxPageState extends State<PushInboxPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Push Inbox"),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 16.0),
+    return Padding(
+        padding: const EdgeInsets.only(top: 1.0),
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 16.0, right: 16.0, top: 16.0, bottom: 5.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Expanded(
-                    child: IntrinsicHeight(
-                      child: TextField(
-                        controller: categoryListController,
-                        decoration:
-                            const InputDecoration(labelText: 'Category List'),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
             Padding(
               padding: const EdgeInsets.only(
                   left: 16.0, right: 16.0, top: 16.0, bottom: 5.0),
@@ -329,7 +294,6 @@ class _PushInboxPageState extends State<PushInboxPage> {
             ),
           ],
         ),
-      ),
     );
   }
 

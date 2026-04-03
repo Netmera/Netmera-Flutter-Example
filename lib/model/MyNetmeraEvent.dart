@@ -1,30 +1,39 @@
-///
-/// Copyright (c) 2022 Inomera Research.
-///
-
 import 'package:netmera_flutter_sdk/events/NetmeraEvent.dart';
 import 'package:netmera_flutter_sdk/events/commerce/NetmeraEventPurchase.dart';
 
-class NetmeraEventContentRate extends NetmeraEvent {
-  final String _EVENT_CODE = "jjnam";
-  
-  late int _no;
+///
+/// Copyright (c) 2026 Netmera Research.
+///
 
-  setNo(int no) {
-    _no = no;
-  }
+/// Custom event class (SDK example).
+class TestEvent extends NetmeraEvent {
 
-  @override
-  Map<String, dynamic> toJson() {
-    Map<String, dynamic> map = super.toJson();
-    map['ec'] = _no;
-    return map;
-  }
+    final String _EVENT_CODE = "prc";
 
-  @override
-  String getCode() {
-    return _EVENT_CODE;
-  }
+    DateTime? _dateAttribute;
+    int? _no;
+
+
+    void setDateAttribute(DateTime dateAttribute) {
+        _dateAttribute = dateAttribute;
+    }
+    void setNo(int no) {
+        _no = no;
+    }
+
+    @override
+    String getCode() {
+        return _EVENT_CODE;
+    }
+
+    @override
+    Map<String, dynamic> toJson() {
+        return {
+            ...super.toJson(),
+            'fi': _dateAttribute,
+            'ec': _no,
+        };
+    }
 }
 
 class CustomPurchaseEvent extends NetmeraEventPurchase {

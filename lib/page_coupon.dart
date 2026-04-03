@@ -4,8 +4,6 @@ import 'package:netmera_flutter_sdk/Netmera.dart';
 import 'package:netmera_flutter_sdk/NetmeraCouponDetail.dart';
 
 class CouponPage extends StatefulWidget {
-  const CouponPage({Key? key}) : super(key: key);
-
   @override
   State<CouponPage> createState() => _CouponPageState();
 }
@@ -43,11 +41,7 @@ class _CouponPageState extends State<CouponPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Coupons"),
-      ),
-      body: Column(
+    return Column(
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 24.0, right: 24.0, top: 16.0),
@@ -130,7 +124,6 @@ class _CouponPageState extends State<CouponPage> {
                       }),
                 ),
         ],
-      ),
     );
   }
 }
