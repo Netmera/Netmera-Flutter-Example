@@ -69,7 +69,7 @@ android {
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion 36
         versionCode flutterVersionCode.toInteger()
-        versionName "3.0.0-beta01"
+        versionName "3.0.0-beta02"
 
         buildConfigField "String", "NETMERA_API_KEY", "\"" + getNetmeraApiKey() + "\""
         buildConfigField "String", "GCM_SENDER_ID", "\"" + getGCMSenderId() + "\""
