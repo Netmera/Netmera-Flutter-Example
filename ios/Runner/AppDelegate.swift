@@ -55,7 +55,7 @@ import NetmeraNotification
 
 extension AppDelegate: NetmeraPushDelegate {
     func urlOpeningDecision(for url: URL, push: NetmeraBasePush) -> PushDelegateDecision {
-        return .appHandles
+        return .sdkHandles
     }
     
     func openURL(_ url: URL, for push: NetmeraBasePush) {

@@ -163,8 +163,8 @@ $ pod install
 
 ```
 // For receiving Media Push, you must add Netmera pods to top of your Podfile.
-pod 'NetmeraNotificationServiceExtension', "4.16.2"
-pod "NetmeraNotificationContentExtension", "4.16.2"
+pod 'NetmeraNotificationServiceExtension', "4.16.4"
+pod "NetmeraNotificationContentExtension", "4.16.4"
 ```
 
 6) In order to use the widget URL callback, add these lines into `AppDelegate.swift` file.
@@ -183,7 +183,7 @@ import netmera_flutter_sdk
 
 extension AppDelegate: NetmeraPushDelegate {
     func urlOpeningDecision(for url: URL, push: NetmeraBasePush) -> PushDelegateDecision {
-        return .appHandles
+        return .sdkHandles
     }
     
     func openURL(_ url: URL, for push: NetmeraBasePush) {

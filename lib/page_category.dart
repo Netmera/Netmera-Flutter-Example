@@ -86,12 +86,6 @@ class _CategoryPageState extends State<CategoryPage> {
     });
   }
 
-  handleLastMessage() async {
-    if (_categoryList.isNotEmpty) {
-      Netmera.handleLastMessage(_categoryList[0]);
-    }
-  }
-
   updateStatusCategories() async {
     if (_categoryList.isNotEmpty) {
       List<String> selectedCategories = List.empty(growable: true);
@@ -259,14 +253,6 @@ class _CategoryPageState extends State<CategoryPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Expanded(
-                      child: IntrinsicHeight(
-                        child: ElevatedButton(
-                          child: const Text('Handle Last Message'),
-                          onPressed: handleLastMessage,
-                        ),
-                      ),
-                    ),
                     Expanded(
                       child: IntrinsicHeight(
                         child: ElevatedButton(
