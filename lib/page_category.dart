@@ -8,8 +8,6 @@ import 'package:netmera_flutter_sdk/NetmeraCategoryFilter.dart';
 import 'package:netmera_flutter_sdk/NetmeraCategoryPreference.dart';
 
 class CategoryPage extends StatefulWidget {
-  const CategoryPage({Key? key}) : super(key: key);
-
   @override
   _CategoryPageState createState() => _CategoryPageState();
 }
@@ -86,12 +84,6 @@ class _CategoryPageState extends State<CategoryPage> {
     setState(() {
       _categoryList = list;
     });
-  }
-
-  handleLastMessage() async {
-    if (_categoryList.isNotEmpty) {
-      Netmera.handleLastMessage(_categoryList[0]);
-    }
   }
 
   updateStatusCategories() async {
@@ -212,11 +204,7 @@ class _CategoryPageState extends State<CategoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text("Category"),
-        ),
-        body: Padding(
+    return Padding(
           padding: const EdgeInsets.only(top: 1.0),
           child: Column(
             children: [
@@ -268,14 +256,6 @@ class _CategoryPageState extends State<CategoryPage> {
                     Expanded(
                       child: IntrinsicHeight(
                         child: ElevatedButton(
-                          child: const Text('Handle Last Message'),
-                          onPressed: handleLastMessage,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: IntrinsicHeight(
-                        child: ElevatedButton(
                           child: const Text(
                               'Update Status For First Two Categories'),
                           onPressed: updateStatusCategories,
@@ -298,6 +278,6 @@ class _CategoryPageState extends State<CategoryPage> {
               ),
             ],
           ),
-        ));
+        );
   }
 }

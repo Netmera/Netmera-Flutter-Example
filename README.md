@@ -1,5 +1,7 @@
 # Netmera Flutter Example
 
+This project is the example application for [Netmera Flutter SDK](https://pub.dev/packages/netmera_flutter_sdk).
+
 NETMERA is a Mobile Application Engagement Platform. We offer a series of development tools and app communication features to help your mobile business ignite and soar.
 
 ### Installation
@@ -10,7 +12,7 @@ NETMERA is a Mobile Application Engagement Platform. We offer a series of develo
 
 ```
 dependencies:
-  netmera_flutter_sdk: ^x.x.x
+  netmera_flutter_sdk: ^3.x.x
 ```
 
 - You can install packages from the command line with Flutter:
@@ -96,13 +98,25 @@ apply plugin: 'com.huawei.agconnect'
 
 ### Setup - iOS Part
 
-1) Navigate to ios folder in your terminal and run the following command.
+1) Add the following post_install block to the end of your Podfile.
+
+```
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if target.name.include?('Swinject')
+      target.build_configurations.each do |config|
+        config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
+      end
+    end
+  end
+end
+```
+
+2) Navigate to ios folder in your terminal and run the following command.
 
 ```
 $ pod install
 ```
-
-2) Download `GoogleService-Info.plist` file from Firebase and place it into ios/ folder.
 
 3) Enable push notifications for your project
 
@@ -112,93 +126,70 @@ $ pod install
     3) Enable Push Notifications capability for your application as explained in [Enable Push Notifications](https://developer.netmera.com/en/IOS/Quick-Start#enable-push-notifications) guide.
     4) Enable Remote notifications background mode for your application as explained in [Configuring Background Modes](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app#2980038) guide.
 
-
-
-4) If you are using Swift, enter the following in your `Runner-Bridging-Header.h`.
+4) Add the `Netmera-Config.plist` file to your ios/Runner directory.
 
 ```
-#import "FNetmera.h"
-#import "FNetmeraService.h"
-#import "NetmeraFlutterSdkPlugin.h"
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>sdk_params</key>
+        <dict>
+            <key>api_key</key>
+            <string>YOUR-API-KEY</string>
+        </dict>
+    </dict>
+</plist>
 ```
 
-5) If you want to use Android alike message sending from iOS to dart please consider to shape your AppDelegate class as following.
+- If you are using Netmera on-premises, you must add your server URL as the base_url key inside sdk_params.
 
 ```
-import UIKit
-import Flutter
-
-//This function is needed for sending messages to the dart side. (Setting the callback function)
-func registerPlugins(registry: FlutterPluginRegistry) {
-    GeneratedPluginRegistrant.register(with: registry)
-};
-
-@UIApplicationMain
-@objc class AppDelegate: FlutterAppDelegate,UNUserNotificationCenterDelegate,NetmeraPushDelegate {
-
-    override func application(_ application: UIApplication,
-                didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    GeneratedPluginRegistrant.register(with: self)
-
-        if #available(iOS 10.0, *) {
-        UNUserNotificationCenter.current().delegate = self
-    } else {
-        // Fallback on earlier versions
-    };
-
-        //For triggering onPushReceive when app is killed and push clicked by user
-        let notification = launchOptions?[.remoteNotification]
-        if notification != nil {
-            FNetmeraService.handleWork(ON_PUSH_RECEIVE, dict:["userInfo" : notification])
-        }
-
-    //This function is needed for sending messages to the dart side.
-    NetmeraFlutterSdkPlugin.setPluginRegistrantCallback(registerPlugins)
-
-    FNetmera.logging(true) // Enable Netmera logging
-    FNetmera.initNetmera("<YOUR-NETMERA-KEY>") //Initializing Netmera packages.
-    FNetmera.setPushDelegate(self)
-    Netmera.setAppGroupName("group.com.netmera.flutter") // Your app group name
-
-    return super.application(application, didFinishLaunchingWithOptions: launchOptions)
-  }
-
-
-    override func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        FNetmeraService.handleWork(ON_PUSH_REGISTER, dict: ["pushToken": deviceToken])
-    }
-
-    override func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
-        FNetmeraService.handleWork(ON_PUSH_RECEIVE, dict:["userInfo" : userInfo])
-    }
-
-    @available(iOS 10.0, *)
-    override func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([UNNotificationPresentationOptions.alert])
-        
-        if UIApplication.shared.applicationState == .active {
-            FNetmeraService.handleWork(ON_PUSH_RECEIVE, dict:["userInfo" : notification.request.content.userInfo])
-        } else {
-            FNetmeraService.handleWork(ON_PUSH_RECEIVE_BACKGROUND, dict:["userInfo" : notification.request.content.userInfo])
-        }
-    }
-}
-
-```
-For example if you trigger `FNetmeraService.handleWork(ON_PUSH_RECEIVE, dict:["userInfo" : userInfo])` from AppDelegate, in the dart part the following method will be triggered.
-```
-void _onPushReceive(Map<dynamic, dynamic> bundle) async {
-  print("onPushReceive: $bundle");
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>sdk_params</key>
+        <dict>
+            ...
+            <key>base_url</key>
+            <string>YOUR-BASE-URL</string>
+        </dict>
+    </dict>
+</plist>
 ```
 
-6) In order to use iOS10 Media Push, follow the instructions in [Netmera Product Hub.](https://developer.netmera.com/en/IOS/Push-Notifications#using-ios10-media-push) Differently, you should add the pods to the top of the `Podfile` as below.
+5) In order to use iOS10 Media Push, follow the instructions in [Netmera Product Hub.](https://user.netmera.com/netmera-developer-guide/platforms/ios/new-ios-swift/push-notifications/media-push) Differently, you should add the pods to the top of the `Podfile` as below.
 
 ```
 // For receiving Media Push, you must add Netmera pods to top of your Podfile.
-pod "Netmera", "3.27.0"
-pod "Netmera/NotificationServiceExtension", "3.27.0"
-pod "Netmera/NotificationContentExtension", "3.27.0"
+pod 'NetmeraNotificationServiceExtension', "4.17.0"
+pod "NetmeraNotificationContentExtension", "4.17.0"
+```
+
+6) In order to use the widget URL callback, add these lines into `AppDelegate.swift` file.
+
+```
+import NetmeraNotification
+import netmera_flutter_sdk
+
+...
+  override func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    ...
+    FNetmera.setPushDelegate(self)
+    ..
+  }
+...
+
+extension AppDelegate: NetmeraPushDelegate {
+    func urlOpeningDecision(for url: URL, push: NetmeraBasePush) -> PushDelegateDecision {
+        return .sdkHandles
+    }
+    
+    func openURL(_ url: URL, for push: NetmeraBasePush) {
+        FNetmera.openURL(url: url, forPushObject: push)
+    }
+}
 ```
 
 ### Setup - Dart Part
@@ -235,20 +226,37 @@ void _onCarouselObjectSelected(Map<dynamic, dynamic> bundle) async {
   print("onCarouselObjectSelected: $bundle");
 }
 
-void initBroadcastReceiver() {
-  NetmeraPushBroadcastReceiver receiver = new NetmeraPushBroadcastReceiver();
-  receiver.initialize(
+  NetmeraPushBroadcastReceiver().initialize(
     onPushRegister: _onPushRegister,
     onPushReceive: _onPushReceive,
     onPushDismiss: _onPushDismiss,
     onPushOpen: _onPushOpen,
     onPushButtonClicked: _onPushButtonClicked,
-    onCarouselObjectSelected: _onCarouselObjectSelected
+    onCarouselObjectSelected: _onCarouselObjectSelected,
   );
 }
 ```
 
-2) If you have custom Firebase Messaging integration, please see usage below.
+2) You need a background handler to be able to listen incoming push notifications when the application is in the background or terminated state. You can add this handler as follows. When received, an isolate is spawned (Android only, iOS does not require a separate isolate) allowing you to handle messages even when your application is not running.
+
+    Note: Since the handler runs in its own isolate outside your applications context, it is not possible to update application state or execute any UI impacting logic. You can, however, perform logic such as HTTP requests, perform IO operations etc.
+
+```
+// This method must be a top-level function
+@pragma('vm:entry-point')
+void _onPushReceiveBackgroundHandler(Map<dynamic, dynamic> bundle) async {
+  print("onPushReceiveBackground: $bundle");
+}
+
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  // This method must be called before the runApp and the provided handler must be a top-level function.
+  NetmeraPushBroadcastReceiver.onPushReceiveBackground(_onPushReceiveBackgroundHandler);
+  runApp(MyApp());
+}
+```
+
+3) If you have custom Firebase Messaging integration, please see usage below.
 
 1- Add the following line to your `AndroidManifest.xml` file inside the `application` tag to remove Netmera's default FCM service
 
@@ -292,7 +300,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage remoteMessage) as
 }
 ```
 
-3) If you have custom Huawei Messaging integration, please see usage below.
+4) If you have custom Huawei Messaging integration, please see usage below.
 
 1- Add the following line to your `AndroidManifest.xml` file inside the `application` tag to remove Netmera's default HMS service
 
@@ -315,32 +323,9 @@ Push.onMessageReceivedStream.listen((RemoteMessage remoteMessage) {
     Netmera.onNetmeraHuaweiPushMessageReceived(remoteMessage.from, map);
   }
 });
-
-void backgroundMessageCallback(RemoteMessage remoteMessage) async {
-  Map<String, String> map = remoteMessage.dataOfMap ?? new Map();
-  if (Netmera.isNetmeraRemoteMessage(map)) {
-    Netmera.onNetmeraHuaweiPushMessageReceived(remoteMessage.from, map);
-  }
-}
 ```
-
 
 ### Calling Dart methods
-
-##### Update User Example
-
-```
-updateUser() {
-    NetmeraUser user = new NetmeraUser();
-    user.setUserId(userController.text);
-    user.setName(nameController.text);
-    user.setSurname(surnameController.text);
-    user.setEmail(emailController.text);
-    user.setMsisdn(msisdnController.text);
-    user.setGender(int.parse(_selectedGender));
-    Netmera.updateUser(user);
-  }
-```
 
 ##### Sending Event Examples
 
@@ -372,12 +357,14 @@ Note: Notification runtime permissions are required on Android 13 (API 33) or hi
 Therefore, before calling the method, make sure your project targets an API of 33 and above.
 
 ```
- Netmera.requestPushNotificationAuthorization();
+Netmera.requestPushNotificationAuthorization().then((isAllowed) {
+  ...
+});
 ```
 
 You can call the `checkNotificationPermission()` method if you need to know the status of permissions.
 
-``` 
+```
  Netmera.checkNotificationPermission().then((status) {
       // NotificationPermissionStatus.notDetermined
       // NotificationPermissionStatus.blocked
@@ -385,6 +372,20 @@ You can call the `checkNotificationPermission()` method if you need to know the 
       // NotificationPermissionStatus.granted
  });
 ```
+
+##### Widget URL Callback
+
+In order to use the widget URL callback, use `onWidgetUrlTriggered` method as follows.
+
+```
+ void _onWidgetUrlTriggered(String url) {
+   String message = "Widget URL handle by app: " + url;
+   print(message);
+ }
+
+ Netmera.onWidgetUrlTriggered(_onWidgetUrlTriggered);
+```
+
 
 ##### Netmera Inbox Examples
 
@@ -444,4 +445,22 @@ Note: To show popup on the app start or everywhere in the app, please add this t
  Netmera.enablePopupPresentation();
 ```
 
-Please explore example project for detailed information.
+##### Data Start-Stop Transfer
+
+###### Stop Data Transfer Method
+The stopDataTransfer() method is a useful feature that can help users to temporarily pause all requests sent by the SDK to the backend.
+This can be useful if, for example, the user needs to temporarily halt data transfers due to network issues or other reasons.
+Once the issue has been resolved, the user can then restart the data transfer using the startDataTransfer() method.
+```
+ Netmera.stopDataTransfer();
+```
+
+###### Start Data Transfer Method
+The startDataTransfer() method is a complementary feature to the stopDataTransfer() method, which allows users to restart any stopped requests.
+This can be useful when the user has temporarily paused data transfers and is now ready to resume the transfer. Once the user calls the
+startDataTransfer() method, the SDK will attempt to resend any requests that were previously stopped.
+```
+ Netmera.startDataTransfer();
+```
+
+Please explore this example project for detailed information.

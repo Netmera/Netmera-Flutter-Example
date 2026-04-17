@@ -1,46 +1,41 @@
 PODS:
-  - app_links (0.0.2):
+  - app_links (7.0.0):
     - Flutter
-  - Firebase/CoreOnly (11.4.0):
-    - FirebaseCore (= 11.4.0)
-  - Firebase/Messaging (11.4.0):
+  - Firebase/CoreOnly (11.15.0):
+    - FirebaseCore (~> 11.15.0)
+  - Firebase/Messaging (11.15.0):
     - Firebase/CoreOnly
-    - FirebaseMessaging (~> 11.4.0)
-  - firebase_core (3.8.0):
-    - Firebase/CoreOnly (= 11.4.0)
+    - FirebaseMessaging (~> 11.15.0)
+  - firebase_core (3.15.2):
+    - Firebase/CoreOnly (= 11.15.0)
     - Flutter
-  - firebase_messaging (15.1.5):
-    - Firebase/Messaging (= 11.4.0)
+  - firebase_messaging (15.2.10):
+    - Firebase/Messaging (= 11.15.0)
     - firebase_core
     - Flutter
-  - FirebaseCore (11.4.0):
-    - FirebaseCoreInternal (~> 11.0)
-    - GoogleUtilities/Environment (~> 8.0)
-    - GoogleUtilities/Logger (~> 8.0)
+  - FirebaseCore (11.15.0):
+    - FirebaseCoreInternal (~> 11.15.0)
+    - GoogleUtilities/Environment (~> 8.1)
+    - GoogleUtilities/Logger (~> 8.1)
   - FirebaseCoreInternal (11.15.0):
     - "GoogleUtilities/NSData+zlib (~> 8.1)"
-  - FirebaseInstallations (11.4.0):
-    - FirebaseCore (~> 11.0)
-    - GoogleUtilities/Environment (~> 8.0)
-    - GoogleUtilities/UserDefaults (~> 8.0)
+  - FirebaseInstallations (11.15.0):
+    - FirebaseCore (~> 11.15.0)
+    - GoogleUtilities/Environment (~> 8.1)
+    - GoogleUtilities/UserDefaults (~> 8.1)
     - PromisesObjC (~> 2.4)
-  - FirebaseMessaging (11.4.0):
-    - FirebaseCore (~> 11.0)
+  - FirebaseMessaging (11.15.0):
+    - FirebaseCore (~> 11.15.0)
     - FirebaseInstallations (~> 11.0)
     - GoogleDataTransport (~> 10.0)
-    - GoogleUtilities/AppDelegateSwizzler (~> 8.0)
-    - GoogleUtilities/Environment (~> 8.0)
-    - GoogleUtilities/Reachability (~> 8.0)
-    - GoogleUtilities/UserDefaults (~> 8.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 8.1)
+    - GoogleUtilities/Environment (~> 8.1)
+    - GoogleUtilities/Reachability (~> 8.1)
+    - GoogleUtilities/UserDefaults (~> 8.1)
     - nanopb (~> 3.30910.0)
   - Flutter (1.0.0)
   - fluttertoast (0.0.2):
     - Flutter
-  - FMDB (2.7.12):
-    - FMDB/standard (= 2.7.12)
-  - FMDB/Core (2.7.12)
-  - FMDB/standard (2.7.12):
-    - FMDB/Core
   - GoogleDataTransport (10.1.0):
     - nanopb (~> 3.30910.0)
     - PromisesObjC (~> 2.4)
@@ -68,36 +63,47 @@ PODS:
   - GoogleUtilities/UserDefaults (8.1.0):
     - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
-  - MMWormhole (2.0.0):
-    - MMWormhole/Core (= 2.0.0)
-  - MMWormhole/Core (2.0.0)
   - nanopb (3.30910.0):
     - nanopb/decode (= 3.30910.0)
     - nanopb/encode (= 3.30910.0)
   - nanopb/decode (3.30910.0)
   - nanopb/encode (3.30910.0)
-  - Netmera (3.27.5):
-    - Netmera/NetmeraWithAdId (= 3.27.5)
-  - Netmera/AdIdSupport (3.27.5)
-  - Netmera/Application (3.27.5):
-    - FMDB
-    - MMWormhole (~> 2.0.0)
-    - NetmeraCore (= 3.27.5)
-    - UICKeyChainStore (~> 2.0)
-  - Netmera/NetmeraWithAdId (3.27.5):
-    - Netmera/AdIdSupport
-    - Netmera/Application
-  - Netmera/NotificationContentExtension (3.27.5):
-    - MMWormhole (~> 2.0.0)
-    - NetmeraCore (= 3.27.5)
-  - Netmera/NotificationServiceExtension (3.27.5):
-    - NetmeraCore (= 3.27.5)
-  - netmera_flutter_sdk (2.9.1):
+  - netmera_flutter_sdk (3.0.0):
     - Flutter
-    - Netmera (= 3.27.5)
-  - NetmeraCore (3.27.5)
+    - NetmeraAdvertisingId (= 4.17.0)
+    - NetmeraAnalytic (= 4.17.0)
+    - NetmeraAnalyticAutotracking (= 4.17.0)
+    - NetmeraGeofence (= 4.17.0)
+    - NetmeraLiveActivity (= 4.17.0)
+    - NetmeraLocation (= 4.17.0)
+    - NetmeraNotification (= 4.17.0)
+    - NetmeraNotificationInbox (= 4.17.0)
+  - NetmeraAdvertisingId (4.17.0):
+    - NetmeraAnalytic (= 4.17.0)
+  - NetmeraAnalytic (4.17.0):
+    - NetmeraSwiftCore (= 4.17.0)
+  - NetmeraAnalyticAutotracking (4.17.0):
+    - NetmeraAnalytic (= 4.17.0)
+  - NetmeraGeofence (4.17.0):
+    - NetmeraLocation (= 4.17.0)
+  - NetmeraLiveActivity (4.17.0):
+    - NetmeraSwiftCore (= 4.17.0)
+  - NetmeraLocation (4.17.0):
+    - NetmeraAnalytic (= 4.17.0)
+  - NetmeraNotification (4.17.0):
+    - NetmeraNotificationCore (= 4.17.0)
+  - NetmeraNotificationContentExtension (4.17.0):
+    - NetmeraNotificationCore (= 4.17.0)
+  - NetmeraNotificationCore (4.17.0):
+    - NetmeraAnalytic (= 4.17.0)
+  - NetmeraNotificationInbox (4.17.0):
+    - NetmeraNotificationCore (= 4.17.0)
+  - NetmeraNotificationServiceExtension (4.17.0):
+    - NetmeraNotificationCore (= 4.17.0)
+  - NetmeraSwiftCore (4.17.0):
+    - Swinject (= 2.8.4)
   - PromisesObjC (2.4.0)
-  - UICKeyChainStore (2.2.1)
+  - Swinject (2.8.4)
 
 DEPENDENCIES:
   - app_links (from `.symlinks/plugins/app_links/ios`)
@@ -105,10 +111,9 @@ DEPENDENCIES:
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - Flutter (from `Flutter`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
-  - Netmera (= 3.27.5)
-  - Netmera/NotificationContentExtension (= 3.27.5)
-  - Netmera/NotificationServiceExtension (= 3.27.5)
   - netmera_flutter_sdk (from `.symlinks/plugins/netmera_flutter_sdk/ios`)
+  - NetmeraNotificationContentExtension (= 4.17.0)
+  - NetmeraNotificationServiceExtension (= 4.17.0)
 
 SPEC REPOS:
   trunk:
@@ -117,15 +122,23 @@ SPEC REPOS:
     - FirebaseCoreInternal
     - FirebaseInstallations
     - FirebaseMessaging
-    - FMDB
     - GoogleDataTransport
     - GoogleUtilities
-    - MMWormhole
     - nanopb
-    - Netmera
-    - NetmeraCore
+    - NetmeraAdvertisingId
+    - NetmeraAnalytic
+    - NetmeraAnalyticAutotracking
+    - NetmeraGeofence
+    - NetmeraLiveActivity
+    - NetmeraLocation
+    - NetmeraNotification
+    - NetmeraNotificationContentExtension
+    - NetmeraNotificationCore
+    - NetmeraNotificationInbox
+    - NetmeraNotificationServiceExtension
+    - NetmeraSwiftCore
     - PromisesObjC
-    - UICKeyChainStore
+    - Swinject
 
 EXTERNAL SOURCES:
   app_links:
@@ -142,27 +155,35 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/netmera_flutter_sdk/ios"
 
 SPEC CHECKSUMS:
-  app_links: 3da4c36b46cac3bf24eb897f1a6ce80bda109874
-  Firebase: cf1b19f21410b029b6786a54e9764a0cacad3c99
-  firebase_core: 84a16d041be8bc166b6e00350f89849e06daf9d1
-  firebase_messaging: 48ce5cf82b70ac47ed9cb9277f97bb77d1d01a38
-  FirebaseCore: e0510f1523bc0eb21653cac00792e1e2bd6f1771
+  app_links: a754cbec3c255bd4bbb4d236ecc06f28cd9a7ce8
+  Firebase: d99ac19b909cd2c548339c2241ecd0d1599ab02e
+  firebase_core: 995454a784ff288be5689b796deb9e9fa3601818
+  firebase_messaging: f4a41dd102ac18b840eba3f39d67e77922d3f707
+  FirebaseCore: efb3893e5b94f32b86e331e3bd6dadf18b66568e
   FirebaseCoreInternal: 9afa45b1159304c963da48addb78275ef701c6b4
-  FirebaseInstallations: 6ef4a1c7eb2a61ee1f74727d7f6ce2e72acf1414
-  FirebaseMessaging: f8a160d99c2c2e5babbbcc90c4a3e15db036aee2
+  FirebaseInstallations: 317270fec08a5d418fdbc8429282238cab3ac843
+  FirebaseMessaging: 3b26e2cee503815e01c3701236b020aa9b576f09
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
   fluttertoast: 2c67e14dce98bbdb200df9e1acf610d7a6264ea1
-  FMDB: 728731dd336af3936ce00f91d9d8495f5718a0e6
   GoogleDataTransport: aae35b7ea0c09004c3797d53c8c41f66f219d6a7
   GoogleUtilities: 00c88b9a86066ef77f0da2fab05f65d7768ed8e1
-  MMWormhole: 0cd3fd35a9118b2e2d762b499f54eeaace0be791
   nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
-  Netmera: 6707b85ecd64f5fc0bcd732e8c4488c4aaf1fc7d
-  netmera_flutter_sdk: d95a803adc72a28609b46e687b85d75a368a4b43
-  NetmeraCore: 7a8083702a934f3f2b2d79bc0cce05ff1584941a
+  netmera_flutter_sdk: 7b0ea1e90a562accc5ae4b81c481d0f5b50b5bc6
+  NetmeraAdvertisingId: efdeea929f13177f3cac1b0c51a322a58b976da1
+  NetmeraAnalytic: add10b1ba4735d880af9ccd7764ccbab3b09d287
+  NetmeraAnalyticAutotracking: 1de2adc956a4e042e179d405f89fba5eb904d0a6
+  NetmeraGeofence: a60bb099feea0290fe569f9a967cf5a8674a6e06
+  NetmeraLiveActivity: efb68e2c3c3da160b6be16059773ecba848b53cf
+  NetmeraLocation: 039c93549fa288e1a070c44fafdaab67ba1a94f7
+  NetmeraNotification: 32cb139af22cf93f7680fa7cd9770049b2e2d90a
+  NetmeraNotificationContentExtension: 09771c71e6293bed4d4e83a4a8a183f6b3c5c2e9
+  NetmeraNotificationCore: 6a481db74782e95f18011a1b41891573fb258447
+  NetmeraNotificationInbox: 16833130031c201b8a3fe50c0ee870c2cc8f53d1
+  NetmeraNotificationServiceExtension: 0e1f89836f64aa321bf5f421d756612194174875
+  NetmeraSwiftCore: 4a3d7acf74dedf70aa18db93d417d045427f7457
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
-  UICKeyChainStore: ba3bff2c762b12db1e516f395c837dd25298b05e
+  Swinject: 6ba81f58fd769c9fd4b8ceced9e25a9cb137cb3c
 
-PODFILE CHECKSUM: 9cd8c0165c169b6e14d0a64ba33a6d2daa635ae0
+PODFILE CHECKSUM: b20c4dfeea0f00af57b4e40455021a7769cd9f17
 
 COCOAPODS: 1.16.2

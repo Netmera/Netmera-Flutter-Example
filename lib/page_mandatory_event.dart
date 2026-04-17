@@ -3,8 +3,6 @@ import 'package:netmera_flutter_example/model/MandatoryEvent.dart';
 import 'package:netmera_flutter_sdk/Netmera.dart';
 
 class MandatoryEventPage extends StatefulWidget {
-  const MandatoryEventPage({super.key});
-
   @override
   State<MandatoryEventPage> createState() => _MandatoryEventPageState();
 }
@@ -46,11 +44,7 @@ class _MandatoryEventPageState extends State<MandatoryEventPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Mandatory Event'),
-      ),
-      body: SingleChildScrollView(
+    return SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
@@ -328,7 +322,6 @@ class _MandatoryEventPageState extends State<MandatoryEventPage> {
             ),
           ],
         ),
-      ),
     );
   }
 

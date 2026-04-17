@@ -1,9 +1,4 @@
-///
-/// Copyright (c) 2022 Inomera Research.
-///
-
 import 'package:flutter/material.dart';
-
 import 'package:netmera_flutter_sdk/Netmera.dart';
 import 'package:netmera_flutter_sdk/events/NetmeraEventLogin.dart';
 import 'package:netmera_flutter_sdk/events/NetmeraEventRegister.dart';
@@ -11,15 +6,14 @@ import 'package:netmera_flutter_sdk/events/commerce/NetmeraEventCartView.dart';
 import 'package:netmera_flutter_sdk/events/commerce/NetmeraEventPurchase.dart';
 import 'package:netmera_flutter_sdk/events/commerce/NetmeraLineItem.dart';
 
-import 'package:netmera_flutter_example/model/MyNetmeraEvent.dart';
+import 'model/MyNetmeraEvent.dart';
 
-import 'main.dart';
-
+///
+/// Copyright (c) 2026 Netmera Research.
+///
 class EventPage extends StatefulWidget {
-  const EventPage({Key? key}) : super(key: key);
-
   @override
-  State<EventPage> createState() => _EventPageState();
+  _EventPageState createState() => _EventPageState();
 }
 
 class _EventPageState extends State<EventPage> {
@@ -27,7 +21,6 @@ class _EventPageState extends State<EventPage> {
 
   void sendLoginEvent() {
     NetmeraEventLogin loginEvent = NetmeraEventLogin();
-    loginEvent.setUserId("TestUserId");
     if (revenueController.text != '') {
       var revenue = double.parse(revenueController.text);
       loginEvent.setRevenue(revenue);
@@ -55,32 +48,26 @@ class _EventPageState extends State<EventPage> {
     Netmera.sendEvent(cartViewEvent);
   }
 
-  void sendPurchaseEvent() {
+  void purchaseEvent() {
     NetmeraLineItem netmeraLineItem = NetmeraLineItem();
-    netmeraLineItem.setBrandId("TestBrandID");
-    netmeraLineItem.setBrandName("TestBrandName");
-    netmeraLineItem.setCampaignId("TestCampaignID");
-    netmeraLineItem.setCategoryIds(["TestCategoryID1", "TestCategoryID2"]);
-    netmeraLineItem.setCategoryNames(
-        ["TestCategoryName1", "TestCategoryName2", "TestCategoryName3"]);
+    netmeraLineItem.setBrandId("brandId12");
+    netmeraLineItem.setBrandName("brandNameInomera");
+    netmeraLineItem.setCampaignId("campaignId1223");
+    netmeraLineItem.setCategoryIds(["categoryIds1", "categoryIds2"]);
+    netmeraLineItem.setCategoryNames(["categoryNames1", "categoryNames2", "categoryNames3"]);
     netmeraLineItem.setKeywords(["keyword1", "keyword2", "keyword3"]);
     netmeraLineItem.setCount(12);
-    netmeraLineItem.setId("TestItemID");
+    netmeraLineItem.setId("Id123123");
     netmeraLineItem.setPrice(130);
 
-    // CustomPurchaseEvent extends PurchaseEvent
-    CustomPurchaseEvent purchaseEvent = CustomPurchaseEvent();
-    // Set default attributes
-    purchaseEvent.setCoupon("Test_Coupon");
+    NetmeraEventPurchase purchaseEvent = NetmeraEventPurchase();
+    purchaseEvent.setCoupon("INOMERACODE");
     purchaseEvent.setDiscount(10);
     purchaseEvent.setItemCount(2);
     purchaseEvent.setPaymentMethod("Credit Card");
     purchaseEvent.setSubTotal(260.89);
     purchaseEvent.setShippingCost(0.0);
     purchaseEvent.setLineItems([netmeraLineItem, netmeraLineItem]);
-
-    // Set custom attributes
-    purchaseEvent.setInstallment("test installment");
     if (revenueController.text != '') {
       var revenue = double.parse(revenueController.text);
       purchaseEvent.setRevenue(revenue);
@@ -89,9 +76,9 @@ class _EventPageState extends State<EventPage> {
   }
 
   void sendTestEvent() {
-    //Custom event
-    NetmeraEventContentRate testEvent = NetmeraEventContentRate();
-    testEvent.setNo(3); //Custom attribute
+    TestEvent testEvent = TestEvent();
+    testEvent.setDateAttribute(DateTime.now());
+    testEvent.setNo(123);
     if (revenueController.text != '') {
       var revenue = double.parse(revenueController.text);
       testEvent.setRevenue(revenue);
@@ -99,30 +86,52 @@ class _EventPageState extends State<EventPage> {
     Netmera.sendEvent(testEvent);
   }
 
+  void sendGenericEvent() {
+    Netmera.sendGenericEvent('srpxy', {
+      'productId': '123',
+      'amount': 99.99,
+      'timestamp': DateTime.now(),
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("Events"),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 50.0, right: 50.0, bottom: 20),
+          child: TextField(
+            controller: revenueController,
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(labelText: 'Revenue'),
+          ),
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 50.0, right: 50.0, bottom: 20),
-              child: TextField(
-                controller: revenueController,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(labelText: 'Revenue'),
-              ),
-            ),
-            button('Login Event', sendLoginEvent),
-            button('Register Event', sendRegisterEvent),
-            button('View Cart Event', sendViewCartEvent),
-            button('Purchase Event', sendPurchaseEvent),
-            button('Custom Test Event', sendTestEvent),
-          ],
-        )
+        ElevatedButton(
+          child: const Text('Login Event'),
+          onPressed: sendLoginEvent,
+        ),
+        ElevatedButton(
+          child: const Text('Register Event'),
+          onPressed: sendRegisterEvent,
+        ),
+        ElevatedButton(
+          child: const Text('View Cart Event'),
+          onPressed: sendViewCartEvent,
+        ),
+        ElevatedButton(
+          child: const Text('Purchase Event'),
+          onPressed: purchaseEvent,
+        ),
+        ElevatedButton(
+          child: const Text('Custom Test Event'),
+          onPressed: sendTestEvent,
+        ),
+        ElevatedButton(
+          child: const Text('Generic Event'),
+          onPressed: sendGenericEvent,
+        ),
+      ],
     );
   }
 }

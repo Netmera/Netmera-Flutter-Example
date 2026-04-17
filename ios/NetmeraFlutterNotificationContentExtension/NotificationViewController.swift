@@ -6,13 +6,16 @@
 //
 
 // Add this class to receive Media Push
-import UIKit
 import UserNotifications
 import UserNotificationsUI
+import NetmeraNotificationContentExtension
 
-class NotificationViewController: NetmeraNotificationContentExtension {
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+class NotificationViewController: NotificationContentExtension {
+  override func viewDidLoad() {
+    super.viewDidLoad()
+  }
+
+  override func didReceive(_ notification: UNNotification) {
+    super.didReceive(notification)
+  }
 }

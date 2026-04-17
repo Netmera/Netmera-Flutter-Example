@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>sdk_params</key>
+        <dict>
+            <key>app_group_name</key>
+            <string>group.com.netmera.flutter</string>
+            <key>api_key</key>
+            <string>gFtyH_nz5WCdXraTsOOgL25er1sBpuQdFa8bAMVGhv9Xo5voVRPFY2gFcVkuTQeZIgoa3gN1rww</string>
+            <key>base_url</key>
+            <string>https://sdk-cloud-uat.sdpaas.com</string>
+        </dict>
+    </dict>
+</plist>
