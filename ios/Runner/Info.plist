@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>FirebaseAppDelegateProxyEnabled</key>
+	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
@@ -30,19 +30,46 @@
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
 			<key>CFBundleURLName</key>
-			<string>com.netmera.flutterexample</string>
+			<string>com.netmera.demo.flutter</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>netmeraflutterexample</string>
+				<string>netmerademoflutter</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Netmera konum izninize ihtiyaç duymaktadır.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Netmera konum izninize her zaman ihtiyaç duymaktadır.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Netmera konum izninize her zaman ihtiyaç duymaktadır.</string>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+		<key>UISceneConfigurations</key>
+		<dict>
+			<key>UIWindowSceneSessionRoleApplication</key>
+			<array>
+				<dict>
+					<key>UISceneClassName</key>
+					<string>UIWindowScene</string>
+					<key>UISceneConfigurationName</key>
+					<string>flutter</string>
+					<key>UISceneDelegateClassName</key>
+					<string>FlutterSceneDelegate</string>
+					<key>UISceneStoryboardFile</key>
+					<string>Main</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>
@@ -69,26 +96,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-    <key>UIApplicationSceneManifest</key>
-    <dict>
-     <key>UIApplicationSupportsMultipleScenes</key>
-     <false/>
-     <key>UISceneConfigurations</key>
-     <dict>
-     <key>UIWindowSceneSessionRoleApplication</key>
-       <array>
-         <dict>
-           <key>UISceneClassName</key>
-           <string>UIWindowScene</string>
-           <key>UISceneDelegateClassName</key>
-           <string>FlutterSceneDelegate</string>
-           <key>UISceneConfigurationName</key>
-           <string>flutter</string>
-           <key>UISceneStoryboardFile</key>
-           <string>Main</string>
-         </dict>
-       </array>
-      </dict>
-    </dict>
 </dict>
 </plist>
