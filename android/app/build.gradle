@@ -45,7 +45,7 @@ def getHMSSenderId() {
 android {
     compileSdk 36
     ndkVersion "27.0.12077973"
-    namespace "com.netmera.flutterexample"
+    namespace "com.netmera.demo.flutter"
 
     lint {
         disable 'InvalidPackage'
@@ -65,7 +65,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.netmera.flutterexample"
+        applicationId "com.netmera.demo.flutter"
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion 36
         versionCode flutterVersionCode.toInteger()

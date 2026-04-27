@@ -2,7 +2,7 @@
 /// Copyright (c) 2026 Netmera Research.
 ///
 
-package com.netmera.flutterexample.config
+package com.netmera.demo.flutter.config
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -40,3 +40,4 @@ object NetmeraConfigProvider {
             .apply()
     }
 }
+

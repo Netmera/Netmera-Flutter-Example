@@ -2,14 +2,14 @@
   "project_info": {
     "project_number": "655729015885",
     "project_id": "netmera-cross-examples",
-    "storage_bucket": "netmera-cross-examples.appspot.com"
+    "storage_bucket": "netmera-cross-examples.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:655729015885:android:8875e94e64c44386837004",
+        "mobilesdk_app_id": "1:655729015885:android:e8ad3acbd2d73b7b837004",
         "android_client_info": {
-          "package_name": "com.initialcode.unity.example"
+          "package_name": "com.netmera.demo.flutter"
         }
       },
       "oauth_client": [],
@@ -26,9 +26,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:655729015885:android:c43c3fed281b782d837004",
+        "mobilesdk_app_id": "1:655729015885:android:76e1c42520401313837004",
         "android_client_info": {
-          "package_name": "com.netmera.flutterexample"
+          "package_name": "com.netmera.demo.reactnative"
         }
       },
       "oauth_client": [],
@@ -45,9 +45,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:655729015885:android:43c13f803d597173837004",
+        "mobilesdk_app_id": "1:655729015885:android:1d8a5e5a24299d2c837004",
         "android_client_info": {
-          "package_name": "com.netmerareactnativeexample"
+          "package_name": "com.netmera.unity.example"
         }
       },
       "oauth_client": [],

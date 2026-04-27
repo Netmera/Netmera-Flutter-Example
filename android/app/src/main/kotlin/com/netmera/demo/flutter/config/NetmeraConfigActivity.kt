@@ -2,7 +2,7 @@
 /// Copyright (c) 2026 Netmera Research.
 ///
 
-package com.netmera.flutterexample.config
+package com.netmera.demo.flutter.config
 
 import android.app.Activity
 import android.graphics.Color
@@ -250,3 +250,4 @@ class NetmeraConfigActivity : Activity() {
         return (value * resources.displayMetrics.density).toInt()
     }
 }
+

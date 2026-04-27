@@ -2,7 +2,7 @@
 /// Copyright (c) 2026 Netmera Research.
 ///
 
-package com.netmera.flutterexample.config
+package com.netmera.demo.flutter.config
 
 enum class NetmeraEnvironment(
     val key: String,
@@ -39,3 +39,4 @@ enum class NetmeraEnvironment(
             entries.find { it.key == key } ?: PREPROD
     }
 }
+

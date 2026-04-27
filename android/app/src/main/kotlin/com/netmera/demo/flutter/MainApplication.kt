@@ -2,10 +2,10 @@
 /// Copyright (c) 2026 Netmera Research.
 ///
 
-package com.netmera.flutterexample
+package com.netmera.demo.flutter
 
 import android.app.Application
-import com.netmera.flutterexample.config.NetmeraConfigProvider
+import com.netmera.demo.flutter.config.NetmeraConfigProvider
 import com.netmera.netmera_flutter_sdk.FNetmera
 import com.netmera.netmera_flutter_sdk.FNetmeraConfiguration
 
@@ -27,3 +27,4 @@ class MainApplication : Application() {
         FNetmera.initNetmera(fNetmeraConfiguration)
     }
 }
+
