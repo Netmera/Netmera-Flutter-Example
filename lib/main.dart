@@ -10,14 +10,20 @@ import 'package:huawei_push/huawei_push.dart' as HMS;
 import 'package:netmera_flutter_example/example_push_token.dart';
 import 'package:netmera_flutter_example/page_dashboard.dart';
 import 'package:netmera_flutter_sdk/Netmera.dart';
-import 'package:netmera_flutter_sdk/NetmeraPushBroadcastReceiver.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:netmera_flutter_sdk/NetmeraPushLifecycleCallbacks.dart';
+import 'package:netmera_flutter_sdk/NetmeraPushObject.dart';
+import 'package:netmera_flutter_sdk/NetmeraInteractiveAction.dart';
+import 'package:netmera_flutter_sdk/NetmeraCarouselObject.dart';
+import 'package:netmera_flutter_example/utils/log_utils.dart';
+import 'package:netmera_flutter_example/utils/push_event_bus.dart';
+import 'package:netmera_flutter_example/widgets/push_event_overlay.dart';
 
 // This method must be a top-level function
 @pragma('vm:entry-point')
-void _onPushReceiveBackgroundHandler(Map<dynamic, dynamic> bundle) async {
-  print("onPushReceiveBackground: $bundle");
+Future<void> _onPushReceiveBackgroundHandler(NetmeraPushObject push) async {
+  print("onPushReceiveBackground: ${getPushObjectString(push)}");
 }
 
 @pragma('vm:entry-point')
@@ -41,52 +47,59 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  NetmeraPushBroadcastReceiver.onPushReceiveBackground(
-      _onPushReceiveBackgroundHandler);
+  NetmeraPushLifecycleCallbacks.setBackgroundMessageHandler(_onPushReceiveBackgroundHandler);
   runApp(const MyApp());
 }
 
-void initBroadcastReceiver() {
-  void _onPushRegister(Map<dynamic, dynamic> bundle) async {
-    print("onPushRegister: $bundle");
-    var pushToken = bundle['pushToken'];
-    if (pushToken is List<int>) {
-      String tokenString = pushToken.map((byte) => byte.toRadixString(16).padLeft(2, '0')).join();
-      ExamplePushToken.value = tokenString;
-    } else if (pushToken is String) {
+Future<void> initPushCallbacks() async {
+  await NetmeraPushLifecycleCallbacks.initialize(
+    onPushRegister: (String pushToken) async {
+      print("onPushRegister: $pushToken");
       ExamplePushToken.value = pushToken;
-    } else {
-      print("Unexpected push token format: ${pushToken.runtimeType}");
-    }
-  }
-
-  void _onPushReceive(Map<dynamic, dynamic> bundle) async {
-    print("onPushReceive: $bundle");
-  }
-
-  void _onPushDismiss(Map<dynamic, dynamic> bundle) async {
-    print("onPushDismiss: $bundle");
-  }
-
-  void _onPushOpen(Map<dynamic, dynamic> bundle) async {
-    print("onPushOpen: $bundle");
-  }
-
-  void _onPushButtonClicked(Map<dynamic, dynamic> bundle) async {
-    print("onPushButtonClicked: $bundle");
-  }
-
-  void _onCarouselObjectSelected(Map<dynamic, dynamic> bundle) async {
-    print("onCarouselObjectSelected: $bundle");
-  }
-
-  NetmeraPushBroadcastReceiver().initialize(
-    onPushRegister: _onPushRegister,
-    onPushReceive: _onPushReceive,
-    onPushDismiss: _onPushDismiss,
-    onPushOpen: _onPushOpen,
-    onPushButtonClicked: _onPushButtonClicked,
-    onCarouselObjectSelected: _onCarouselObjectSelected,
+      emitPushEvent('onPushRegister', {'pushToken': pushToken});
+    },
+    onPushReceive: (NetmeraPushObject push) async {
+      print("onPushReceive: ${getPushObjectString(push)}");
+      emitPushEvent('onPushReceive', mapPushObject(push));
+    },
+    onPushOpen: (NetmeraPushObject push) async {
+      print("onPushOpen: ${getPushObjectString(push)}");
+      emitPushEvent('onPushOpen', mapPushObject(push));
+    },
+    onPushDismiss: (NetmeraPushObject push) async {
+      print("onPushDismiss: ${getPushObjectString(push)}");
+      emitPushEvent('onPushDismiss', mapPushObject(push));
+    },
+    onPushButtonClicked:
+        (NetmeraPushObject push, NetmeraInteractiveAction? action) async {
+      print("onPushButtonClicked: ${getPushObjectString(push)}");
+      print("clickedAction: id=${action?.getId()}, title=${action?.getActionTitle()}, act=${action?.getPushAction()?.actionType}");
+      emitPushEvent('onPushButtonClicked', {
+        'push': mapPushObject(push),
+        'action': action == null
+            ? null
+            : {
+                'id': action.getId(),
+                'title': action.getActionTitle(),
+                'actionType': action.getPushAction()?.actionType?.toString(),
+              },
+      });
+    },
+    onCarouselObjectSelected:
+        (NetmeraPushObject push, NetmeraCarouselObject? item) async {
+      print("onCarouselObjectSelected: ${getPushObjectString(push)}");
+      print("carouselItem: id=${item?.id}, picturePath=${item?.picturePath}, action=${item?.action?.actionType}");
+      emitPushEvent('onCarouselObjectSelected', {
+        'push': mapPushObject(push),
+        'carouselItem': item == null
+            ? null
+            : {
+                'id': item.id,
+                'picturePath': item.picturePath,
+                'actionType': item.action?.actionType?.toString(),
+              },
+      });
+    },
   );
 }
 
@@ -140,7 +153,7 @@ class _MyAppState extends State<MyApp> {
       initHMSPush();
     }
 
-    initBroadcastReceiver();
+    initPushCallbacks();
 
     Netmera.isPushEnabled().then((enabled) {
       print("Netmera: isPushEnabled = " + enabled.toString());
@@ -211,6 +224,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true, colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue)),
+      builder: (context, child) => PushEventOverlay(child: child!),
       home: const DashboardPage(),
     );
   }

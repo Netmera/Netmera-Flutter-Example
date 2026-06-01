@@ -4,6 +4,11 @@ This project is the example application for [Netmera Flutter SDK](https://pub.de
 
 NETMERA is a Mobile Application Engagement Platform. We offer a series of development tools and app communication features to help your mobile business ignite and soar.
 
+| | Minimum version |
+|---|---|
+| Dart | 2.17.0 |
+| Flutter | 3.0.0 |
+
 ### Installation
 
 ##### For using this package as a library:
@@ -62,7 +67,7 @@ allprojects {
 
  dependencies {
  
-     implementation 'androidx.core:core:1.7.0'
+     implementation 'androidx.core:core:1.x.x'
      
  }
 ```
@@ -163,8 +168,8 @@ $ pod install
 
 ```
 // For receiving Media Push, you must add Netmera pods to top of your Podfile.
-pod 'NetmeraNotificationServiceExtension', "4.17.0"
-pod "NetmeraNotificationContentExtension", "4.17.0"
+pod 'NetmeraNotificationServiceExtension', "4.19.1"
+pod "NetmeraNotificationContentExtension", "4.19.1"
 ```
 
 6) In order to use the widget URL callback, add these lines into `AppDelegate.swift` file.
@@ -194,45 +199,34 @@ extension AppDelegate: NetmeraPushDelegate {
 
 ### Setup - Dart Part
 
-1) Inside dart class add the following
+1) Register push lifecycle callbacks using `NetmeraPushLifecycleCallbacks`. All callbacks receive typed model objects and are optional.
 
-```
-void main() {
-  initBroadcastReceiver();
-  runApp(MyApp());
-}
+```dart
+import 'package:netmera_flutter_sdk/NetmeraPushLifecycleCallbacks.dart';
+import 'package:netmera_flutter_sdk/NetmeraPushObject.dart';
+import 'package:netmera_flutter_sdk/NetmeraInteractiveAction.dart';
+import 'package:netmera_flutter_sdk/NetmeraCarouselObject.dart';
 
-void _onPushRegister(Map<dynamic, dynamic> bundle) async {
-  print("onPushRegister: $bundle");
-}
-
-void _onPushReceive(Map<dynamic, dynamic> bundle) async {
-  print("onPushReceive: $bundle");
-}
-
-void _onPushDismiss(Map<dynamic, dynamic> bundle) async {
-  print("onPushDismiss: $bundle");
-}
-
-void _onPushOpen(Map<dynamic, dynamic> bundle) async {
-  print("onPushOpen: $bundle");
-}
-
-void _onPushButtonClicked(Map<dynamic, dynamic> bundle) async {
-  print("onPushButtonClicked: $bundle");
-}
-
-void _onCarouselObjectSelected(Map<dynamic, dynamic> bundle) async {
-  print("onCarouselObjectSelected: $bundle");
-}
-
-  NetmeraPushBroadcastReceiver().initialize(
-    onPushRegister: _onPushRegister,
-    onPushReceive: _onPushReceive,
-    onPushDismiss: _onPushDismiss,
-    onPushOpen: _onPushOpen,
-    onPushButtonClicked: _onPushButtonClicked,
-    onCarouselObjectSelected: _onCarouselObjectSelected,
+Future<void> initPushCallbacks() async {
+  await NetmeraPushLifecycleCallbacks.initialize(
+    onPushRegister: (String pushToken) async {
+      print("onPushRegister: $pushToken");
+    },
+    onPushReceive: (NetmeraPushObject push) async {
+      print("onPushReceive: pushId=${push.pushId}, title=${push.title}");
+    },
+    onPushOpen: (NetmeraPushObject push) async {
+      print("onPushOpen: pushId=${push.pushId}, title=${push.title}");
+    },
+    onPushDismiss: (NetmeraPushObject push) async {
+      print("onPushDismiss: pushId=${push.pushId}");
+    },
+    onPushButtonClicked: (NetmeraPushObject push, NetmeraInteractiveAction? action) async {
+      print("onPushButtonClicked: pushId=${push.pushId}, action=${action?.getActionTitle()}");
+    },
+    onCarouselObjectSelected: (NetmeraPushObject push, NetmeraCarouselObject? item) async {
+      print("onCarouselObjectSelected: pushId=${push.pushId}, itemId=${item?.id}");
+    },
   );
 }
 ```
@@ -241,17 +235,19 @@ void _onCarouselObjectSelected(Map<dynamic, dynamic> bundle) async {
 
     Note: Since the handler runs in its own isolate outside your applications context, it is not possible to update application state or execute any UI impacting logic. You can, however, perform logic such as HTTP requests, perform IO operations etc.
 
-```
-// This method must be a top-level function
+```dart
+import 'package:netmera_flutter_sdk/NetmeraPushLifecycleCallbacks.dart';
+import 'package:netmera_flutter_sdk/NetmeraPushObject.dart';
+
+// Must be a top-level function
 @pragma('vm:entry-point')
-void _onPushReceiveBackgroundHandler(Map<dynamic, dynamic> bundle) async {
-  print("onPushReceiveBackground: $bundle");
+Future<void> _onPushReceiveBackground(NetmeraPushObject push) async {
+  print("onPushReceiveBackground: pushId=${push.pushId}, title=${push.title}");
 }
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // This method must be called before the runApp and the provided handler must be a top-level function.
-  NetmeraPushBroadcastReceiver.onPushReceiveBackground(_onPushReceiveBackgroundHandler);
+  NetmeraPushLifecycleCallbacks.setBackgroundMessageHandler(_onPushReceiveBackground);
   runApp(MyApp());
 }
 ```

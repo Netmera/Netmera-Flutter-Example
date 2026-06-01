@@ -68,39 +68,39 @@ PODS:
     - nanopb/encode (= 3.30910.0)
   - nanopb/decode (3.30910.0)
   - nanopb/encode (3.30910.0)
-  - netmera_flutter_sdk (3.0.0):
+  - netmera_flutter_sdk (3.1.0):
     - Flutter
-    - NetmeraAdvertisingId (= 4.17.0)
-    - NetmeraAnalytic (= 4.17.0)
-    - NetmeraAnalyticAutotracking (= 4.17.0)
-    - NetmeraGeofence (= 4.17.0)
-    - NetmeraLiveActivity (= 4.17.0)
-    - NetmeraLocation (= 4.17.0)
-    - NetmeraNotification (= 4.17.0)
-    - NetmeraNotificationInbox (= 4.17.0)
-  - NetmeraAdvertisingId (4.17.0):
-    - NetmeraAnalytic (= 4.17.0)
-  - NetmeraAnalytic (4.17.0):
-    - NetmeraSwiftCore (= 4.17.0)
-  - NetmeraAnalyticAutotracking (4.17.0):
-    - NetmeraAnalytic (= 4.17.0)
-  - NetmeraGeofence (4.17.0):
-    - NetmeraLocation (= 4.17.0)
-  - NetmeraLiveActivity (4.17.0):
-    - NetmeraSwiftCore (= 4.17.0)
-  - NetmeraLocation (4.17.0):
-    - NetmeraAnalytic (= 4.17.0)
-  - NetmeraNotification (4.17.0):
-    - NetmeraNotificationCore (= 4.17.0)
-  - NetmeraNotificationContentExtension (4.17.0):
-    - NetmeraNotificationCore (= 4.17.0)
-  - NetmeraNotificationCore (4.17.0):
-    - NetmeraAnalytic (= 4.17.0)
-  - NetmeraNotificationInbox (4.17.0):
-    - NetmeraNotificationCore (= 4.17.0)
-  - NetmeraNotificationServiceExtension (4.17.0):
-    - NetmeraNotificationCore (= 4.17.0)
-  - NetmeraSwiftCore (4.17.0):
+    - NetmeraAdvertisingId (= 4.19.1)
+    - NetmeraAnalytic (= 4.19.1)
+    - NetmeraAnalyticAutotracking (= 4.19.1)
+    - NetmeraGeofence (= 4.19.1)
+    - NetmeraLiveActivity (= 4.19.1)
+    - NetmeraLocation (= 4.19.1)
+    - NetmeraNotification (= 4.19.1)
+    - NetmeraNotificationInbox (= 4.19.1)
+  - NetmeraAdvertisingId (4.19.1):
+    - NetmeraAnalytic (= 4.19.1)
+  - NetmeraAnalytic (4.19.1):
+    - NetmeraSwiftCore (= 4.19.1)
+  - NetmeraAnalyticAutotracking (4.19.1):
+    - NetmeraAnalytic (= 4.19.1)
+  - NetmeraGeofence (4.19.1):
+    - NetmeraLocation (= 4.19.1)
+  - NetmeraLiveActivity (4.19.1):
+    - NetmeraSwiftCore (= 4.19.1)
+  - NetmeraLocation (4.19.1):
+    - NetmeraAnalytic (= 4.19.1)
+  - NetmeraNotification (4.19.1):
+    - NetmeraNotificationCore (= 4.19.1)
+  - NetmeraNotificationContentExtension (4.19.1):
+    - NetmeraNotificationCore (= 4.19.1)
+  - NetmeraNotificationCore (4.19.1):
+    - NetmeraAnalytic (= 4.19.1)
+  - NetmeraNotificationInbox (4.19.1):
+    - NetmeraNotificationCore (= 4.19.1)
+  - NetmeraNotificationServiceExtension (4.19.1):
+    - NetmeraNotificationCore (= 4.19.1)
+  - NetmeraSwiftCore (4.19.1):
     - Swinject (= 2.8.4)
   - PromisesObjC (2.4.0)
   - Swinject (2.8.4)
@@ -112,8 +112,8 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - netmera_flutter_sdk (from `.symlinks/plugins/netmera_flutter_sdk/ios`)
-  - NetmeraNotificationContentExtension (= 4.17.0)
-  - NetmeraNotificationServiceExtension (= 4.17.0)
+  - NetmeraNotificationContentExtension (= 4.19.1)
+  - NetmeraNotificationServiceExtension (= 4.19.1)
 
 SPEC REPOS:
   trunk:
@@ -168,22 +168,22 @@ SPEC CHECKSUMS:
   GoogleDataTransport: aae35b7ea0c09004c3797d53c8c41f66f219d6a7
   GoogleUtilities: 00c88b9a86066ef77f0da2fab05f65d7768ed8e1
   nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
-  netmera_flutter_sdk: 7b0ea1e90a562accc5ae4b81c481d0f5b50b5bc6
-  NetmeraAdvertisingId: efdeea929f13177f3cac1b0c51a322a58b976da1
-  NetmeraAnalytic: add10b1ba4735d880af9ccd7764ccbab3b09d287
-  NetmeraAnalyticAutotracking: 1de2adc956a4e042e179d405f89fba5eb904d0a6
-  NetmeraGeofence: a60bb099feea0290fe569f9a967cf5a8674a6e06
-  NetmeraLiveActivity: efb68e2c3c3da160b6be16059773ecba848b53cf
-  NetmeraLocation: 039c93549fa288e1a070c44fafdaab67ba1a94f7
-  NetmeraNotification: 32cb139af22cf93f7680fa7cd9770049b2e2d90a
-  NetmeraNotificationContentExtension: 09771c71e6293bed4d4e83a4a8a183f6b3c5c2e9
-  NetmeraNotificationCore: 6a481db74782e95f18011a1b41891573fb258447
-  NetmeraNotificationInbox: 16833130031c201b8a3fe50c0ee870c2cc8f53d1
-  NetmeraNotificationServiceExtension: 0e1f89836f64aa321bf5f421d756612194174875
-  NetmeraSwiftCore: 4a3d7acf74dedf70aa18db93d417d045427f7457
+  netmera_flutter_sdk: c466e9ac2f062782a2739f19328a6937418ff74e
+  NetmeraAdvertisingId: 625be399a1080d4f070fd25d396221dab711032b
+  NetmeraAnalytic: bb4a0e6e8395829df8dbfd2e68a08059f7554d04
+  NetmeraAnalyticAutotracking: 120150b16a477c8e1f5be51fa11c7f2fd441bcd5
+  NetmeraGeofence: 249946aa2d3338fb895e422a02f1f7c2a4b9337d
+  NetmeraLiveActivity: 190a67588a1fb3b4027838df4ba5b6a366b0a4e6
+  NetmeraLocation: 0111099ba9b4c3a127d9f8c4e4ebbdc5183025c4
+  NetmeraNotification: 1457725aafd46d2aa6fd41be034d9032a0b0ce0e
+  NetmeraNotificationContentExtension: d8b020853b6a125b7fcabad03b51b6f795497512
+  NetmeraNotificationCore: f7bbc051577d9ce966972b2850a4773aa0ae610a
+  NetmeraNotificationInbox: f5e0175b84f2458f95eae4e777dad26e99acd880
+  NetmeraNotificationServiceExtension: 9a9b874289d027d353d652e345453c6f13c39fcb
+  NetmeraSwiftCore: 63da8fb018abc664c23b3595edaf1a579c601be6
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   Swinject: 6ba81f58fd769c9fd4b8ceced9e25a9cb137cb3c
 
-PODFILE CHECKSUM: b20c4dfeea0f00af57b4e40455021a7769cd9f17
+PODFILE CHECKSUM: 93406c8ee7b44b153fdcb74021d103e456ab5cd3
 
 COCOAPODS: 1.16.2

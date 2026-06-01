@@ -48,7 +48,7 @@ import NetmeraNotification
         NetmeraConfigProvider.registerSettingsBundleDefaults()
         let (apiKey, baseUrl) = NetmeraConfigProvider.configFromSettings()
         
-        let netmeraParams = NetmeraParams(apiKey: apiKey, baseUrl: baseUrl)
+        let netmeraParams = NetmeraParams(apiKey: apiKey, baseUrl: baseUrl, appGroupName: "group.com.netmera.demo.flutter")
         FNetmera.initialize(params: netmeraParams)
     }
 }
