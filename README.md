@@ -103,7 +103,31 @@ apply plugin: 'com.huawei.agconnect'
 
 ### Setup - iOS Part
 
-1) Add the following post_install block to the end of your Podfile.
+You can integrate the native Netmera iOS SDK either with **Swift Package Manager (SPM)** or with **CocoaPods**. Pick one method — don't mix the two in the same project. Flutter's SPM support requires Flutter 3.24 or later (on by default since Flutter 3.44).
+
+1) Install dependencies
+
+- Option 1: Swift Package Manager (Recommended)
+
+Make sure Swift Package Manager integration is enabled for your Flutter project (on by default since Flutter 3.44; for earlier versions run `flutter config --enable-swift-package-manager`, or add the following to your app's `pubspec.yaml` so the setting applies to all contributors):
+
+```yaml
+flutter:
+  config:
+    enable-swift-package-manager: true
+```
+
+Then run your app as usual:
+
+```
+$ flutter run
+```
+
+Flutter resolves the plugin's Swift package automatically — no `post_install` Podfile block or `pod install` step is needed.
+
+- Option 2: Cocoapods
+
+Add the following post_install block to the end of your Podfile.
 
 ```
 post_install do |installer|
@@ -117,13 +141,13 @@ post_install do |installer|
 end
 ```
 
-2) Navigate to ios folder in your terminal and run the following command.
+Navigate to ios folder in your terminal and run the following command.
 
 ```
 $ pod install
 ```
 
-3) Enable push notifications for your project
+2) Enable push notifications for your project
 
     1) If you have not generated a valid push notification certificate yet,
        generate one and then export by following the steps explained in [Configuring Push Notifications section of App Distribution Guide](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/establishing_a_certificate-based_connection_to_apns#2947597)
@@ -131,7 +155,7 @@ $ pod install
     3) Enable Push Notifications capability for your application as explained in [Enable Push Notifications](https://developer.netmera.com/en/IOS/Quick-Start#enable-push-notifications) guide.
     4) Enable Remote notifications background mode for your application as explained in [Configuring Background Modes](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app#2980038) guide.
 
-4) Add the `Netmera-Config.plist` file to your ios/Runner directory.
+3) Add the `Netmera-Config.plist` file to your ios/Runner directory.
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -164,15 +188,23 @@ $ pod install
 </plist>
 ```
 
-5) In order to use iOS10 Media Push, follow the instructions in [Netmera Product Hub.](https://user.netmera.com/netmera-developer-guide/platforms/ios/new-ios-swift/push-notifications/media-push) Differently, you should add the pods to the top of the `Podfile` as below.
+4) In order to use iOS10 Media Push, follow the instructions in [Netmera Product Hub.](https://user.netmera.com/netmera-developer-guide/platforms/ios/new-ios-swift/push-notifications/media-push) to create your Notification Service Extension and Notification Content Extension targets.
+
+Option 1: Swift Package Manager
+
+Select your project in Xcode → the `Runner` project (not a target) → **Package Dependencies** tab → add `https://github.com/Netmera/swift-sdk` at version `4.23.3` if it isn't already added as a dependency. In the **Choose Package Products** step, set **Add to Target** to `Runner` for both `NetmeraNotificationServiceExtension` and `NetmeraNotificationContentExtension`.
+
+Option 2: Cocoapods
+
+You should add the pods to the top of the `Podfile` as below.
 
 ```
 // For receiving Media Push, you must add Netmera pods to top of your Podfile.
-pod 'NetmeraNotificationServiceExtension', "4.19.1"
-pod "NetmeraNotificationContentExtension", "4.19.1"
+pod 'NetmeraNotificationServiceExtension', "4.23.3"
+pod "NetmeraNotificationContentExtension", "4.23.3"
 ```
 
-6) In order to use the widget URL callback, add these lines into `AppDelegate.swift` file.
+5) In order to use the widget URL callback, add these lines into `AppDelegate.swift` file.
 
 ```
 import NetmeraNotification
