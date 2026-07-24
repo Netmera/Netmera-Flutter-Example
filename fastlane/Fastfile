@@ -1,0 +1,138 @@
+require 'yaml'
+
+FASTLANE_DIR          = File.expand_path(".")          # fastlane/ — CWD when fastlane runs
+ROOT                  = File.expand_path("..")         # project root
+WORKSPACE             = File.join(ROOT, "ios/Runner.xcworkspace")
+PROJECT               = File.join(ROOT, "ios/Runner.xcodeproj")
+SCHEME                = "Runner"
+BETA_DIR              = File.join(FASTLANE_DIR, "beta")
+API_KEY_PATH          = File.join(FASTLANE_DIR, "Netmera_Auth_Key.p8")
+BUNDLE_ID             = "com.netmera.demo.flutter"
+ANDROID_DIR           = File.join(ROOT, "android")
+ANDROID_GRADLE        = File.join(ROOT, "android/app/build.gradle")
+# android/build.gradle sets rootProject.buildDir = '../build', so Gradle outputs land under
+# <ROOT>/build/app/..., not android/app/build/... — this is standard Flutter template behavior.
+ANDROID_APK_PATH      = File.join(ROOT, "build/app/outputs/apk/release/app-release.apk")
+FIREBASE_ANDROID_APP  = "1:655729015885:android:e8ad3acbd2d73b7b837004"
+FIREBASE_SERVICE_ACCOUNT = File.join(FASTLANE_DIR, "netmera-cross-examples-firebase-adminsdk.json")
+FIREBASE_TESTERS_GROUP = "netmera-testers"
+
+# Parses netmera_flutter_sdk version from pubspec.yaml.
+# "3.2.0-beta03" → { full: "3.2.0-beta03", semver: "3.2.0", build: 3 }
+# "3.2.0"        → { full: "3.2.0",        semver: "3.2.0", build: 1 }
+def netmera_version
+  pubspec = YAML.load_file(File.join(ROOT, "pubspec.yaml"))
+  raw = pubspec.dig("dependencies", "netmera_flutter_sdk").to_s.gsub(/^\^/, '')
+  if raw.match(/^(\d+\.\d+\.\d+)-(?:alpha|beta)(\d+)$/)
+    { full: raw, semver: $1, build: $2.to_i }
+  elsif raw.match(/^(\d+\.\d+\.\d+)$/)
+    { full: raw, semver: $1, build: 1 }
+  else
+    UI.user_error!("Unexpected netmera_flutter_sdk version format: #{raw}")
+  end
+end
+
+def api_key
+  app_store_connect_api_key(
+    key_id: ENV["ASC_KEY_ID"],
+    issuer_id: ENV["ASC_ISSUER_ID"],
+    key_filepath: API_KEY_PATH
+  )
+end
+
+def sync_profiles
+  match(
+    type: "appstore",
+    app_identifier: [
+      BUNDLE_ID,
+      "#{BUNDLE_ID}.nse",
+      "#{BUNDLE_ID}.nce"
+    ],
+    readonly: false
+  )
+end
+
+def flutter_pub_get
+  Dir.chdir(ROOT) { sh("flutter pub get") }
+end
+
+def pod_install
+  Dir.chdir(File.join(ROOT, "ios")) do
+    Bundler.with_original_env { sh("pod install") }
+  end
+end
+
+def build_ipa
+  pod_install
+
+  build_ios_app(
+    workspace: WORKSPACE,
+    scheme: SCHEME,
+    output_directory: BETA_DIR,
+    output_name: "NetmeraFlutterExample.ipa",
+    configuration: "Release",
+    export_options: {
+      method: "app-store",
+      signingStyle: "manual",
+      provisioningProfiles: {
+        BUNDLE_ID           => "match AppStore #{BUNDLE_ID}",
+        "#{BUNDLE_ID}.nse"  => "match AppStore #{BUNDLE_ID}.nse",
+        "#{BUNDLE_ID}.nce"  => "match AppStore #{BUNDLE_ID}.nce"
+      }
+    }
+  )
+end
+
+def set_android_version(version_name, version_code)
+  content = File.read(ANDROID_GRADLE)
+  content = content.gsub(/versionCode\s+.+/, "versionCode #{version_code}")
+  content = content.gsub(/versionName\s+"[^"]+"/, "versionName \"#{version_name}\"")
+  File.write(ANDROID_GRADLE, content)
+end
+
+platform :ios do
+
+  desc "Build and upload iOS app to TestFlight"
+  lane :release do |options|
+    version = netmera_version
+    notes = options[:notes].to_s.strip.empty? ? "netmera_flutter_sdk #{version[:full]}" : options[:notes]
+
+    sync_profiles
+    flutter_pub_get
+    increment_version_number(version_number: version[:semver], xcodeproj: PROJECT)
+    increment_build_number(build_number: version[:build], xcodeproj: PROJECT)
+    build_ipa
+    upload_to_testflight(
+      api_key: api_key,
+      ipa: File.join(BETA_DIR, "NetmeraFlutterExample.ipa"),
+      changelog: notes,
+      skip_waiting_for_build_processing: false
+    )
+  end
+
+end
+
+platform :android do
+
+  desc "Build and upload Android APK to Firebase App Distribution"
+  lane :release do |options|
+    version = netmera_version
+    notes = options[:notes].to_s.strip.empty? ? "netmera_flutter_sdk #{version[:full]}" : options[:notes]
+
+    set_android_version(version[:full], 1)
+    flutter_pub_get
+    gradle(
+      task: "assemble",
+      build_type: "Release",
+      project_dir: "#{ANDROID_DIR}/"
+    )
+    firebase_app_distribution(
+      app: FIREBASE_ANDROID_APP,
+      apk_path: ANDROID_APK_PATH,
+      release_notes: notes,
+      groups: FIREBASE_TESTERS_GROUP,
+      service_credentials_file: FIREBASE_SERVICE_ACCOUNT
+    )
+  end
+
+end

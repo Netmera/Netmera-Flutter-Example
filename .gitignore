@@ -45,3 +45,10 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Fastlane secrets
+fastlane/*.json
+fastlane/Netmera_Auth_Key.p8
+fastlane/beta/
+fastlane/.env
+fastlane/report.xml
