@@ -68,8 +68,8 @@ android {
         applicationId "com.netmera.demo.flutter"
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion 36
-        versionCode flutterVersionCode.toInteger()
-        versionName "3.2.0-beta01"
+        versionCode 1
+        versionName "3.2.1-beta01"
 
         buildConfigField "String", "NETMERA_API_KEY", "\"" + getNetmeraApiKey() + "\""
         buildConfigField "String", "GCM_SENDER_ID", "\"" + getGCMSenderId() + "\""
