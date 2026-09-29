@@ -14,14 +14,6 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   String _isPushEnabled = "";
 
-  disablePopupPresentation() {
-    Netmera.disablePopupPresentation();
-  }
-
-  enablePopupPresentation() {
-    Netmera.enablePopupPresentation();
-  }
-
   requestPermissionsForLocation() {
     Netmera.requestPermissionsForLocation();
   }
@@ -133,19 +125,6 @@ class _SettingsPageState extends State<SettingsPage> {
           ElevatedButton(
             child: const Text('Request Push Notification Authorization'),
             onPressed: requestPushNotificationAuthorization,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ElevatedButton(
-                child: const Text('Disable Popup Pres.'),
-                onPressed: disablePopupPresentation,
-              ),
-              ElevatedButton(
-                child: const Text('Enable Popup Pres.'),
-                onPressed: enablePopupPresentation,
-              ),
-            ],
           ),
           ElevatedButton(
             child: const Text('Request Permission For Location'),

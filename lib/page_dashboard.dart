@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:netmera_flutter_example/page_category_menu.dart';
 import 'package:netmera_flutter_example/page_coupon.dart';
 import 'package:netmera_flutter_example/page_event.dart';
+import 'package:netmera_flutter_example/page_in_app_messages.dart';
 import 'package:netmera_flutter_example/page_mandatory_event.dart';
 import 'package:netmera_flutter_example/page_profile.dart';
 import 'package:netmera_flutter_example/page_push_inbox.dart';
@@ -27,6 +28,7 @@ class DashboardPage extends StatelessWidget {
       },
       {'label': 'User', 'page': UserPage(), 'title': 'User'},
       {'label': 'Profile', 'page': ProfilePage(), 'title': 'User Profile'},
+      {'label': 'In App Messages', 'page': InAppMessagesPage(), 'title': 'In App Messages'},
       {'label': 'Push Inbox', 'page': PushInboxPage(), 'title': 'Push Inbox'},
       {'label': 'Settings', 'page': SettingsPage(), 'title': 'Settings'},
       {'label': 'Category', 'page': CategoryMenuPage(), 'title': 'Category'},
