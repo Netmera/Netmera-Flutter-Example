@@ -36,7 +36,7 @@ enum class NetmeraEnvironment(
 
     companion object {
         fun fromKey(key: String?): NetmeraEnvironment =
-            entries.find { it.key == key } ?: PREPROD
+            entries.find { it.key == key } ?: PROD
     }
 }
 

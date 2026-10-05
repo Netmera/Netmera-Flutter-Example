@@ -25,8 +25,11 @@ class _UserPermissionsPageState extends State<UserPermissionsPage> {
   void _fetchPermissions() async {
     try {
       final emailAllowed = await Netmera.getEmailPermission();
+      if (!mounted) return;
       final smsAllowed = await Netmera.getSmsPermission();
+      if (!mounted) return;
       final whatsAppAllowed = await Netmera.getWhatsAppPermission();
+      if (!mounted) return;
       setState(() {
         _emailPermission = emailAllowed;
         _smsPermission = smsAllowed;
@@ -34,7 +37,8 @@ class _UserPermissionsPageState extends State<UserPermissionsPage> {
         _loading = false;
       });
     } catch (e) {
-      print("Error fetching permissions: $e");
+      if (!mounted) return;
+      debugPrint("Error fetching permissions: $e");
       setState(() => _loading = false);
     }
   }
@@ -45,7 +49,8 @@ class _UserPermissionsPageState extends State<UserPermissionsPage> {
     try {
       await Netmera.setEmailPermission(value);
     } catch (e) {
-      print("Error setting email permission: $e");
+      if (!mounted) return;
+      debugPrint("Error setting email permission: $e");
       setState(() => _emailPermission = oldValue);
     }
   }
@@ -56,7 +61,8 @@ class _UserPermissionsPageState extends State<UserPermissionsPage> {
     try {
       await Netmera.setSmsPermission(value);
     } catch (e) {
-      print("Error setting sms permission: $e");
+      if (!mounted) return;
+      debugPrint("Error setting sms permission: $e");
       setState(() => _smsPermission = oldValue);
     }
   }
@@ -67,7 +73,8 @@ class _UserPermissionsPageState extends State<UserPermissionsPage> {
     try {
       await Netmera.setWhatsAppPermission(value);
     } catch (e) {
-      print("Error setting whatsapp permission: $e");
+      if (!mounted) return;
+      debugPrint("Error setting whatsapp permission: $e");
       setState(() => _whatsAppPermission = oldValue);
     }
   }

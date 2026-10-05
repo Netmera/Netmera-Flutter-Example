@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:netmera_flutter_sdk/Netmera.dart';
+import 'package:netmera_flutter_sdk/events/NetmeraEvent.dart';
 import 'package:netmera_flutter_sdk/events/NetmeraEventLogin.dart';
 import 'package:netmera_flutter_sdk/events/NetmeraEventRegister.dart';
 import 'package:netmera_flutter_sdk/events/commerce/NetmeraEventCartView.dart';
@@ -17,23 +18,30 @@ class EventPage extends StatefulWidget {
 }
 
 class _EventPageState extends State<EventPage> {
-  TextEditingController revenueController = TextEditingController();
+  final TextEditingController revenueController = TextEditingController();
+
+  @override
+  void dispose() {
+    revenueController.dispose();
+    super.dispose();
+  }
+
+  void _applyRevenue(NetmeraEvent event) {
+    final revenue = double.tryParse(revenueController.text.trim());
+    if (revenue != null) {
+      event.setRevenue(revenue);
+    }
+  }
 
   void sendLoginEvent() {
     NetmeraEventLogin loginEvent = NetmeraEventLogin();
-    if (revenueController.text != '') {
-      var revenue = double.parse(revenueController.text);
-      loginEvent.setRevenue(revenue);
-    }
+    _applyRevenue(loginEvent);
     Netmera.sendEvent(loginEvent);
   }
 
   void sendRegisterEvent() {
     NetmeraEventRegister registerEvent = NetmeraEventRegister();
-    if (revenueController.text != '') {
-      var revenue = double.parse(revenueController.text);
-      registerEvent.setRevenue(revenue);
-    }
+    _applyRevenue(registerEvent);
     Netmera.sendEvent(registerEvent);
   }
 
@@ -41,10 +49,7 @@ class _EventPageState extends State<EventPage> {
     NetmeraEventCartView cartViewEvent = NetmeraEventCartView();
     cartViewEvent.setItemCount(3);
     cartViewEvent.setSubTotal(15.99);
-    if (revenueController.text != '') {
-      var revenue = double.parse(revenueController.text);
-      cartViewEvent.setRevenue(revenue);
-    }
+    _applyRevenue(cartViewEvent);
     Netmera.sendEvent(cartViewEvent);
   }
 
@@ -68,10 +73,7 @@ class _EventPageState extends State<EventPage> {
     purchaseEvent.setSubTotal(260.89);
     purchaseEvent.setShippingCost(0.0);
     purchaseEvent.setLineItems([netmeraLineItem, netmeraLineItem]);
-    if (revenueController.text != '') {
-      var revenue = double.parse(revenueController.text);
-      purchaseEvent.setRevenue(revenue);
-    }
+    _applyRevenue(purchaseEvent);
     Netmera.sendEvent(purchaseEvent);
   }
 
@@ -79,10 +81,7 @@ class _EventPageState extends State<EventPage> {
     TestEvent testEvent = TestEvent();
     testEvent.setDateAttribute(DateTime.now());
     testEvent.setNo(123);
-    if (revenueController.text != '') {
-      var revenue = double.parse(revenueController.text);
-      testEvent.setRevenue(revenue);
-    }
+    _applyRevenue(testEvent);
     Netmera.sendEvent(testEvent);
   }
 

@@ -6,30 +6,6 @@ plugins {
     id "com.huawei.agconnect"
 }
 
-def localProperties = new Properties()
-def localPropertiesFile = rootProject.file('local.properties')
-if (localPropertiesFile.exists()) {
-    localPropertiesFile.withReader('UTF-8') { reader ->
-        localProperties.load(reader)
-    }
-}
-
-def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
-if (flutterVersionCode == null) {
-    flutterVersionCode = '1'
-}
-
-def flutterVersionName = localProperties.getProperty('flutter.versionName')
-if (flutterVersionName == null) {
-    flutterVersionName = '1.0'
-}
-
-def getNetmeraApiKey() {
-    Properties properties = new Properties()
-    properties.load(project.rootProject.file('local.properties').newDataInputStream())
-    return properties.getProperty("netmera_apikey")
-}
-
 def getGCMSenderId() {
     Properties properties = new Properties()
     properties.load(project.rootProject.file('local.properties').newDataInputStream())
@@ -69,9 +45,8 @@ android {
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion 36
         versionCode 1
-        versionName "3.2.2-beta03"
+        versionName "3.3.0"
 
-        buildConfigField "String", "NETMERA_API_KEY", "\"" + getNetmeraApiKey() + "\""
         buildConfigField "String", "GCM_SENDER_ID", "\"" + getGCMSenderId() + "\""
         buildConfigField "String", "HMS_SENDER_ID", "\"" + getHMSSenderId() + "\""
 

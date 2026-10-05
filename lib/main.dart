@@ -6,7 +6,7 @@ import 'dart:io';
 import 'package:app_links/app_links.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:huawei_push/huawei_push.dart' as HMS;
+import 'package:huawei_push/huawei_push.dart' as hms;
 import 'package:netmera_flutter_example/example_push_token.dart';
 import 'package:netmera_flutter_example/page_dashboard.dart';
 import 'package:netmera_flutter_sdk/Netmera.dart';
@@ -23,7 +23,7 @@ import 'package:netmera_flutter_example/widgets/push_event_overlay.dart';
 // This method must be a top-level function
 @pragma('vm:entry-point')
 Future<void> _onPushReceiveBackgroundHandler(NetmeraPushObject push) async {
-  print("onPushReceiveBackground: ${getPushObjectString(push)}");
+  debugPrint("onPushReceiveBackground: ${getPushObjectString(push)}");
 }
 
 @pragma('vm:entry-point')
@@ -36,7 +36,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 }
 
 @pragma('vm:entry-point')
-void backgroundMessageCallback(HMS.RemoteMessage remoteMessage) async {
+void backgroundMessageCallback(hms.RemoteMessage remoteMessage) async {
   Map<String, String> map = remoteMessage.dataOfMap ?? {};
   if (Netmera.isNetmeraRemoteMessage(map)) {
     Netmera.onNetmeraHuaweiPushMessageReceived(remoteMessage.from, map);
@@ -54,26 +54,26 @@ void main() async {
 Future<void> initPushCallbacks() async {
   await NetmeraPushLifecycleCallbacks.initialize(
     onPushRegister: (String pushToken) async {
-      print("onPushRegister: $pushToken");
+      debugPrint("onPushRegister: $pushToken");
       ExamplePushToken.value = pushToken;
       emitPushEvent('onPushRegister', {'pushToken': pushToken});
     },
     onPushReceive: (NetmeraPushObject push) async {
-      print("onPushReceive: ${getPushObjectString(push)}");
+      debugPrint("onPushReceive: ${getPushObjectString(push)}");
       emitPushEvent('onPushReceive', mapPushObject(push));
     },
     onPushOpen: (NetmeraPushObject push) async {
-      print("onPushOpen: ${getPushObjectString(push)}");
+      debugPrint("onPushOpen: ${getPushObjectString(push)}");
       emitPushEvent('onPushOpen', mapPushObject(push));
     },
     onPushDismiss: (NetmeraPushObject push) async {
-      print("onPushDismiss: ${getPushObjectString(push)}");
+      debugPrint("onPushDismiss: ${getPushObjectString(push)}");
       emitPushEvent('onPushDismiss', mapPushObject(push));
     },
     onPushButtonClicked:
         (NetmeraPushObject push, NetmeraInteractiveAction? action) async {
-      print("onPushButtonClicked: ${getPushObjectString(push)}");
-      print("clickedAction: id=${action?.getId()}, title=${action?.getActionTitle()}, act=${action?.getPushAction()?.actionType}");
+      debugPrint("onPushButtonClicked: ${getPushObjectString(push)}");
+      debugPrint("clickedAction: id=${action?.getId()}, title=${action?.getActionTitle()}, act=${action?.getPushAction()?.actionType}");
       emitPushEvent('onPushButtonClicked', {
         'push': mapPushObject(push),
         'action': action == null
@@ -87,8 +87,8 @@ Future<void> initPushCallbacks() async {
     },
     onCarouselObjectSelected:
         (NetmeraPushObject push, NetmeraCarouselObject? item) async {
-      print("onCarouselObjectSelected: ${getPushObjectString(push)}");
-      print("carouselItem: id=${item?.id}, picturePath=${item?.picturePath}, action=${item?.action?.actionType}");
+      debugPrint("onCarouselObjectSelected: ${getPushObjectString(push)}");
+      debugPrint("carouselItem: id=${item?.id}, picturePath=${item?.picturePath}, action=${item?.action?.actionType}");
       emitPushEvent('onCarouselObjectSelected', {
         'push': mapPushObject(push),
         'carouselItem': item == null
@@ -106,9 +106,10 @@ Future<void> initPushCallbacks() async {
 Future<void> initFirebase() async {
   await Firebase.initializeApp();
 
-  FirebaseMessaging.instance.getToken().then((value) {
-    print("Custom push token: " + value!);
-    Netmera.onNetmeraNewToken(value);
+  FirebaseMessaging.instance.getToken().then((token) {
+    if (token == null) return;
+    debugPrint("Custom push token: $token");
+    Netmera.onNetmeraNewToken(token);
   });
 
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
@@ -119,19 +120,19 @@ Future<void> initFirebase() async {
 }
 
 Future<void> initHMSPush() async {
-  HMS.Push.getTokenStream.listen((String token) {
+  hms.Push.getTokenStream.listen((String token) {
     Netmera.onNetmeraNewToken(token);
   });
 
-  HMS.Push.onMessageReceivedStream.listen((HMS.RemoteMessage remoteMessage) {
+  hms.Push.onMessageReceivedStream.listen((hms.RemoteMessage remoteMessage) {
     Map<String, String> map = remoteMessage.dataOfMap ?? {};
     if (Netmera.isNetmeraRemoteMessage(map)) {
       Netmera.onNetmeraHuaweiPushMessageReceived(remoteMessage.from, map);
     }
   });
 
-  bool backgroundMessageHandler = await HMS.Push.registerBackgroundMessageHandler(backgroundMessageCallback);
-  print("HMS backgroundMessageHandler registered: $backgroundMessageHandler");
+  bool backgroundMessageHandler = await hms.Push.registerBackgroundMessageHandler(backgroundMessageCallback);
+  debugPrint("HMS backgroundMessageHandler registered: $backgroundMessageHandler");
 }
 
 class MyApp extends StatefulWidget {
@@ -156,13 +157,13 @@ class _MyAppState extends State<MyApp> {
     initPushCallbacks();
 
     Netmera.isPushEnabled().then((enabled) {
-      print("Netmera: isPushEnabled = " + enabled.toString());
+      debugPrint("Netmera: isPushEnabled = $enabled");
     });
 
     Netmera.enablePopupPresentation();
 
     void _onWidgetUrlTriggered(String url) {
-      String message = "Widget URL handle by app: " + url;
+      String message = "Widget URL handled by app: $url";
       Fluttertoast.showToast(
           msg: message,
           toastLength: Toast.LENGTH_SHORT,

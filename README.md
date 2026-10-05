@@ -192,7 +192,7 @@ $ pod install
 
 Option 1: Swift Package Manager
 
-Select your project in Xcode → the `Runner` project (not a target) → **Package Dependencies** tab → add `https://github.com/Netmera/swift-sdk` at version `4.23.3` if it isn't already added as a dependency. In the **Choose Package Products** step, set **Add to Target** to `Runner` for both `NetmeraNotificationServiceExtension` and `NetmeraNotificationContentExtension`.
+Select your project in Xcode → the `Runner` project (not a target) → **Package Dependencies** tab → add `https://github.com/Netmera/swift-sdk` at version `4.26.0` if it isn't already added as a dependency. In the **Choose Package Products** step, set **Add to Target** to `Runner` for both `NetmeraNotificationServiceExtension` and `NetmeraNotificationContentExtension`.
 
 Option 2: Cocoapods
 
@@ -200,8 +200,8 @@ You should add the pods to the top of the `Podfile` as below.
 
 ```
 // For receiving Media Push, you must add Netmera pods to top of your Podfile.
-pod 'NetmeraNotificationServiceExtension', "4.23.3"
-pod "NetmeraNotificationContentExtension", "4.23.3"
+pod 'NetmeraNotificationServiceExtension', "4.26.0"
+pod "NetmeraNotificationContentExtension", "4.26.0"
 ```
 
 5) In order to use the widget URL callback, add these lines into `AppDelegate.swift` file.
