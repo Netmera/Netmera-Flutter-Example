@@ -15,7 +15,6 @@ dependencies:
 
   netmera_flutter_sdk: 3.3.0
 
-  fluttertoast: ^9.0.0
   cupertino_icons: ^1.0.8
   app_links: ^7.0.0
   firebase_core: ^3.15.2

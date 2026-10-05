@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:netmera_flutter_sdk/Netmera.dart';
 import 'package:netmera_flutter_sdk/NetmeraCouponDetail.dart';
+import 'package:netmera_flutter_example/ui/feedback.dart';
 import 'package:netmera_flutter_example/utils/category_channel_utils.dart';
 
 class CouponPage extends StatefulWidget {
@@ -17,7 +18,7 @@ class _CouponPageState extends State<CouponPage> {
     final pageNumber = int.tryParse(page.trim());
     final maxCount = int.tryParse(max.trim());
     if (pageNumber == null || maxCount == null) {
-      showErrorToast('Page and Max must be numbers');
+      showFeedback('Page and Max must be numbers', style: FeedbackStyle.error);
       return;
     }
     Netmera.fetchCoupons(pageNumber, maxCount).then((fetchedCoupons) {
@@ -27,7 +28,7 @@ class _CouponPageState extends State<CouponPage> {
       });
     }).catchError((error) {
       debugPrint('fetchCoupons failed: $error');
-      showErrorToast(errorMessage(error));
+      showFeedback(errorMessage(error), style: FeedbackStyle.error);
     });
   }
 

@@ -3,6 +3,7 @@ import 'package:netmera_flutter_sdk/Netmera.dart';
 import 'package:netmera_flutter_sdk/NetmeraCategoryPreference.dart';
 import 'package:netmera_flutter_sdk/models/NetmeraCategoryChannel.dart';
 import 'package:netmera_flutter_sdk/models/NetmeraCategoryPreferenceFilter.dart';
+import 'package:netmera_flutter_example/ui/feedback.dart';
 import 'package:netmera_flutter_example/utils/category_channel_utils.dart';
 
 ///
@@ -104,7 +105,10 @@ class _CategoryChannelPreferencesPageState
         }
       }
       if (match == null) {
-        showErrorToast('Category ${widget.categoryId} was not in the response');
+        showFeedback(
+          'Category ${widget.categoryId} was not in the response',
+          style: FeedbackStyle.error,
+        );
         return;
       }
 
@@ -144,7 +148,10 @@ class _CategoryChannelPreferencesPageState
         });
       }
     } catch (error) {
-      showErrorToast('Could not load preferences: ${errorMessage(error)}');
+      showFeedback(
+        'Could not load preferences: ${errorMessage(error)}',
+        style: FeedbackStyle.error,
+      );
     } finally {
       _isFetchingNow = false;
     }
@@ -183,7 +190,7 @@ class _CategoryChannelPreferencesPageState
             )
             .toList();
       });
-      showSuccessToast('Preference updated.');
+      showFeedback('Preference updated.', style: FeedbackStyle.success);
     } catch (error) {
       if (!mounted) return;
       _isWritingAllChannels = false;
@@ -191,7 +198,10 @@ class _CategoryChannelPreferencesPageState
         _categoryEnabled = previousValue;
         _allChannelsStatus = RowFailed(errorMessage(error));
       });
-      showErrorToast('Something went wrong: ${errorMessage(error)}');
+      showFeedback(
+        'Something went wrong: ${errorMessage(error)}',
+        style: FeedbackStyle.error,
+      );
     }
   }
 
@@ -243,7 +253,7 @@ class _CategoryChannelPreferencesPageState
             )
             .toList();
       });
-      showSuccessToast('Preference updated.');
+      showFeedback('Preference updated.', style: FeedbackStyle.success);
     } catch (error) {
       if (!mounted) return;
       _pendingWrites.remove(channel);
@@ -260,7 +270,10 @@ class _CategoryChannelPreferencesPageState
             )
             .toList();
       });
-      showErrorToast('Something went wrong: ${errorMessage(error)}');
+      showFeedback(
+        'Something went wrong: ${errorMessage(error)}',
+        style: FeedbackStyle.error,
+      );
     }
   }
 

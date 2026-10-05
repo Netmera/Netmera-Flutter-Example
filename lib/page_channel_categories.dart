@@ -3,6 +3,7 @@ import 'package:netmera_flutter_sdk/Netmera.dart';
 import 'package:netmera_flutter_sdk/models/NetmeraCategoryChannel.dart';
 import 'package:netmera_flutter_sdk/models/NetmeraCategoryChannelPreference.dart';
 import 'package:netmera_flutter_sdk/models/NetmeraCategoryPreferenceFilter.dart';
+import 'package:netmera_flutter_example/ui/feedback.dart';
 import 'package:netmera_flutter_example/utils/category_channel_utils.dart';
 
 ///
@@ -119,7 +120,10 @@ class _ChannelCategoriesPageState extends State<ChannelCategoriesPage> {
 
       setState(() => _rows = merged);
     } catch (error) {
-      showErrorToast('Could not load preferences: ${errorMessage(error)}');
+      showFeedback(
+        'Could not load preferences: ${errorMessage(error)}',
+        style: FeedbackStyle.error,
+      );
     } finally {
       _isFetchingNow = false;
       if (mounted) setState(() => _isFetching = false);
@@ -173,7 +177,7 @@ class _ChannelCategoriesPageState extends State<ChannelCategoriesPage> {
             )
             .toList();
       });
-      showSuccessToast('Preference updated.');
+      showFeedback('Preference updated.', style: FeedbackStyle.success);
     } catch (error) {
       if (!mounted) return;
       _pendingWrites.remove(categoryId);
@@ -191,7 +195,10 @@ class _ChannelCategoriesPageState extends State<ChannelCategoriesPage> {
             )
             .toList();
       });
-      showErrorToast('Something went wrong: ${errorMessage(error)}');
+      showFeedback(
+        'Something went wrong: ${errorMessage(error)}',
+        style: FeedbackStyle.error,
+      );
     }
   }
 
