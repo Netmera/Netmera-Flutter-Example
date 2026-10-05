@@ -27,6 +27,11 @@ enum NetmeraConfigProvider {
     }
 
     static func configFromSettings() -> (apiKey: String, baseUrl: String) {
+        #if DEBUG
+        if let testBaseUrl = dartDefine("NETMERA_TEST_BASE_URL"), !testBaseUrl.isEmpty {
+            return ("flutter-ui-test-api-key", testBaseUrl)
+        }
+        #endif
         let ud = UserDefaults.standard
         let envValue = ud.string(forKey: NetmeraSettingsKeys.environment)
         let environment = envValue.flatMap { NetmeraEnvironment(rawValue: $0) }
@@ -43,5 +48,17 @@ enum NetmeraConfigProvider {
             apiKey = ud.string(forKey: NetmeraSettingsKeys.APIKey) ?? NetmeraEnvironment.prod.defaultApiKey
         }
         return (apiKey, baseUrl)
+    }
+
+    /// Reads a `--dart-define` value; Flutter exposes them to Xcode as base64 encoded `KEY=value` pairs.
+    private static func dartDefine(_ key: String) -> String? {
+        guard let encoded = Bundle.main.object(forInfoDictionaryKey: "NetmeraDartDefines") as? String else { return nil }
+        for entry in encoded.split(separator: ",") {
+            guard let data = Data(base64Encoded: String(entry)),
+                  let pair = String(data: data, encoding: .utf8) else { continue }
+            let parts = pair.split(separator: "=", maxSplits: 1)
+            if parts.count == 2, parts[0] == key { return String(parts[1]) }
+        }
+        return nil
     }
 }

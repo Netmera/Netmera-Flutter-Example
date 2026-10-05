@@ -104,14 +104,24 @@ Future<void> initPushCallbacks() async {
   );
 }
 
+Future<void> forwardFcmToken() async {
+  String? token;
+  try {
+    token = await FirebaseMessaging.instance.getToken();
+  } catch (error) {
+    // On iOS this throws until APNs has delivered a token, e.g. on a fresh install.
+    debugPrint("FCM token is not available yet: $error");
+  }
+  if (token != null) {
+    debugPrint("Custom push token: $token");
+    Netmera.onNetmeraNewToken(token);
+  }
+}
+
 Future<void> initFirebase() async {
   await Firebase.initializeApp();
 
-  FirebaseMessaging.instance.getToken().then((token) {
-    if (token == null) return;
-    debugPrint("Custom push token: $token");
-    Netmera.onNetmeraNewToken(token);
-  });
+  forwardFcmToken();
 
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     if (Netmera.isNetmeraRemoteMessage(message.data)) {
