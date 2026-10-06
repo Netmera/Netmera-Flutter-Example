@@ -72,6 +72,7 @@ class _ChannelCategoriesPageState extends State<ChannelCategoriesPage> {
       final filter = NetmeraCategoryPreferenceFilter()
         ..setChannels([widget.channel]);
       final list = await Netmera.getUserCategoryPreferenceList(filter);
+      if (!mounted) return;
 
       final seenIds = <int>{};
       final fresh = <_ChannelCategoryRow>[];
@@ -121,7 +122,7 @@ class _ChannelCategoriesPageState extends State<ChannelCategoriesPage> {
       showErrorToast('Could not load preferences: ${errorMessage(error)}');
     } finally {
       _isFetchingNow = false;
-      setState(() => _isFetching = false);
+      if (mounted) setState(() => _isFetching = false);
     }
   }
 
@@ -156,6 +157,7 @@ class _ChannelCategoriesPageState extends State<ChannelCategoriesPage> {
         enabled,
         channel: widget.channel,
       );
+      if (!mounted) return;
       _pendingWrites.remove(categoryId);
       setState(() {
         _rows = _rows
@@ -173,6 +175,7 @@ class _ChannelCategoriesPageState extends State<ChannelCategoriesPage> {
       });
       showSuccessToast('Preference updated.');
     } catch (error) {
+      if (!mounted) return;
       _pendingWrites.remove(categoryId);
       setState(() {
         _rows = _rows

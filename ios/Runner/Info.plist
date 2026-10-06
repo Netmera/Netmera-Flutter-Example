@@ -19,7 +19,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>3.2.2</string>
+	<string>3.3.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -36,7 +36,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>3</string>
+	<string>1</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<false/>
 	<key>ITSAppUsesNonExemptEncryption</key>
@@ -44,11 +44,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Netmera konum izninize her zaman ihtiyaç duymaktadır.</string>
+	<string>Netmera uses your location in the background to deliver location-based and geofence messages.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Netmera konum izninize her zaman ihtiyaç duymaktadır.</string>
+	<string>Netmera uses your location in the background to deliver location-based and geofence messages.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Netmera konum izninize ihtiyaç duymaktadır.</string>
+	<string>Netmera uses your location to deliver location-based messages.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

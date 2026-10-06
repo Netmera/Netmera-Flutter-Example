@@ -33,29 +33,6 @@ class _CategoryPageState extends State<CategoryPage> {
     return items;
   }
 
-  onCategoryStatusChanged(String status) {
-    setState(() {
-      _currentStatus = status;
-    });
-  }
-
-  String getStatusText(int status) {
-    switch (status) {
-      case Netmera.PUSH_OBJECT_STATUS_ALL:
-        return "ALL";
-      case Netmera.PUSH_OBJECT_STATUS_READ:
-        return "READ";
-      case Netmera.PUSH_OBJECT_STATUS_UNREAD:
-        return "UNREAD";
-      case Netmera.PUSH_OBJECT_STATUS_DELETED:
-        return "DELETED";
-    }
-    return "";
-  }
-
-  // Click Functions
-  emptyAction() {}
-
   getCategoryFilter() {
     NetmeraCategoryFilter categoryFilter = NetmeraCategoryFilter();
     categoryFilter.setPageSize(2);
@@ -68,7 +45,7 @@ class _CategoryPageState extends State<CategoryPage> {
     Netmera.fetchCategory(getCategoryFilter()).then((list) {
       fillCategoryList(list);
     }).catchError((error) {
-      debugPrint(error);
+      debugPrint('$error');
     });
   }
 
@@ -76,11 +53,12 @@ class _CategoryPageState extends State<CategoryPage> {
     Netmera.fetchNextCategory().then((list) {
       fillCategoryList(list);
     }).catchError((error) {
-      debugPrint(error);
+      debugPrint('$error');
     });
   }
 
   fillCategoryList(list) {
+    if (!mounted) return;
     setState(() {
       _categoryList = list;
     });
@@ -101,7 +79,7 @@ class _CategoryPageState extends State<CategoryPage> {
           .then((netmeraError) {
         fetchCategory();
       }).catchError((error) {
-        debugPrint(error);
+        debugPrint('$error');
       });
     }
   }
@@ -110,7 +88,7 @@ class _CategoryPageState extends State<CategoryPage> {
     Netmera.getUserCategoryPreferenceList().then((list) {
       fillCategoryList(list);
     }).catchError((error) {
-      debugPrint(error);
+      debugPrint('$error');
     });
   }
 
@@ -120,7 +98,7 @@ class _CategoryPageState extends State<CategoryPage> {
         .then((value) {
       debugPrint("Successfully set user category preference list");
     }).catchError((error) {
-      debugPrint(error);
+      debugPrint('$error');
     });
   }
 

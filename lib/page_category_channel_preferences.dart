@@ -94,6 +94,7 @@ class _CategoryChannelPreferencesPageState
       final filter = NetmeraCategoryPreferenceFilter()
         ..setCategoryIds([widget.categoryId]);
       final list = await Netmera.getUserCategoryPreferenceList(filter);
+      if (!mounted) return;
 
       NetmeraCategoryPreference? match;
       for (final item in list) {
@@ -164,6 +165,7 @@ class _CategoryChannelPreferencesPageState
 
     try {
       await Netmera.setUserCategoryPreference(widget.categoryId, enabled);
+      if (!mounted) return;
       _isWritingAllChannels = false;
       setState(() {
         _categoryEnabled = enabled;
@@ -183,6 +185,7 @@ class _CategoryChannelPreferencesPageState
       });
       showSuccessToast('Preference updated.');
     } catch (error) {
+      if (!mounted) return;
       _isWritingAllChannels = false;
       setState(() {
         _categoryEnabled = previousValue;
@@ -225,6 +228,7 @@ class _CategoryChannelPreferencesPageState
         enabled,
         channel: channel,
       );
+      if (!mounted) return;
       _pendingWrites.remove(channel);
       setState(() {
         _channelRows = _channelRows
@@ -241,6 +245,7 @@ class _CategoryChannelPreferencesPageState
       });
       showSuccessToast('Preference updated.');
     } catch (error) {
+      if (!mounted) return;
       _pendingWrites.remove(channel);
       setState(() {
         _channelRows = _channelRows

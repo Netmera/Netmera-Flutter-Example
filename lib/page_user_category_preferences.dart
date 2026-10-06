@@ -50,6 +50,7 @@ class _UserCategoryPreferencesPageState
     setState(() => _loading = true);
     try {
       final list = await Netmera.getUserCategoryPreferenceList();
+      if (!mounted) return;
       final seenIds = <int>{};
       final rows = <_UserCategoryRow>[];
       for (final preference in list) {
@@ -72,10 +73,11 @@ class _UserCategoryPreferencesPageState
       }
       setState(() => _rows = rows);
     } catch (error) {
+      if (!mounted) return;
       setState(() => _rows = []);
       showErrorToast('Could not load preferences: ${errorMessage(error)}');
     } finally {
-      setState(() => _loading = false);
+      if (mounted) setState(() => _loading = false);
     }
   }
 

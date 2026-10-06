@@ -1,4 +1,4 @@
-/// Holds push token from [NetmeraPushBroadcastReceiver] for demo UI (e.g. Settings).
+/// Latest push token from `onPushRegister`, shown on the Settings page.
 class ExamplePushToken {
   static String value = '';
 }

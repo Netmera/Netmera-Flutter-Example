@@ -21,7 +21,7 @@ class _SettingsPageState extends State<SettingsPage> {
   requestPushNotificationAuthorization() {
     Netmera.requestPushNotificationAuthorization().then((isGranted) {
       String message = "Notification auth result: $isGranted";
-      print(message);
+      debugPrint(message);
       Fluttertoast.showToast(
           msg: message,
           toastLength: Toast.LENGTH_SHORT,
@@ -51,6 +51,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   isPushEnabled() {
     Netmera.isPushEnabled().then((enabled) {
+      if (!mounted) return;
       setState(() {
         _isPushEnabled = enabled.toString();
       });
@@ -59,6 +60,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   checkNotificationPermission() {
     Netmera.checkNotificationPermission().then((status) {
+      if (!mounted) return;
       if (status != null) {
         setState(() {
           _isPushEnabled = status.name;
@@ -69,6 +71,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   getCurrentExternalId() {
     Netmera.getCurrentExternalId().then((externalId) {
+      if (!mounted) return;
       setState(() {
         _isPushEnabled = externalId.toString();
       });

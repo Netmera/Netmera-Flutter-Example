@@ -34,34 +34,12 @@ class _PushInboxPageState extends State<PushInboxPage> {
     return items;
   }
 
-  onInboxStatusChanged(String status) {
-    setState(() {
-      _currentStatus = status;
-    });
-  }
-
-  String getStatusText(int status) {
-    switch (status) {
-      case Netmera.PUSH_OBJECT_STATUS_ALL:
-        return "ALL";
-      case Netmera.PUSH_OBJECT_STATUS_READ:
-        return "READ";
-      case Netmera.PUSH_OBJECT_STATUS_UNREAD:
-        return "UNREAD";
-      case Netmera.PUSH_OBJECT_STATUS_DELETED:
-        return "DELETED";
-    }
-    return "";
-  }
-
   fillInboxList(list) {
+    if (!mounted) return;
     setState(() {
       _pushInboxList = list;
     });
   }
-
-  // Click Functions
-  emptyAction() {}
 
   getInboxFilter() {
     NetmeraInboxFilter inboxFilter = NetmeraInboxFilter();
@@ -76,7 +54,7 @@ class _PushInboxPageState extends State<PushInboxPage> {
     Netmera.fetchInbox(getInboxFilter()).then((list) {
       fillInboxList(list);
     }).catchError((error) {
-      debugPrint(error);
+      debugPrint('$error');
     });
   }
 
@@ -84,12 +62,13 @@ class _PushInboxPageState extends State<PushInboxPage> {
     Netmera.fetchNextPage().then((list) {
       fillInboxList(list);
     }).catchError((error) {
-      debugPrint(error);
+      debugPrint('$error');
     });
   }
 
   countForStatus() async {
     Netmera.countForStatus(int.parse(_currentStatus)).then((val) {
+      if (!mounted) return;
       setState(() {
         if (val != -1) {
           _count = val.toString();
@@ -125,10 +104,10 @@ class _PushInboxPageState extends State<PushInboxPage> {
     int status = Netmera.PUSH_OBJECT_STATUS_UNREAD;
     Netmera.inboxUpdateStatus(selectedPushList, status).then((netmeraError) {
       if (netmeraError != null) {
-        debugPrint(netmeraError);
+        debugPrint('$netmeraError');
       }
     }).catchError((error) {
-      debugPrint(error);
+      debugPrint('$error');
     });
   }
 
@@ -143,7 +122,7 @@ class _PushInboxPageState extends State<PushInboxPage> {
       Netmera.updateAll(updateStatus).then((netmeraError) {
         fetchInbox();
       }).catchError((error) {
-        debugPrint(error);
+        debugPrint('$error');
       });
     }
   }
@@ -165,11 +144,12 @@ class _PushInboxPageState extends State<PushInboxPage> {
           ", " +
           "DELETED: " +
           map[Netmera.PUSH_OBJECT_STATUS_DELETED.toString()].toString();
+      if (!mounted) return;
       setState(() {
         _count = countStatusText;
       });
     }).catchError((error) {
-      debugPrint(error);
+      debugPrint('$error');
     });
   }
 

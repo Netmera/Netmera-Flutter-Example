@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:netmera_flutter_sdk/Netmera.dart';
 import 'package:netmera_flutter_sdk/NetmeraCouponDetail.dart';
+import 'package:netmera_flutter_example/utils/category_channel_utils.dart';
 
 class CouponPage extends StatefulWidget {
   @override
@@ -13,30 +13,22 @@ class _CouponPageState extends State<CouponPage> {
   String max = "";
   String page = "";
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  onFetchCouponsPress() {
-    if (max != "" && page != "") {
-      Netmera.fetchCoupons(int.parse(page), int.parse(max))
-          .then((fetchedCoupons) {
-        setState(() {
-          coupons = fetchedCoupons;
-        });
-      }).catchError((error) {
-        debugPrint(error);
-        Fluttertoast.showToast(
-            msg: error.message,
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
-      });
+  void onFetchCouponsPress() {
+    final pageNumber = int.tryParse(page.trim());
+    final maxCount = int.tryParse(max.trim());
+    if (pageNumber == null || maxCount == null) {
+      showErrorToast('Page and Max must be numbers');
+      return;
     }
+    Netmera.fetchCoupons(pageNumber, maxCount).then((fetchedCoupons) {
+      if (!mounted) return;
+      setState(() {
+        coupons = fetchedCoupons;
+      });
+    }).catchError((error) {
+      debugPrint('fetchCoupons failed: $error');
+      showErrorToast(errorMessage(error));
+    });
   }
 
   @override

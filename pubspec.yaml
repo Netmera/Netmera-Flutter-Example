@@ -1,7 +1,9 @@
 name: netmera_flutter_example
 description: NETMERA is a Mobile Application Engagement Platform. We offer a series of development tools and app communication features to help your mobile business ignite and soar.
 
-version: 3.1.0-beta02
+publish_to: 'none'
+
+version: 3.3.0
 
 environment:
   sdk: '>=3.9.0 <4.0.0'
@@ -16,6 +18,7 @@ dependencies:
   fluttertoast: ^9.0.0
   cupertino_icons: ^1.0.8
   app_links: ^7.0.0
+  firebase_core: ^3.15.2
   firebase_messaging: ^15.1.5
 
   #This fork is used because Huawei flutter packages are not compatible with current flutter versions.
