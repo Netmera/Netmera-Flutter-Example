@@ -5,10 +5,11 @@ import 'dart:io';
 
 import 'package:app_links/app_links.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:huawei_push/huawei_push.dart' as hms;
 import 'package:netmera_flutter_example/example_push_token.dart';
-import 'package:netmera_flutter_example/page_dashboard.dart';
+import 'package:netmera_flutter_example/app/home_page.dart';
+import 'package:netmera_flutter_example/ui/app_theme.dart';
+import 'package:netmera_flutter_example/ui/feedback.dart';
 import 'package:netmera_flutter_sdk/Netmera.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -164,14 +165,7 @@ class _MyAppState extends State<MyApp> {
 
     void _onWidgetUrlTriggered(String url) {
       String message = "Widget URL handled by app: $url";
-      Fluttertoast.showToast(
-          msg: message,
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.green,
-          textColor: Colors.white,
-          fontSize: 16.0);
+      showFeedback(message, style: FeedbackStyle.success);
     }
 
     Netmera.onWidgetUrlTriggered(_onWidgetUrlTriggered);
@@ -180,14 +174,7 @@ class _MyAppState extends State<MyApp> {
     Future.delayed(const Duration(milliseconds: 1000), () {
       Netmera.getCurrentExternalId().then((value) {
         msg = value == null ? "ExternalID was not set yet" : "ExternalId :: $value";
-        Fluttertoast.showToast(
-            msg: msg,
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
+        showFeedback(msg);
       });
     });
   }
@@ -197,23 +184,11 @@ class _MyAppState extends State<MyApp> {
       final appLinks = AppLinks();
       final uri = await appLinks.getInitialLink();
       if (uri != null) {
-        Fluttertoast.showToast(
-            msg: 'Initial url is: $uri',
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.TOP,
-            backgroundColor: Colors.blueGrey,
-            textColor: Colors.white,
-            fontSize: 16.0);
+        showFeedback('Initial url is: $uri');
       }
 
       appLinks.uriLinkStream.listen((uri) {
-        Fluttertoast.showToast(
-            msg: 'Deeplink url is: $uri',
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.TOP,
-            backgroundColor: Colors.blueGrey,
-            textColor: Colors.white,
-            fontSize: 16.0);
+        showFeedback('Deeplink url is: $uri');
       });
     } catch (error) {
       // ignore
@@ -224,9 +199,10 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(useMaterial3: true, colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue)),
+      theme: buildAppTheme(),
+      scaffoldMessengerKey: scaffoldMessengerKey,
       builder: (context, child) => PushEventOverlay(child: child!),
-      home: const DashboardPage(),
+      home: const HomePage(),
     );
   }
 }

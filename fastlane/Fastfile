@@ -56,15 +56,7 @@ def flutter_pub_get
   Dir.chdir(ROOT) { sh("flutter pub get") }
 end
 
-def pod_install
-  Dir.chdir(File.join(ROOT, "ios")) do
-    Bundler.with_original_env { sh("pod install") }
-  end
-end
-
 def build_ipa
-  pod_install
-
   build_ios_app(
     workspace: WORKSPACE,
     scheme: SCHEME,

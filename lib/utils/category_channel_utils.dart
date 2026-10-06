@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/services.dart' show PlatformException;
 import 'package:netmera_flutter_sdk/models/NetmeraCategoryChannel.dart';
 import 'package:netmera_flutter_sdk/models/NetmeraCategoryChannelPreference.dart';
@@ -64,24 +62,3 @@ const RowSaveStatus idleStatus = RowIdle();
 String errorMessage(Object error) => error is PlatformException
     ? (error.message ?? error.code)
     : error.toString();
-
-void showSuccessToast(String message) {
-  Fluttertoast.showToast(
-    msg: message,
-    toastLength: Toast.LENGTH_SHORT,
-    gravity: ToastGravity.CENTER,
-    timeInSecForIosWeb: 1,
-  );
-}
-
-void showErrorToast(String message) {
-  Fluttertoast.showToast(
-    msg: message,
-    toastLength: Toast.LENGTH_SHORT,
-    gravity: ToastGravity.CENTER,
-    timeInSecForIosWeb: 1,
-    backgroundColor: Colors.red,
-    textColor: Colors.white,
-    fontSize: 16.0,
-  );
-}
