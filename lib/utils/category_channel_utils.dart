@@ -59,6 +59,7 @@ class RowFailed extends RowSaveStatus {
 
 const RowSaveStatus idleStatus = RowIdle();
 
+/// Android bridge errors carry the real reason in `details`.
 String errorMessage(Object error) => error is PlatformException
-    ? (error.message ?? error.code)
+    ? '${error.details ?? error.message ?? error.code}'
     : error.toString();
