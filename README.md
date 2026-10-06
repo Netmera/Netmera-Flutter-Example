@@ -9,6 +9,22 @@ NETMERA is a Mobile Application Engagement Platform. We offer a series of develo
 | Dart | 2.17.0 |
 | Flutter | 3.0.0 |
 
+### Integration tests
+
+The tests in `integration_test/` check what the Netmera SDK sends, the same way the native demo apps do: the SDK talks to a stub server instead of the real backend and the tests assert on the recorded requests.
+
+```
+tool/run_integration_tests.sh <device-id> [test path]
+```
+
+Device ids come from `flutter devices` (an Android emulator such as `emulator-5554`, or an iOS simulator UDID). The script:
+
+1. Starts `tool/stub_server.dart` on the host (`127.0.0.1:8089`) before the app launches, so launch-time requests such as `session/init` are recorded.
+2. On Android, runs `adb reverse tcp:8089 tcp:8089`; the iOS simulator shares the host loopback, so physical iOS devices are not supported.
+3. Runs `flutter test` with `--dart-define=NETMERA_TEST_BASE_URL=http://127.0.0.1:8089`. Debug builds that receive this value initialise the SDK with the stub URL and a test API key (`MainApplication.kt`, `NetmeraConfigProvider.swift`); release builds ignore it.
+
+Tests read the recorded requests through `integration_test/support/stub_client.dart`.
+
 ### Installation
 
 ##### For using this package as a library:

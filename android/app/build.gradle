@@ -12,6 +12,15 @@ def getGCMSenderId() {
     return properties.getProperty("gcmsenderid")
 }
 
+// `flutter run/test --dart-define=KEY=value` reaches Gradle as base64 encoded pairs.
+def dartDefines = [:]
+if (project.hasProperty('dart-defines')) {
+    project.property('dart-defines').split(',').each { entry ->
+        def pair = new String(entry.decodeBase64(), 'UTF-8').split('=', 2)
+        if (pair.size() == 2) dartDefines[pair[0]] = pair[1]
+    }
+}
+
 def getHMSSenderId() {
     Properties properties = new Properties()
     properties.load(project.rootProject.file('local.properties').newDataInputStream())
@@ -49,6 +58,7 @@ android {
 
         buildConfigField "String", "GCM_SENDER_ID", "\"" + getGCMSenderId() + "\""
         buildConfigField "String", "HMS_SENDER_ID", "\"" + getHMSSenderId() + "\""
+        buildConfigField "String", "NETMERA_TEST_BASE_URL", "\"" + (dartDefines.NETMERA_TEST_BASE_URL ?: "") + "\""
 
         multiDexEnabled true
     }
