@@ -5,12 +5,12 @@ import 'package:netmera_flutter_example/features/events/events_page.dart';
 import 'package:netmera_flutter_example/features/inbox/inbox_page.dart';
 import 'package:netmera_flutter_example/features/location/location_page.dart';
 import 'package:netmera_flutter_example/features/notification/notification_page.dart';
+import 'package:netmera_flutter_example/features/user/coupons_page.dart';
+import 'package:netmera_flutter_example/features/user/user_identify_page.dart';
+import 'package:netmera_flutter_example/features/user/user_settings_page.dart';
+import 'package:netmera_flutter_example/features/user/user_update_page.dart';
 import 'package:netmera_flutter_example/page_category_channel_list.dart';
-import 'package:netmera_flutter_example/page_coupon.dart';
-import 'package:netmera_flutter_example/page_profile.dart';
-import 'package:netmera_flutter_example/page_user.dart';
 import 'package:netmera_flutter_example/page_user_category_preferences.dart';
-import 'package:netmera_flutter_example/page_user_permissions.dart';
 import 'package:netmera_flutter_example/ui/feedback.dart';
 import 'package:netmera_flutter_sdk/Netmera.dart';
 
@@ -65,17 +65,17 @@ class HomePage extends StatelessWidget {
         MenuEntry.page(
           id: 'identify',
           title: 'User Identify',
-          builder: (_) => UserPage(),
+          builder: (_) => const UserIdentifyPage(),
         ),
         MenuEntry.page(
           id: 'update',
           title: 'User Update',
-          builder: (_) => ProfilePage(),
+          builder: (_) => const UserUpdatePage(),
         ),
         MenuEntry.page(
           id: 'settings',
           title: 'User Settings',
-          builder: (_) => UserPermissionsPage(),
+          builder: (_) => const UserSettingsPage(),
         ),
         MenuEntry.page(
           id: 'categoryPreferences',
@@ -90,7 +90,7 @@ class HomePage extends StatelessWidget {
         MenuEntry.page(
           id: 'coupons',
           title: 'Coupons',
-          builder: (_) => CouponPage(),
+          builder: (_) => const CouponsPage(),
         ),
       ],
     ),
