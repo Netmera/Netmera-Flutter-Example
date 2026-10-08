@@ -10,6 +10,8 @@ abstract final class AppColors {
   static const mutedText = Color(0xFF8E8E93);
   static const groupedBackground = Color(0xFFF2F2F7);
   static const divider = Color(0xFFE5E5EA);
+  static const fieldBorder = Color(0xFFD1D1D6);
+  static const placeholder = Color(0xFFC4C4C6);
   static const surface = Color(0xFFFFFFFF);
 
   static const success = Color(0xFF34C759);

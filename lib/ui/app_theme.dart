@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:netmera_flutter_example/ui/app_colors.dart';
 
 abstract final class AppTextStyles {
-  static const rowTitle = TextStyle(
-    fontSize: 17,
-    fontWeight: FontWeight.bold,
-    color: AppColors.label,
-  );
+  static const rowTitle = TextStyle(fontSize: 17, color: AppColors.label);
   static const rowSubtitle = TextStyle(
     fontSize: 15,
     height: 1.2,
@@ -18,10 +14,7 @@ abstract final class AppTextStyles {
     fontSize: 13,
     color: AppColors.mutedText,
   );
-  static const statusValue = TextStyle(
-    fontSize: 17,
-    fontWeight: FontWeight.bold,
-  );
+  static const statusValue = TextStyle(fontSize: 17);
   static const mono = TextStyle(
     fontFamily: 'monospace',
     fontFamilyFallback: ['Menlo', 'Courier'],
@@ -57,6 +50,13 @@ ThemeData buildAppTheme() {
       thickness: 1,
       space: 1,
     ),
+    inputDecorationTheme: InputDecorationTheme(
+      isDense: true,
+      hintStyle: const TextStyle(color: AppColors.placeholder),
+      border: _fieldBorder(AppColors.fieldBorder),
+      enabledBorder: _fieldBorder(AppColors.fieldBorder),
+      focusedBorder: _fieldBorder(AppColors.primary),
+    ),
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.surface,
       foregroundColor: AppColors.label,
@@ -87,3 +87,9 @@ ThemeData buildAppTheme() {
     snackBarTheme: const SnackBarThemeData(behavior: SnackBarBehavior.floating),
   );
 }
+
+/// Thin rounded border like a UIKit `roundedRect` text field.
+OutlineInputBorder _fieldBorder(Color color) => OutlineInputBorder(
+  borderRadius: BorderRadius.circular(6),
+  borderSide: BorderSide(color: color),
+);

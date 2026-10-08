@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:netmera_flutter_example/page_in_app_messages.dart';
-import 'package:netmera_flutter_example/ui/app_colors.dart';
 import 'package:netmera_flutter_example/ui/feedback.dart';
 import 'package:netmera_flutter_example/ui/widgets/list_rows.dart';
 import 'package:netmera_flutter_example/utils/category_channel_utils.dart';
@@ -75,14 +74,11 @@ class _NotificationPageState extends State<NotificationPage> {
           subtitle: 'Asks for notification permission through Netmera.',
           onTap: _requestAuthorization,
         ),
-        StatusRow(
+        MenuRow(
           key: const ValueKey('notification.permission'),
           title: 'Check Push Permission Type',
           subtitle: 'Shows the current push authorization type.',
-          value: permission?.name ?? '—',
-          valueColor: permission == NotificationPermissionStatus.granted
-              ? AppColors.success
-              : AppColors.destructive,
+          detail: permission?.name ?? '…',
           onTap: _refresh,
         ),
         SwitchRow(

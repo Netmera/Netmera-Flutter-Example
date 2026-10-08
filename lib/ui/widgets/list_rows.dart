@@ -15,12 +15,14 @@ class MenuRow extends StatelessWidget {
     super.key,
     required this.title,
     this.subtitle,
+    this.detail,
     this.onTap,
     this.showDivider = true,
   });
 
   final String title;
   final String? subtitle;
+  final String? detail;
   final VoidCallback? onTap;
   final bool showDivider;
 
@@ -42,6 +44,15 @@ class MenuRow extends StatelessWidget {
                   if (subtitle != null) ...[
                     const SizedBox(height: 2),
                     Text(subtitle!, style: AppTextStyles.rowSubtitle),
+                  ],
+                  if (detail != null) ...[
+                    const SizedBox(height: 2),
+                    Text(
+                      detail!,
+                      style: AppTextStyles.rowSubtitle.copyWith(
+                        color: AppColors.label,
+                      ),
+                    ),
                   ],
                 ],
               ),
@@ -96,7 +107,7 @@ class SwitchRow extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 12),
-                  Switch(value: value, onChanged: onChanged),
+                  Switch.adaptive(value: value, onChanged: onChanged),
                 ],
               ),
             ),
@@ -153,7 +164,8 @@ class StatusRow extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 12),
-                  Flexible(
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 180),
                     child: Text(
                       value,
                       textAlign: TextAlign.end,
