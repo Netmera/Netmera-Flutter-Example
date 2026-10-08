@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:netmera_flutter_example/app/menu.dart';
 import 'package:netmera_flutter_example/features/device/device_info_page.dart';
 import 'package:netmera_flutter_example/features/inbox/inbox_page.dart';
+import 'package:netmera_flutter_example/features/location/location_page.dart';
 import 'package:netmera_flutter_example/features/notification/notification_page.dart';
 import 'package:netmera_flutter_example/page_category_channel_list.dart';
 import 'package:netmera_flutter_example/page_coupon.dart';
@@ -16,8 +17,6 @@ import 'package:netmera_flutter_sdk/Netmera.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
-
-  static const maxActiveRegions = 10;
 
   static final List<MenuEntry> entries = [
     MenuEntry.subMenu(
@@ -123,31 +122,17 @@ class HomePage extends StatelessWidget {
         MaterialPageRoute<void>(builder: (_) => const InboxPage()),
       ),
     ),
-    MenuEntry.subMenu(
+    MenuEntry.page(
       id: 'location',
       title: 'Location',
       subtitle:
           'To manage location authorization status and location-based features.',
-      entries: [
-        MenuEntry.action(
-          id: 'requestPermission',
-          title: 'Enable Location & Geofence',
-          onTap: (_) => Netmera.requestPermissionsForLocation(),
-        ),
-        MenuEntry.action(
-          id: 'maxActiveRegions',
-          title: 'Set Max Active Regions ($maxActiveRegions)',
-          onTap: (_) {
-            Netmera.setNetmeraMaxActiveRegions(maxActiveRegions);
-            showFeedback('Max active regions set to $maxActiveRegions.');
-          },
-        ),
-      ],
+      builder: (_) => const LocationPage(),
     ),
     MenuEntry.page(
       id: 'deviceInfo',
       title: 'Device & Token Info',
-      subtitle: 'Push token, external id and push status.',
+      subtitle: 'NetmeraIdentifiers and Token.',
       builder: (_) => const DeviceInfoPage(),
     ),
   ];
