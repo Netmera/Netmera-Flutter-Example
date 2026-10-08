@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:netmera_flutter_example/page_in_app_messages.dart';
+import 'package:netmera_flutter_example/features/in_app/in_app_messages_page.dart';
 import 'package:netmera_flutter_example/ui/feedback.dart';
 import 'package:netmera_flutter_example/ui/widgets/list_rows.dart';
 import 'package:netmera_flutter_example/utils/category_channel_utils.dart';
@@ -93,7 +93,7 @@ class _NotificationPageState extends State<NotificationPage> {
           subtitle:
               'Display in-app widget messages and toggle popup presentation.',
           onTap: () =>
-              pushPage(context, InAppMessagesPage(), 'In-App Messages'),
+              pushPage(context, const InAppMessagesPage(), 'In-App Messages'),
         ),
       ],
     );
