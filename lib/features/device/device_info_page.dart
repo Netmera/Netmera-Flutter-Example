@@ -1,9 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:netmera_flutter_example/example_push_token.dart';
 import 'package:netmera_flutter_example/ui/feedback.dart';
 import 'package:netmera_flutter_example/ui/widgets/list_rows.dart';
-import 'package:netmera_flutter_example/ui/widgets/states.dart';
 import 'package:netmera_flutter_example/utils/category_channel_utils.dart';
 import 'package:netmera_flutter_sdk/Netmera.dart';
 
@@ -15,8 +16,9 @@ class DeviceInfoPage extends StatefulWidget {
 }
 
 class _DeviceInfoPageState extends State<DeviceInfoPage> {
+  static const _encoder = JsonEncoder.withIndent('  ');
+
   String? _externalId;
-  bool? _pushEnabled;
 
   @override
   void initState() {
@@ -27,11 +29,9 @@ class _DeviceInfoPageState extends State<DeviceInfoPage> {
   Future<void> _refresh() async {
     try {
       final externalId = await Netmera.getCurrentExternalId();
-      final pushEnabled = await Netmera.isPushEnabled();
       if (!mounted) return;
       setState(() {
         _externalId = externalId;
-        _pushEnabled = pushEnabled;
       });
     } catch (error) {
       showFeedback(
@@ -46,6 +46,16 @@ class _DeviceInfoPageState extends State<DeviceInfoPage> {
     showFeedback('$label copied');
   }
 
+  Widget _jsonRow(String id, String title, Map<String, Object?> value) {
+    final json = _encoder.convert(value);
+    return MenuRow(
+      key: ValueKey('deviceInfo.$id'),
+      title: title,
+      subtitle: json,
+      onTap: () => _copy(title, json),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final token = ExamplePushToken.value;
@@ -53,27 +63,12 @@ class _DeviceInfoPageState extends State<DeviceInfoPage> {
       onRefresh: _refresh,
       child: ListView(
         physics: const AlwaysScrollableScrollPhysics(),
+        padding: const EdgeInsets.symmetric(vertical: 8),
         children: [
-          const SectionHeader('PUSH TOKEN'),
-          MonoPanel(
-            token.isEmpty ? '—' : token,
-            key: const ValueKey('deviceInfo.token'),
-          ),
-          const SectionHeader('USER'),
-          StatusRow(
-            key: const ValueKey('deviceInfo.externalId'),
-            title: 'External ID',
-            value: _externalId ?? '—',
-            onTap: _externalId == null
-                ? null
-                : () => _copy('External ID', _externalId!),
-          ),
-          StatusRow(
-            key: const ValueKey('deviceInfo.pushEnabled'),
-            title: 'Push Enabled',
-            value: _pushEnabled?.toString() ?? '—',
-            showDivider: false,
-          ),
+          _jsonRow('identifiers', 'NetmeraIdentifiers', {
+            'externalId': _externalId,
+          }),
+          _jsonRow('token', 'Token', {'token': token.isEmpty ? null : token}),
         ],
       ),
     );
