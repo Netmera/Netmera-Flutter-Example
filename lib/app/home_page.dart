@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:netmera_flutter_example/app/menu.dart';
 import 'package:netmera_flutter_example/features/device/device_info_page.dart';
+import 'package:netmera_flutter_example/features/events/events_page.dart';
 import 'package:netmera_flutter_example/features/inbox/inbox_page.dart';
 import 'package:netmera_flutter_example/features/location/location_page.dart';
 import 'package:netmera_flutter_example/features/notification/notification_page.dart';
 import 'package:netmera_flutter_example/page_category_channel_list.dart';
 import 'package:netmera_flutter_example/page_coupon.dart';
-import 'package:netmera_flutter_example/page_event.dart';
-import 'package:netmera_flutter_example/page_mandatory_event.dart';
 import 'package:netmera_flutter_example/page_profile.dart';
 import 'package:netmera_flutter_example/page_user.dart';
 import 'package:netmera_flutter_example/page_user_category_preferences.dart';
@@ -95,23 +94,12 @@ class HomePage extends StatelessWidget {
         ),
       ],
     ),
-    MenuEntry.subMenu(
+    MenuEntry.page(
       id: 'events',
       title: 'Events',
       subtitle:
           'To send and track Netmera events triggered within the application.',
-      entries: [
-        MenuEntry.page(
-          id: 'standard',
-          title: 'Standard Events',
-          builder: (_) => EventPage(),
-        ),
-        MenuEntry.page(
-          id: 'mandatory',
-          title: 'Mandatory Event',
-          builder: (_) => MandatoryEventPage(),
-        ),
-      ],
+      builder: (_) => const EventsPage(),
     ),
     MenuEntry.action(
       id: 'inbox',
