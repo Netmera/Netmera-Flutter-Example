@@ -34,6 +34,14 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^3.0.1
+  patrol: ^4.10.0
+
+patrol:
+  app_name: Netmera Flutter Example
+  android:
+    package_name: com.netmera.demo.flutter
+  ios:
+    bundle_id: com.netmera.demo.flutter
 
 flutter:
   uses-material-design: true

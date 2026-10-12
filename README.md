@@ -25,6 +25,17 @@ Device ids come from `flutter devices` (an Android emulator such as `emulator-55
 
 Tests read the recorded requests through `integration_test/support/stub_client.dart`.
 
+Tests that need the native UI, such as the notification permission dialog, live in `patrol_test/` and run with [Patrol](https://patrol.leancode.co). Install its CLI once (`dart pub global activate patrol_cli`), then pass `patrol_test` or one of its files to the same script:
+
+```
+tool/run_integration_tests.sh <device-id> patrol_test
+```
+
+The script runs Patrol once per file, and each run reinstalls the app. iOS keeps permissions between the tests of one run, so a test that needs a fresh permission state goes in its own file.
+
+- Keep `/` out of test names: Patrol rejects them on Android, while iOS silently runs no test and still reports success.
+- Run the Patrol tests on both platforms before merging; an iOS-only run can miss the case above.
+
 ### Installation
 
 ##### For using this package as a library:
