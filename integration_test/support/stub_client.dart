@@ -2,6 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+/// Event attributes: Android nests them under `prms`, iOS keeps them on the
+/// event itself.
+Map<String, dynamic> eventAttributes(Map<String, dynamic> event) =>
+    (event['prms'] as Map<String, dynamic>?) ?? event;
+
 class RecordedRequest {
   RecordedRequest.fromJson(Map<String, dynamic> json)
     : method = json['method'] as String,
@@ -68,6 +73,44 @@ class StubClient {
     throw TimeoutException(
       'No request to "$pathContains". Received: $received',
     );
+  }
+
+  /// Fails if a request to [pathContains] arrives within [window]; native
+  /// suites use the same short negative window.
+  Future<void> expectNoRequest(
+    String pathContains, {
+    required int after,
+    Duration window = const Duration(seconds: 4),
+  }) async {
+    await Future<void>.delayed(window);
+    final received = (await requests())
+        .skip(after)
+        .where((request) => request.path.contains(pathContains))
+        .toList();
+    if (received.isNotEmpty) {
+      throw StateError('Unexpected request to "$pathContains": $received');
+    }
+  }
+
+  /// Waits for an `event/fire` request that carries an event with [code] and
+  /// returns that event (`{"events": [{"code": ..., ...}]}`).
+  Future<Map<String, dynamic>> waitForEvent(
+    String code, {
+    int after = 0,
+    Duration timeout = const Duration(seconds: 20),
+  }) async {
+    final deadline = DateTime.now().add(timeout);
+    while (DateTime.now().isBefore(deadline)) {
+      for (final request in (await requests()).skip(after)) {
+        if (!request.path.contains('event/fire')) continue;
+        final events = (request.jsonBody as Map<String, dynamic>)['events'];
+        for (final event in events as List) {
+          if (event['code'] == code) return event as Map<String, dynamic>;
+        }
+      }
+      await Future<void>.delayed(const Duration(milliseconds: 250));
+    }
+    throw TimeoutException('No event "$code" in event/fire requests.');
   }
 
   void close() => _http.close(force: true);
