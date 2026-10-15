@@ -3,6 +3,9 @@
 #
 #   tool/run_integration_tests.sh <device-id> [test path]
 #
+# Paths under patrol_test/ run with `patrol test`, one run per file (needs
+# patrol_cli on PATH).
+#
 # Device ids come from `flutter devices` (e.g. emulator-5554 or a simulator UDID).
 set -euo pipefail
 
@@ -70,5 +73,15 @@ if $ANDROID; then
   "$ADB" -s "$DEVICE" reverse "tcp:$PORT" "tcp:$PORT" >/dev/null
 fi
 
-flutter test "$TARGET" -d "$DEVICE" \
-  --dart-define=NETMERA_TEST_BASE_URL="http://127.0.0.1:$PORT"
+DART_DEFINE="--dart-define=NETMERA_TEST_BASE_URL=http://127.0.0.1:$PORT"
+if [[ "$TARGET" == patrol_test* ]]; then
+  # One Patrol run per file: each run reinstalls the app, so every file starts
+  # with fresh permissions (iOS keeps them between tests of a single run).
+  STATUS=0
+  for file in $(find "$TARGET" -name '*_test.dart' | sort); do
+    patrol test --target "$file" --device "$DEVICE" "$DART_DEFINE" || STATUS=1
+  done
+  exit $STATUS
+else
+  flutter test "$TARGET" -d "$DEVICE" "$DART_DEFINE"
+fi
