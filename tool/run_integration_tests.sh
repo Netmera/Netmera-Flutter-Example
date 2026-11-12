@@ -4,13 +4,15 @@
 #   tool/run_integration_tests.sh <device-id> [test path]
 #
 # Paths under patrol_test/ run with `patrol test`, one run per file (needs
-# patrol_cli on PATH).
+# patrol_cli on PATH). Paths under host_test/ build the app and run
+# tests that drive it from the host (install, launch, kill, permissions).
 #
 # Device ids come from `flutter devices` (e.g. emulator-5554 or a simulator UDID).
 set -euo pipefail
 
 DEVICE="${1:?Usage: tool/run_integration_tests.sh <device-id> [test path]}"
 TARGET="${2:-integration_test}"
+# The seed files (patrol_test/*.stub.json) use this port too.
 PORT=8089
 GENERATED_XCCONFIG=ios/Flutter/Generated.xcconfig
 cd "$(dirname "$0")/.."
@@ -50,7 +52,12 @@ if ! $ANDROID && [ -f "$GENERATED_XCCONFIG" ]; then
   cp "$GENERATED_XCCONFIG" "$XCCONFIG_BACKUP"
 fi
 
-dart run tool/stub_server.dart "$PORT" &
+if $ANDROID; then
+  dart run tool/stub_server.dart "$PORT" &
+else
+  # The stub delivers the tests' pushes to the simulator.
+  dart run tool/stub_server.dart "$PORT" "$DEVICE" &
+fi
 SERVER_PID=$!
 disown "$SERVER_PID"
 
@@ -77,11 +84,32 @@ DART_DEFINE="--dart-define=NETMERA_TEST_BASE_URL=http://127.0.0.1:$PORT"
 if [[ "$TARGET" == patrol_test* ]]; then
   # One Patrol run per file: each run reinstalls the app, so every file starts
   # with fresh permissions (iOS keeps them between tests of a single run).
+  # The app starts before the test can stub responses, so a file's launch-time
+  # responses come from <file>.stub.json ({"pathContains": ..., "body": ...}).
   STATUS=0
   for file in $(find "$TARGET" -name '*_test.dart' | sort); do
+    curl -sf -X POST "http://127.0.0.1:$PORT/__stub/reset" >/dev/null
+    seed="${file%.dart}.stub.json"
+    if [ -f "$seed" ]; then
+      curl -sf -X POST -H 'Content-Type: application/json' --data @"$seed" \
+        "http://127.0.0.1:$PORT/__stub/responses" >/dev/null
+    fi
     patrol test --target "$file" --device "$DEVICE" "$DART_DEFINE" || STATUS=1
   done
   exit $STATUS
+elif [[ "$TARGET" == host_test* ]]; then
+  # Host-side tests that install, launch and kill a prebuilt app themselves.
+  if $ANDROID; then
+    flutter build apk --debug "$DART_DEFINE"
+    APP=build/app/outputs/flutter-apk/app-debug.apk
+  else
+    flutter build ios --simulator --debug "$DART_DEFINE"
+    APP=build/ios/iphonesimulator/Runner.app
+  fi
+  # The files share one device and stub server, so they run one at a time.
+  flutter test "$TARGET" --concurrency=1 \
+    --dart-define=HOST_TEST_DEVICE="$DEVICE" --dart-define=HOST_TEST_APP="$APP" \
+    --dart-define=HOST_TEST_ADB="$ADB"
 else
   flutter test "$TARGET" -d "$DEVICE" "$DART_DEFINE"
 fi
