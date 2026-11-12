@@ -1,1 +1,1 @@
--keep class com.netmera.flutterexample.BuildConfig { *; }
+-keep class com.netmera.demo.flutter.BuildConfig { *; }

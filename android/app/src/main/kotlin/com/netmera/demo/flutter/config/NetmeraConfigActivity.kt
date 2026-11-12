@@ -99,8 +99,8 @@ class NetmeraConfigActivity : Activity() {
             setBackgroundColor(COLOR_INPUT_BG)
             layoutParams = linearParams(0, dp(16))
         }
-        val savedEnvKey = prefs.getString("environment", NetmeraEnvironment.PROD.key)
-        val savedIndex = envValues.indexOfFirst { it.key == savedEnvKey }.takeIf { it >= 0 } ?: 1
+        val savedEnv = NetmeraEnvironment.fromKey(prefs.getString("environment", null))
+        val savedIndex = envValues.indexOf(savedEnv)
         spinner.setSelection(savedIndex)
         content.addView(spinner)
 
@@ -138,7 +138,7 @@ class NetmeraConfigActivity : Activity() {
         content.addView(saveButton)
 
         content.addView(TextView(this).apply {
-            text = "Değişikliklerin uygulanması için ana uygulama ikonundan uygulamayı açın."
+            text = "Open the app from the main launcher icon to apply the changes."
             setTextColor(COLOR_LABEL)
             setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 12f)
             setPadding(0, dp(20), 0, 0)
@@ -185,7 +185,7 @@ class NetmeraConfigActivity : Activity() {
         val apiKey = apiKeyInput.text.toString().trim().ifEmpty { env.defaultApiKey.ifEmpty { NetmeraEnvironment.PROD.defaultApiKey } }
 
         NetmeraConfigProvider.saveConfig(prefs, env, baseUrl, apiKey)
-        Toast.makeText(this, "Ayarlar kaydedildi. Uygulama kapatılıyor; ana ikondan tekrar açın.", Toast.LENGTH_LONG).apply {
+        Toast.makeText(this, "Settings saved. The app will close; reopen it from the main launcher icon.", Toast.LENGTH_LONG).apply {
             setGravity(Gravity.CENTER, 0, 0)
             show()
         }

@@ -9,6 +9,33 @@ NETMERA is a Mobile Application Engagement Platform. We offer a series of develo
 | Dart | 2.17.0 |
 | Flutter | 3.0.0 |
 
+### Integration tests
+
+The tests in `integration_test/` check what the Netmera SDK sends, the same way the native demo apps do: the SDK talks to a stub server instead of the real backend and the tests assert on the recorded requests.
+
+```
+tool/run_integration_tests.sh <device-id> [test path]
+```
+
+Device ids come from `flutter devices` (an Android emulator such as `emulator-5554`, or an iOS simulator UDID). The script:
+
+1. Starts `tool/stub_server.dart` on the host (`127.0.0.1:8089`) before the app launches, so launch-time requests such as `session/init` are recorded.
+2. On Android, runs `adb reverse tcp:8089 tcp:8089`; the iOS simulator shares the host loopback, so physical iOS devices are not supported.
+3. Runs `flutter test` with `--dart-define=NETMERA_TEST_BASE_URL=http://127.0.0.1:8089`. Debug builds that receive this value initialise the SDK with the stub URL and a test API key (`MainApplication.kt`, `NetmeraConfigProvider.swift`); release builds ignore it.
+
+Tests read the recorded requests through `integration_test/support/stub_client.dart`.
+
+Tests that need the native UI, such as the notification permission dialog, live in `patrol_test/` and run with [Patrol](https://patrol.leancode.co). Install its CLI once (`dart pub global activate patrol_cli`), then pass `patrol_test` or one of its files to the same script:
+
+```
+tool/run_integration_tests.sh <device-id> patrol_test
+```
+
+The script runs Patrol once per file, and each run reinstalls the app. iOS keeps permissions between the tests of one run, so a test that needs a fresh permission state goes in its own file.
+
+- Keep `/` out of test names: Patrol rejects them on Android, while iOS silently runs no test and still reports success.
+- Run the Patrol tests on both platforms before merging; an iOS-only run can miss the case above.
+
 ### Installation
 
 ##### For using this package as a library:
@@ -192,7 +219,7 @@ $ pod install
 
 Option 1: Swift Package Manager
 
-Select your project in Xcode → the `Runner` project (not a target) → **Package Dependencies** tab → add `https://github.com/Netmera/swift-sdk` at version `4.23.3` if it isn't already added as a dependency. In the **Choose Package Products** step, set **Add to Target** to `Runner` for both `NetmeraNotificationServiceExtension` and `NetmeraNotificationContentExtension`.
+Select your project in Xcode → the `Runner` project (not a target) → **Package Dependencies** tab → add `https://github.com/Netmera/swift-sdk` at version `4.26.0` if it isn't already added as a dependency. In the **Choose Package Products** step, set **Add to Target** to `Runner` for both `NetmeraNotificationServiceExtension` and `NetmeraNotificationContentExtension`.
 
 Option 2: Cocoapods
 
@@ -200,8 +227,8 @@ You should add the pods to the top of the `Podfile` as below.
 
 ```
 // For receiving Media Push, you must add Netmera pods to top of your Podfile.
-pod 'NetmeraNotificationServiceExtension', "4.23.3"
-pod "NetmeraNotificationContentExtension", "4.23.3"
+pod 'NetmeraNotificationServiceExtension', "4.26.0"
+pod "NetmeraNotificationContentExtension", "4.26.0"
 ```
 
 5) In order to use the widget URL callback, add these lines into `AppDelegate.swift` file.

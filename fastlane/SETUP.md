@@ -99,7 +99,7 @@ Version is read automatically from `netmera_flutter_sdk` in `pubspec.yaml`:
 bundle exec fastlane ios release
 ```
 
-Syncs provisioning profiles (match), runs `flutter pub get` and `pod install`, bumps the
+Syncs provisioning profiles (match), runs `flutter pub get`, bumps the
 version/build on `Runner.xcodeproj`, builds an IPA, and uploads it to TestFlight.
 
 ### `android release`

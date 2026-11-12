@@ -6,34 +6,19 @@ plugins {
     id "com.huawei.agconnect"
 }
 
-def localProperties = new Properties()
-def localPropertiesFile = rootProject.file('local.properties')
-if (localPropertiesFile.exists()) {
-    localPropertiesFile.withReader('UTF-8') { reader ->
-        localProperties.load(reader)
-    }
-}
-
-def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
-if (flutterVersionCode == null) {
-    flutterVersionCode = '1'
-}
-
-def flutterVersionName = localProperties.getProperty('flutter.versionName')
-if (flutterVersionName == null) {
-    flutterVersionName = '1.0'
-}
-
-def getNetmeraApiKey() {
-    Properties properties = new Properties()
-    properties.load(project.rootProject.file('local.properties').newDataInputStream())
-    return properties.getProperty("netmera_apikey")
-}
-
 def getGCMSenderId() {
     Properties properties = new Properties()
     properties.load(project.rootProject.file('local.properties').newDataInputStream())
     return properties.getProperty("gcmsenderid")
+}
+
+// `flutter run/test --dart-define=KEY=value` reaches Gradle as base64 encoded pairs.
+def dartDefines = [:]
+if (project.hasProperty('dart-defines')) {
+    project.property('dart-defines').split(',').each { entry ->
+        def pair = new String(entry.decodeBase64(), 'UTF-8').split('=', 2)
+        if (pair.size() == 2) dartDefines[pair[0]] = pair[1]
+    }
 }
 
 def getHMSSenderId() {
@@ -69,13 +54,20 @@ android {
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion 36
         versionCode 1
-        versionName "3.2.2-beta03"
+        versionName "3.3.0"
 
-        buildConfigField "String", "NETMERA_API_KEY", "\"" + getNetmeraApiKey() + "\""
         buildConfigField "String", "GCM_SENDER_ID", "\"" + getGCMSenderId() + "\""
         buildConfigField "String", "HMS_SENDER_ID", "\"" + getHMSSenderId() + "\""
+        buildConfigField "String", "NETMERA_TEST_BASE_URL", "\"" + (dartDefines.NETMERA_TEST_BASE_URL ?: "") + "\""
 
         multiDexEnabled true
+
+        testInstrumentationRunner "pl.leancode.patrol.PatrolJUnitRunner"
+        testInstrumentationRunnerArguments clearPackageData: "true"
+    }
+
+    testOptions {
+        execution "ANDROIDX_TEST_ORCHESTRATOR"
     }
 
     signingConfigs {
@@ -110,4 +102,5 @@ flutter {
 dependencies {
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'com.android.support:multidex:1.0.3'
+    androidTestUtil "androidx.test:orchestrator:1.5.1"
 }

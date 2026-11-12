@@ -6,6 +6,7 @@ package com.netmera.demo.flutter.config
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.netmera.demo.flutter.BuildConfig
 
 object NetmeraConfigProvider {
 
@@ -13,8 +14,12 @@ object NetmeraConfigProvider {
     private const val KEY_ENVIRONMENT = "environment"
     private const val KEY_BASE_URL = "baseUrl"
     private const val KEY_API_KEY = "apiKey"
+    private const val TEST_API_KEY = "flutter-ui-test-api-key"
 
     fun configFromPreferences(context: Context): Pair<String, String> {
+        if (BuildConfig.DEBUG && BuildConfig.NETMERA_TEST_BASE_URL.isNotEmpty()) {
+            return Pair(TEST_API_KEY, BuildConfig.NETMERA_TEST_BASE_URL)
+        }
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val envKey = prefs.getString(KEY_ENVIRONMENT, NetmeraEnvironment.PROD.key)
         val env = NetmeraEnvironment.fromKey(envKey)

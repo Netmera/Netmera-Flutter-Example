@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:netmera_flutter_sdk/Netmera.dart';
 import 'package:netmera_flutter_sdk/models/NetmeraCategoryPreferenceFilter.dart';
 import 'package:netmera_flutter_example/page_category_channel_preferences.dart';
+import 'package:netmera_flutter_example/ui/feedback.dart';
 import 'package:netmera_flutter_example/utils/category_channel_utils.dart';
 import 'package:netmera_flutter_example/utils/navigation_utils.dart';
 
@@ -50,6 +51,7 @@ class _UserCategoryPreferencesPageState
     setState(() => _loading = true);
     try {
       final list = await Netmera.getUserCategoryPreferenceList();
+      if (!mounted) return;
       final seenIds = <int>{};
       final rows = <_UserCategoryRow>[];
       for (final preference in list) {
@@ -72,10 +74,14 @@ class _UserCategoryPreferencesPageState
       }
       setState(() => _rows = rows);
     } catch (error) {
+      if (!mounted) return;
       setState(() => _rows = []);
-      showErrorToast('Could not load preferences: ${errorMessage(error)}');
+      showFeedback(
+        'Could not load preferences: ${errorMessage(error)}',
+        style: FeedbackStyle.error,
+      );
     } finally {
-      setState(() => _loading = false);
+      if (mounted) setState(() => _loading = false);
     }
   }
 
@@ -89,11 +95,15 @@ class _UserCategoryPreferencesPageState
       debugPrint(
         'Filtered fetch (categoryIds: [${row.id}]) returned: $filtered',
       );
-      showSuccessToast(
+      showFeedback(
         'Filter check — categoryIds:[${row.id}] → ${filtered.length} result(s)',
+        style: FeedbackStyle.success,
       );
     } catch (error) {
-      showErrorToast('Filter check failed: ${errorMessage(error)}');
+      showFeedback(
+        'Filter check failed: ${errorMessage(error)}',
+        style: FeedbackStyle.error,
+      );
     }
   }
 

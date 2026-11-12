@@ -73,6 +73,7 @@ class _PushEventOverlayState extends State<PushEventOverlay> {
     final size = MediaQuery.of(context).size;
 
     return Material(
+      key: const ValueKey('pushEvents.overlay'),
       color: Colors.transparent,
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
