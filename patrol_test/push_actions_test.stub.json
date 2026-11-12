@@ -1,0 +1,10 @@
+{
+  "pathContains": "session/init",
+  "body": {
+    "cfg": {
+      "htmlTemps": {
+        "e2e_template": "<html><body><img src=\"http://127.0.0.1:8089/e2e-template-image\"></body></html>"
+      }
+    }
+  }
+}
