@@ -38,6 +38,12 @@ Map<String, Object> _messages(int count) => {
   'cnts': <String, Object>{},
 };
 
+const _generalPreference = {
+  'cts': [
+    {'ctid': 1, 'ctn': 'General', 'cte': true},
+  ],
+};
+
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
@@ -64,6 +70,15 @@ void main() {
     await tapText(tester, item);
   }
 
+  Future<void> openInboxWithGeneralChip(WidgetTester tester) async {
+    await stub.stubResponse('user/getCategoryPreferences', _generalPreference);
+    await openInbox(tester);
+    await pumpUntilFound(
+      tester,
+      find.byKey(const ValueKey('inbox.list.chip.General')),
+    );
+  }
+
   testWidgets('Opening the inbox fetches messages and counts', (tester) async {
     await launchApp(tester);
     final after = await stub.requestCount();
@@ -83,6 +98,14 @@ void main() {
     await tapKey(tester, 'inbox.list.chip.Unread');
 
     expect((await bodyOf('inbox/fetch', after))['st'], _unread);
+  });
+
+  testWidgets('A category chip sends the category to fetch', (tester) async {
+    await openInboxWithGeneralChip(tester);
+    final after = await stub.requestCount();
+    await tapKey(tester, 'inbox.list.chip.General');
+
+    expect((await bodyOf('inbox/fetch', after))['cats'], ['General']);
   });
 
   testWidgets('Show deleted messages fetches every status', (tester) async {
@@ -131,6 +154,45 @@ void main() {
       expect(body['all'], isTrue);
     });
   }
+
+  testWidgets('Mark all as read on a category chip updates that category', (
+    tester,
+  ) async {
+    await openInboxWithGeneralChip(tester);
+    final chipSelected = await stub.requestCount();
+    await tapKey(tester, 'inbox.list.chip.General');
+    await stub.waitForRequest('inbox/fetch', after: chipSelected);
+    await pumpFor(tester, const Duration(seconds: 1));
+    final after = await stub.requestCount();
+    await menu(tester, 'Mark all as read');
+
+    final body = await bodyOf('inbox/set', after);
+    expect(body['st'], _read);
+    expect(body['cats'], ['General']);
+    expect(body['all'], isFalse);
+  });
+
+  testWidgets('Opening the inbox fetches the category summary', (tester) async {
+    await launchApp(tester);
+    final after = await stub.requestCount();
+    await openMenu(tester, ['home.menu.inbox']);
+
+    final body = await bodyOf('inbox/categoryCount', after);
+    expect(body['st'], _readOrUnread);
+    expect(body['ps'], 10);
+    expect(body['ie'], isTrue);
+  });
+
+  testWidgets(
+    'Show deleted messages asks the category summary for every status',
+    (tester) async {
+      await openInbox(tester);
+      final after = await stub.requestCount();
+      await menu(tester, 'Show deleted messages');
+
+      expect((await bodyOf('inbox/categoryCount', after))['st'], _all);
+    },
+  );
 
   testWidgets('Swiping a row right marks it read', (tester) async {
     await openInbox(tester, messages: 1);

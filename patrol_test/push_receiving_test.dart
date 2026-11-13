@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:netmera_flutter_sdk/Netmera.dart';
-import 'package:netmera_flutter_sdk/NotificationPermissionStatus.dart';
 import 'package:patrol/patrol.dart';
 
 import '../integration_test/support/app_driver.dart';
@@ -14,12 +12,8 @@ void main() {
   setUp(stub.reset);
 
   patrolTest('Push Receiving switch disables and enables push', ($) async {
-    await openNotificationPage($);
     // Without notification permission the SDK cannot turn push on.
-    if (await Netmera.checkNotificationPermission() !=
-        NotificationPermissionStatus.granted) {
-      await tapRegisterPushAndAllow($);
-    }
+    await openNotificationPageWithPushPermission($);
 
     final pushSwitch = find.descendant(
       of: find.byKey(const ValueKey('notification.pushReceiving')),

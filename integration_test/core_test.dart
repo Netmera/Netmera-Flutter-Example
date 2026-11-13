@@ -34,4 +34,28 @@ void main() {
 
     await stub.expectNoRequest('event/fire', after: after);
   });
+
+  // The SDK starts with the app, before the test can reset the stub, so this
+  // checks the requests the test triggers instead of the launch traffic.
+  testWidgets('Every request carries the same installation ids', (
+    tester,
+  ) async {
+    await launchApp(tester);
+    await openMenu(tester, ['home.menu.inbox']);
+    await stub.waitForRequest('inbox/fetch');
+    await sendLoginEvent(tester);
+    await stub.waitForEvent(_loginEvent);
+
+    final requests = await stub.requests();
+    expect(requests.length, greaterThan(1));
+    final ids = [
+      for (final request in requests)
+        (request.jsonBody as Map<String, dynamic>)['ids']
+                as Map<String, dynamic>? ??
+            {},
+    ];
+    expect(ids.map((ids) => ids['iid']), everyElement(isNotEmpty));
+    expect(ids.map((ids) => ids['did']), everyElement(isNotEmpty));
+    expect(ids.map((ids) => ids['iid']).toSet(), hasLength(1));
+  });
 }
